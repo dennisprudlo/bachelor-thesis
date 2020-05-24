@@ -1,12 +1,36 @@
-\documentclass{report}
-\usepackage[utf8]{inputenc}
+\documentclass[a4paper, 12pt]{report}
 
-\title{Konzeption und Realisierung einer mobilen Anwendung zur Erstellung von Indoor Maps}
-\author{Dennis Prudlo}
-\date{\today}
+\input preprocessors/localization
+\input preprocessors/packages
+\input preprocessors/properties
 
 \begin{document}
+
+	%
+	% Generate a thesis title page
 	\maketitle
 
-	\input{chapters/01-introduction/chapter}
+
+	%
+	%	FRONT MATTER
+	%
+	\pagenumbering{roman}
+
+
+	%
+	% Include an auto-generated table of contents
+	\tableofcontents
+	\clearpage
+
+
+	%
+	%	MAIN MATTER
+	%
+	\pagenumbering{arabic}
+
+
+	%
+	% Includes all chapters
+	\input chapters/01-introduction/chapter
+
 \end{document}
