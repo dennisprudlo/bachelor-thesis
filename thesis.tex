@@ -6,6 +6,8 @@
 \input preprocessors/properties
 \input preprocessors/page
 
+\newcounter{currentpage}
+
 \begin{document}
 
 	%
@@ -24,12 +26,27 @@
 	\input matters/front/listoffigures
 	\input matters/front/listoftables
 	\input matters/front/tableofacronyms
+	\setcounter{currentpage}{\arabic{page}}
 
 	%
 	%	MAIN MATTER
 	\pagenumbering{arabic}
 	\pagestyle{fancy}
+	\setcounter{page}{\thecurrentpage}
 
 	\input chapters/01-introduction/chapter
+	\clearpage
+	\setcounter{currentpage}{\arabic{page}}
+
+	%
+	%	REAR MATTER
+	\pagenumbering{Roman}
+	\pagestyle{plain}
+	\setcounter{page}{\thecurrentpage}
+
+	\input matters/rear/bibliography
+	\input matters/rear/glossary
+	\input matters/rear/attachments
+	\input matters/rear/declarationofauthorship
 
 \end{document}
