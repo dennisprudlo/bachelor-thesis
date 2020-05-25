@@ -1,8 +1,9 @@
 # Ignore all files temporarily created in the build/ directory
 build/
 
-# Ignore temporarily created synctex files
+# Ignore temporarily created synctex files and system files
 *.synctex.gz
+.DS_Store
 
 # Ignore the compiled pdf output
 thesis.pdf
