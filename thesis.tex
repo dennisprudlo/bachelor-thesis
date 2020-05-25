@@ -2,7 +2,7 @@
 
 \input preprocessors/localization
 \input preprocessors/packages
-\input preprocessors/colors
+\input preprocessors/definitions
 \input preprocessors/properties
 \input preprocessors/page
 
@@ -11,18 +11,25 @@
 	%
 	% Generate a thesis title page
 	\maketitle
+	\clearpage
 
 	%
 	%	FRONT MATTER
 	\pagenumbering{roman}
+	\pagestyle{plain}
+
 	\input matters/front/preface
 	\input matters/front/abstract
 	\input matters/front/tableofcontents
+	\input matters/front/listoffigures
+	\input matters/front/listoftables
 	\input matters/front/tableofacronyms
 
 	%
 	%	MAIN MATTER
 	\pagenumbering{arabic}
+	\pagestyle{fancy}
+
 	\input chapters/01-introduction/chapter
 
 \end{document}
