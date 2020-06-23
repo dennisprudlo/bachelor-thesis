@@ -10,7 +10,7 @@
 % Insert a code listing
 \newcommand{\codelisting}[4]{
 	\begin{listing}[ht]
-		\inputminted{#4}{listings/#3}
+		\inputminted[obeytabs=true,tabsize=4,linenos,xleftmargin=1em]{#4}{listings/#3}
 		\caption{#1}
 		\label{#2}
 	\end{listing}
