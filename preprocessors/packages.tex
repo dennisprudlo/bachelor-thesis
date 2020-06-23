@@ -38,8 +38,27 @@
 \usepackage{blindtext}
 
 %
-% Used for apalike-citations
-\usepackage{apalike}
+% Used for bibliography rendering
+\usepackage{csquotes}
+\usepackage[
+	backend=biber,
+	style=apa,
+	citestyle=authoryear,
+	citetracker=false,
+	uniquelist=false,
+	sorting=none,
+	sortcites=true,
+	block=none,
+	indexing=false,
+	citereset=none,
+	isbn=true,
+	url=true,
+	doi=true,
+	natbib=true
+]{biblatex}
+\DeclareFieldFormat{apacase}{#1}	% Prevent mis-format for sentences beginning with an umlaut.
+\addbibresource{references.bib}		% Add the bibliography resource
+\setlength\bibitemsep{1.3ex}		% Vertical item spacing
 
 %
 % Used for SI-Unit rendering
