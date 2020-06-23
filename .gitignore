@@ -4,6 +4,7 @@ build/
 # Ignore temporarily created synctex files and system files
 *.synctex.gz
 .DS_Store
+_minted-thesis/
 
 # Ignore the compiled pdf output
 thesis.pdf

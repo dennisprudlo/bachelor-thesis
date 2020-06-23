@@ -5,3 +5,13 @@
 \newcommand{\mattertoc}[1]{
 	\addcontentsline{toc}{chapter}{#1}
 }
+
+%
+% Insert a code listing
+\newcommand{\codelisting}[4]{
+	\begin{listing}[ht]
+		\inputminted{#4}{listings/#3}
+		\caption{#1}
+		\label{#2}
+	\end{listing}
+}
