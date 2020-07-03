@@ -1,0 +1,30 @@
+\chapter{
+	\de{Theorie und Grundlagen}
+	\en{Theory and Basics}
+}
+
+\section{
+	\de{Zeichnen auf Kartendaten}
+	\en{Drawing on map data}
+}
+Indoor Maps beschreiben in erster Linie die Positionen, Strukturen und Funktionsweisen von Räumlichkeiten in Gebäuden. Diese Informationen, die auf Kartendaten gezeichnet werden müssen, lassen sich mit Hilfe der \ac{geojson} beschreiben. Dabei muss beachtet werden, dass man die Syntax des Formats einhält.
+
+\subsection{
+	\de{Das JSON-Format}
+	\en{The JSON format}
+}
+Die \ac{json} ist ein textbasiertes und sprachenunabhängiges Datenaustauschformat, welches Informationen strukturiert darstellen kann. Dabei ist ein großer Vorteil gegenüber anderen Datenaustauschformaten, dass \ac{json} für sowohl Mensch als auch Maschine einfach zu lesen ist und zudem die enthaltenen Informationen auf ein benötigtes minimum reduziert. Der Standard wird von der Internet Engineering Task Force\footnote{RFC 8259} und der \ac{ecma} spezifiziert\footnote{ECMA-404}.\\[1em]%
+%
+Der Kern von \ac{json} besteht aus den sogenannten Objekten, die Key-Value-Paare enthalten. Dabei ist ein Key immer vom Typ \textit{string} und ein Value vom Typ \textit{object}, \textit{array}, \textit{string}, \textit{number}, \textit{boolean} oder \textit{null}. Ein Array kann aus den selben Typen bestehen wie der Wert eines Key, sodass sich auch Objekte und Arrays verschachteln können. Dabei ist zu beachten, dass gültiges \ac{json} entweder mit einem Objekt oder einem Array beginnt. Im Listing \ref{lst:jsonexample} kann man ein \ac{json}-Konstrukt sehen, bestehend aus einem Array, welches mehrere Objekte enthalten kann.
+\codelisting{Title}{lst:jsonexample}{json-example.json}{json}
+
+\subsection{
+	\de{Das GeoJSON-Format}
+	\en{The GeoJSON format}
+}
+Bei der \ac{geojson} handelt es sich um ein Datenaustauschformat, welches auf \ac{json} basiert und die sich an der Syntax von \ac{json} orientiert.
+
+\subsection{
+	\de{Indoor Mapping Data Format}
+	\en{Indoor Mapping Data Format}
+}
