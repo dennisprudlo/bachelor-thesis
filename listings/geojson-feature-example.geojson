@@ -1,0 +1,11 @@
+{
+	"type": "Feature",
+	"geometry": {
+		"type": "Point",
+		"coordinates": [52.52493, 13.369181]
+	},
+	"properties": {
+		"category": "train",
+		"title": "Berlin Hauptbahnhof"
+	}
+}

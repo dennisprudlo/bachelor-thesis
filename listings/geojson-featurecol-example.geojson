@@ -1,0 +1,25 @@
+{
+	"type": "FeatureCollection",
+	"features": [
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [52.52493, 13.369181]
+			},
+			"properties": {
+				"title": "Berlin Hauptbahnhof"
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [52.364044, 13.508999]
+			},
+			"properties": {
+				"title": "Flughafen Berlin Brandenburg"
+			}
+		}
+	]
+}

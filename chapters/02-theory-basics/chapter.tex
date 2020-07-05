@@ -1,30 +1,22 @@
-\chapter{
-	\de{Theorie und Grundlagen}
-	\en{Theory and Basics}
-}
+\chapter{Theorie und Grundlagen}
 
-\section{
-	\de{Zeichnen auf Kartendaten}
-	\en{Drawing on map data}
-}
+\section{Zeichnen auf Kartendaten}
 Indoor Maps beschreiben in erster Linie die Positionen, Strukturen und Funktionsweisen von Räumlichkeiten in Gebäuden. Diese Informationen, die auf Kartendaten gezeichnet werden müssen, lassen sich mit Hilfe der \ac{geojson} beschreiben. Dabei muss beachtet werden, dass man die Syntax des Formats einhält.
 
-\subsection{
-	\de{Das JSON-Format}
-	\en{The JSON format}
-}
-Die \ac{json} ist ein textbasiertes und sprachenunabhängiges Datenaustauschformat, welches Informationen strukturiert darstellen kann. Dabei ist ein großer Vorteil gegenüber anderen Datenaustauschformaten, dass \ac{json} für sowohl Mensch als auch Maschine einfach zu lesen ist und zudem die enthaltenen Informationen auf ein benötigtes minimum reduziert. Der Standard wird von der Internet Engineering Task Force\footnote{RFC 8259} und der \ac{ecma} spezifiziert\footnote{ECMA-404}.\\[1em]%
+\subsection{Das JSON-Format}
+Die \ac{json} ist ein textbasiertes und sprachenunabhängiges Datenaustauschformat, welches Informationen strukturiert darstellen kann. Dabei ist ein großer Vorteil gegenüber anderen Datenaustauschformaten, dass \ac{json} für sowohl Mensch als auch Maschine einfach zu lesen ist und zudem die enthaltenen Informationen auf ein benötigtes minimum reduziert. Gerade durch die für Maschinen einfach zu interpretierende Struktur lassen sich \ac{json}-Inhalte schneller parsen und verarbeiten \parencite{WYS2014}. Der Standard wird von der Internet Engineering Task Force\footnote{RFC 8259} und der \ac{ecma} spezifiziert\footnote{ECMA-404}.\pbreak%
 %
-Der Kern von \ac{json} besteht aus den sogenannten Objekten, die Key-Value-Paare enthalten. Dabei ist ein Key immer vom Typ \textit{string} und ein Value vom Typ \textit{object}, \textit{array}, \textit{string}, \textit{number}, \textit{boolean} oder \textit{null}. Ein Array kann aus den selben Typen bestehen wie der Wert eines Key, sodass sich auch Objekte und Arrays verschachteln können. Dabei ist zu beachten, dass gültiges \ac{json} entweder mit einem Objekt oder einem Array beginnt. Im Listing \ref{lst:jsonexample} kann man ein \ac{json}-Konstrukt sehen, bestehend aus einem Array, welches mehrere Objekte enthalten kann.
-\codelisting{Title}{lst:jsonexample}{json-example.json}{json}
+Der Kern von \ac{json} besteht aus den sogenannten Objekten, die Key-Value-Paare enthalten. Dabei ist ein Key immer vom Typ \textit{string} und ein Value vom Typ \textit{object}, \textit{array}, \textit{string}, \textit{number}, \textit{boolean} oder \textit{null}. Ein Array kann aus den selben Typen bestehen wie der Wert eines Key, sodass sich auch Objekte und Arrays verschachteln können. Dabei ist zu beachten, dass gültiges \ac{json} entweder mit einem Objekt oder einem Array beginnt. Im Listing \ref{lst:jsonexample} kann man ein \ac{json}-Konstrukt sehen, bestehend aus einem Array, welches mehrere Objekte enthalten kann mit Keys, die eine Person beschreiben, wie \textit{name}, \textit{age} und \textit{parents}.%
+Das \textit{parents}-Array beinhaltet wieder Objekte, die eine Person beschreiben.
+\codelisting{Beispielcode eines JSON-Konstrukts}{lst:jsonexample}{json-example.json}{json}%
+%
+\subsection{Das GeoJSON-Format}
+Bei der \ac{geojson} handelt es sich um ein Datenaustauschformat, welches auf \ac{json} basiert und sich an der Syntax von \ac{json} orientiert. Der Standard wurde Anfang 2007 begonnen und Mitte 2008 als GeoJSON Specification veröffentlicht. In 2015 wurde eine neue GeoJSON Working Group von der Internet Engineering Task Force gegründet, die den Standard nun spezifiziert\footnote{RFC 7948}. Die veraltete GeoJSON Specification wurde daher für obsolet erklärt und wird nicht mehr verwendet \parencite{BUT2008}.\pbreak%
+%
+Für die Darstellung von Geometrien werden sogenannte \textit{Features} erstellt, die eine \textit{Geometry} und \textit{Properties} haben. In der Geometry werden die Koordinaten und der Typ der Geometrie angegeben, während man in den Properties die Möglichkeit hat beliebige weitere Daten zu hinterlegen. Die \ac{geojson}-Spezifikation bietet sechs verschiedene Geometrie-Typen an, die die angegebenen Koordinaten unterschiedlich verarbeiten. Diese sind \textit{Point}, \textit{LineString}, \textit{Polygon}, \textit{MultiPoint}, \textit{MultiLineString} und \textit{MultiPolygon}.
+\codelisting{Beispielcode eines GeoJSON-Features}{lst:geojsonfeature}{geojson-feature-example.geojson}{json}\pbreak
+Möchte man Features gruppieren, kann man diese in eine \textit{FeatureCollection} ablegen. Eine FeatureCollection hat keine weiteren Eigenschaften wie einen Namen, sie gruppiert lediglich mehrere Features.
+\codelisting{Beispielcode einer GeoJSON-FeatureCollection}{lst:geojsonfeaturecol}{geojson-featurecol-example.geojson}{json}\pbreak
+asd
 
-\subsection{
-	\de{Das GeoJSON-Format}
-	\en{The GeoJSON format}
-}
-Bei der \ac{geojson} handelt es sich um ein Datenaustauschformat, welches auf \ac{json} basiert und die sich an der Syntax von \ac{json} orientiert.
-
-\subsection{
-	\de{Indoor Mapping Data Format}
-	\en{Indoor Mapping Data Format}
-}
+\subsection{Indoor Mapping Data Format}

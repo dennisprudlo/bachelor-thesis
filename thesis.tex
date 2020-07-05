@@ -1,11 +1,24 @@
 \documentclass[a4paper, 12pt, twoside]{report}
 \linespread{1.3}
 
-\input preprocessors/localization
 \input preprocessors/packages
 \input preprocessors/definitions
-\input preprocessors/properties
 \input preprocessors/page
+
+\title{Konzeption und Realisierung einer mobilen Anwendung zur Erstellung von Indoor Maps}
+\author{Dennis Prudlo}
+\date{\today}
+
+\pretitle{%
+	\begin{center}
+	\begin{spacing}{1.0}
+	\includegraphics[scale=1]{images/htwlogo}\\[3em]
+	\LARGE
+}
+\posttitle{%
+	\end{spacing}
+	\end{center}
+}
 
 \newcounter{currentpage}
 
@@ -36,9 +49,9 @@
 
 	\input chapters/01-introduction/chapter
 	\input chapters/02-theory-basics/chapter
-	\input chapters/03-analysis/chapter
-	\input chapters/04-implementation/chapter
-	\input chapters/05-conclusion/chapter
+	% \input chapters/03-analysis/chapter
+	% \input chapters/04-implementation/chapter
+	% \input chapters/05-conclusion/chapter
 	\clearpage
 	\setcounter{currentpage}{\arabic{page}}
 

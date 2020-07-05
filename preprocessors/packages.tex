@@ -1,13 +1,18 @@
-\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
 \usepackage{fontspec}
 
-\de{
-	\usepackage[ngerman]{babel}
-}
-\en{
-	\usepackage[english]{babel}
-}
+%
+% Used to include graphics
+\usepackage{graphicx}
+
+%
+% Used to build a title
+\usepackage{titling}
+
+%
+% Used to set spacing
+\usepackage{setspace}
 
 %
 % Used to style the headers and footers
@@ -28,7 +33,7 @@
 %
 % Used to define the layout of the pages
 \usepackage[
-	%showframe, % used to show the frame while debugging
+	showframe, % used to show the frame while debugging
 	a4paper,
 	width=150mm,
 	top=30mm,
@@ -36,13 +41,9 @@
 	bindingoffset=0mm
 ]{geometry}
 
-\usepackage{blindtext}
-
 %
 % Used for syntax highlighted codes
 \usepackage[outputdir=build]{minted}
-\usemintedstyle{lovelace}
-\setminted{fontsize=\small,baselinestretch=1,fontfamily=SFMono}
 
 %
 % Used for bibliography rendering
@@ -63,16 +64,11 @@
 	doi=true,
 	natbib=true
 ]{biblatex}
-\DeclareFieldFormat{apacase}{#1}	% Prevent mis-format for sentences beginning with an umlaut.
 \addbibresource{references.bib}		% Add the bibliography resource
-\setlength\bibitemsep{1.3ex}		% Vertical item spacing
 
 %
 % Used for SI-Unit rendering
 \usepackage{siunitx}
-	\DeclareSIUnit{\prc}{\text{\%}}
-	\DeclareSIUnit{\mio}{\text{Mio.}}
-	\DeclareSIUnit{\mrd}{\text{Mrd.}}
 
 %
 % Used for linking the table of contents items and references

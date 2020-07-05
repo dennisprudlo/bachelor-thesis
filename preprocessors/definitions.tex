@@ -7,7 +7,7 @@
 % Fonts
 \newfontfamily\monaco{SF Mono}[NFSSFamily=SFMono]
 \setmonofont{SF Mono}
-\renewcommand{\theFancyVerbLine}{\monaco\textcolor{gray25}{\scriptsize\oldstylenums{\arabic{FancyVerbLine}}}}
+% \renewcommand{\theFancyVerbLine}{\monaco\textcolor{gray25}{\scriptsize\oldstylenums{\arabic{FancyVerbLine}}}}
 
 %
 % Inserts a chapter title into the table of contents
@@ -16,10 +16,28 @@
 }
 
 %
+% Set the \paragraph indentation length to 0
+\setlength{\parindent}{0pt}
+
+%
+% Create paragraph break command
+\newcommand{\pbreak}{\\[1em]}
+
+\usemintedstyle{lovelace}
+\setminted{fontsize=\small,baselinestretch=1,fontfamily=SFMono}
+
+\setlength\bibitemsep{1.3ex}		% Vertical item spacing
+\DeclareFieldFormat{apacase}{#1}	% Prevent mis-format for sentences beginning with an umlaut.
+
+\DeclareSIUnit{\prc}{\text{\%}}
+\DeclareSIUnit{\mio}{\text{Mio.}}
+\DeclareSIUnit{\mrd}{\text{Mrd.}}
+
+%
 % Insert a code listing
 \newcommand{\codelisting}[4]{
 	\begin{listing}[ht]
-		\inputminted[obeytabs=true,tabsize=4,linenos,xleftmargin=1.7em]{#4}{listings/#3}
+		\inputminted[fontsize=\footnotesize,obeytabs=true,tabsize=4,linenos,xleftmargin=1.7em]{#4}{listings/#3}
 		\caption{#1}
 		\label{#2}
 	\end{listing}

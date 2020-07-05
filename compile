@@ -1,0 +1,8 @@
+#!/bin/bash
+[ -d build ] || mkdir ./build
+rm ./thesis.pdf
+# xelatex -halt-on-error -shell-escape -output-directory ./build ./thesis.tex
+latexmk -xelatex -shell-escape -jobname=./build/thesis ./thesis.tex
+cp build/thesis.pdf ./thesis.pdf
+
+open thesis.pdf
