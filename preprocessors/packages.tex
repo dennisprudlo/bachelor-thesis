@@ -32,14 +32,24 @@
 
 %
 % Used to define the layout of the pages
-\usepackage[
-	showframe, % used to show the frame while debugging
-	a4paper,
-	width=150mm,
-	top=30mm,
-	bottom=30mm,
-	bindingoffset=0mm
-]{geometry}
+\ifdefined\isrelease
+	\usepackage[
+		a4paper,
+		width=150mm,
+		top=30mm,
+		bottom=30mm,
+		bindingoffset=0mm
+	]{geometry}
+\else
+	\usepackage[
+		showframe, % used to show the frame while debugging
+		a4paper,
+		width=150mm,
+		top=30mm,
+		bottom=30mm,
+		bindingoffset=0mm
+	]{geometry}
+\fi
 
 %
 % Used for syntax highlighted codes

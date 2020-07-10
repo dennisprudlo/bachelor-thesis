@@ -1,8 +1,19 @@
 #!/bin/bash
+
+TEXFILE=thesis
+
+for arg in $@
+do
+	if test $arg = '--release'; then
+		TEXFILE=release
+	fi
+done
+
 [ -d build ] || mkdir ./build
 rm ./thesis.pdf
-# xelatex -halt-on-error -shell-escape -output-directory ./build ./thesis.tex
-latexmk -xelatex -shell-escape -jobname=./build/thesis ./thesis.tex
+
+echo "Compiling $TEXFILE.tex";
+latexmk -xelatex -shell-escape -jobname=./build/thesis ./$TEXFILE.tex
 cp build/thesis.pdf ./thesis.pdf
 
 open thesis.pdf
