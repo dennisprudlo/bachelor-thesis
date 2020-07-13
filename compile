@@ -10,10 +10,16 @@ do
 done
 
 [ -d build ] || mkdir ./build
+[ -d build/thesis ] || mkdir ./build/thesis
+[ -d build/release ] || mkdir ./build/release
 rm ./thesis.pdf
 
 echo "Compiling $TEXFILE.tex";
-latexmk -xelatex -shell-escape -jobname=./build/thesis ./$TEXFILE.tex
-cp build/thesis.pdf ./thesis.pdf
+latexmk -xelatex -shell-escape -jobname=./build/${TEXFILE}/${TEXFILE} ./$TEXFILE.tex
+cp build/${TEXFILE}/${TEXFILE}.pdf ./thesis.pdf
+
+#
+# Publish the file to iCloud
+cp ./thesis.pdf ~/Library/Mobile\ Documents/com~apple~CloudDocs/Thesis/${TEXFILE}.pdf
 
 open thesis.pdf

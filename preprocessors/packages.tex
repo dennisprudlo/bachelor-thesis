@@ -82,4 +82,16 @@
 
 %
 % Used for linking the table of contents items and references
-\usepackage{hyperref}
+\ifdefined\isrelease
+	\usepackage[
+		hidelinks,
+		pdfusetitle,
+		pdfsubject={The Subject},
+		pdflang={de},
+		pdfkeywords={Indoor Mapping, Indoor Maps, iOS, Application, Mobile Application, iPad, JSON, GeoJSON, GIS},
+		pdfproducer={XeTeX \the\eTeXversion\eTeXrevision-\the\XeTeXversion\XeTeXrevision},
+		pdfcreator={XeTeX}
+	]{hyperref}
+\else
+	\usepackage{hyperref}
+\fi
