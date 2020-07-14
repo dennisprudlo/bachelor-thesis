@@ -1,11 +1,27 @@
 #!/bin/bash
 
 TEXFILE=thesis
+PUBLISH=false
+
+log ()
+{
+	CLR="\033[0m"
+	if [ "$2" = success ]; then
+		CLR="\033[32m"
+	fi
+	if [ "$2" = compile ]; then
+		CLR="\033[33m"
+	fi
+	echo -e "\033[0m\033[1mThesis: $CLR$1\033[0m"
+}
 
 for arg in $@
 do
 	if test $arg = '--release'; then
 		TEXFILE=release
+	fi
+	if test $arg = '--publish'; then
+		PUBLISH=true
 	fi
 done
 
@@ -14,12 +30,19 @@ done
 [ -d build/release ] || mkdir ./build/release
 rm ./thesis.pdf
 
-echo "Compiling $TEXFILE.tex";
+log "Compiling $TEXFILE.tex" compile
+echo -e "\033[33m"
 latexmk -xelatex -shell-escape -jobname=./build/${TEXFILE}/${TEXFILE} ./$TEXFILE.tex
+log "$TEXFILE.tex was compiled successfully" success
+log "Copying generated document to root directory" success
 cp build/${TEXFILE}/${TEXFILE}.pdf ./thesis.pdf
 
 #
 # Publish the file to iCloud
-cp ./thesis.pdf ~/Library/Mobile\ Documents/com~apple~CloudDocs/Thesis/${TEXFILE}.pdf
+if test $PUBLISH = 'true'; then
+	log "Publishing $TEXFILE.pdf to iCloud" compile
+	cp ./thesis.pdf ~/Library/Mobile\ Documents/com~apple~CloudDocs/Thesis/${TEXFILE}.pdf
+	log "Published successfully" success
+fi
 
 open thesis.pdf

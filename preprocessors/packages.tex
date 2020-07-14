@@ -81,6 +81,10 @@
 \usepackage{siunitx}
 
 %
+% Used to obtain TeX logo commands
+\usepackage{metalogo}
+
+%
 % Used for linking the table of contents items and references
 \ifdefined\isrelease
 	\usepackage[
@@ -89,8 +93,8 @@
 		pdfsubject={The Subject},
 		pdflang={de},
 		pdfkeywords={Indoor Mapping, Indoor Maps, iOS, Application, Mobile Application, iPad, JSON, GeoJSON, GIS},
-		pdfproducer={XeTeX \the\eTeXversion\eTeXrevision-\the\XeTeXversion\XeTeXrevision},
-		pdfcreator={XeTeX}
+		pdfproducer={XeLaTeX \the\eTeXversion\eTeXrevision-\the\XeTeXversion\XeTeXrevision},
+		pdfcreator={XeLaTeX}
 	]{hyperref}
 \else
 	\usepackage{hyperref}

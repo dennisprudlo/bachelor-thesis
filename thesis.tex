@@ -9,17 +9,6 @@
 \author{Dennis Prudlo}
 \date{\today}
 
-\pretitle{%
-	\begin{center}
-	\begin{spacing}{1.0}
-	\includegraphics[scale=1]{images/htwlogo}\\[3em]
-	\LARGE
-}
-\posttitle{%
-	\end{spacing}
-	\end{center}
-}
-
 \newcounter{currentpage}
 
 \begin{document}
@@ -47,11 +36,11 @@
 	\pagestyle{fancy}
 	\setcounter{page}{\thecurrentpage}
 
-	\input chapters/01-introduction/chapter
-	\input chapters/02-theory-basics/chapter
-	% \input chapters/03-analysis/chapter
-	% \input chapters/04-implementation/chapter
-	% \input chapters/05-conclusion/chapter
+	\input chapters/01-introduction
+	\input chapters/02-theory-and-basics
+	% \input chapters/03-analysis
+	% \input chapters/04-implementation
+	% \input chapters/05-conclusion
 	\clearpage
 	\setcounter{currentpage}{\arabic{page}}
 
