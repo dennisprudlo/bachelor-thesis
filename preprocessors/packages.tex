@@ -31,6 +31,11 @@
 \usepackage{acronym}
 
 %
+% Used to format captions
+\usepackage{caption}
+\captionsetup{font=footnotesize}
+
+%
 % Used to define the layout of the pages
 \ifdefined\isrelease
 	\usepackage[
@@ -98,4 +103,11 @@
 	]{hyperref}
 \else
 	\usepackage{hyperref}
+	\hypersetup{
+		citebordercolor={0 0 1}
+	}
 \fi
+
+%
+% Used to generate glossary entries
+\usepackage[automake]{glossaries}

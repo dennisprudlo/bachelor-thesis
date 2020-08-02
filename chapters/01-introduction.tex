@@ -1,12 +1,16 @@
 \chapter{Einleitung}
 
 \section{Motivation}
-% Globalisierte Welt\\
 Der Tourismus und die Reiselust der Menschen steigt kontinuierlich im globalen Ausmaß. Waren es im Jahr 1950 international noch insgesamt \SI{25}{\mio} Ankünfte von Touristen, so konnten im Jahr 2015 schon \SI{1.186}{\mrd} Ankünfte verbucht werden \parencite{GLA2017}. Laut der World Tourism Organization wird davon ausgegangen, dass die Ankünfte bis 2030 auf \SI{1.8}{\mrd} ansteigen. Das Zurechtfinden in fremden Orten ist ebenfalls nicht mehr so wie vor 70 Jahren. Heutzutage nutzen \SI{77}{\prc} aller Smartphone Nutzer regelmäßig Navigations-Apps. Es sei viel einfacher eine App zu öffnen und den Weg von Punkt A zu Punkt B zu finden, als eine Person zu fragen \parencite{PAN2018}.%
 %
 Von den Benutzern einer Navigations-App schauen sich \SI{36}{\prc} die Wegbeschreibung an und informieren sich über die Route, bevor sie sich auf den Weg machen \parencite{PAN2018}. Die Wegbeschreibungen sind sehr detailliert, hören allerdings oft bei den Eingängen von Gebäuden auf. Sogenannte ``Indoor Maps`` – die ein Pendant zu den Kartendaten für den Außenbereich sind – werden noch nicht in allen Ländern unterstützt und falls doch, finden sich nur vereinzelt Gebäude, die Indoor Maps anbieten. Google Maps bietet Indoor Maps in 62 Staaten an \parencite{GOO2020}, Apple Maps zählt einzelne Indoor Maps Standorte auf, wie Flughäfen und Einkaufszentren. Allein in Deutschland wurden erst Anfang 2020 die ersten Einkaufszentren in Apple Maps hinzugefügt, dabei wird Deutschland in der Verfügbarkeitsübersicht für Einkaufszentren immer noch nicht aufgelistet \parencite{OES2020}.%
 %
 \section{Problemstellung}
+Als Anwendungsfall lässt sich ein Vermieter einer kleinen Einkaufspassage nehmen, welcher den Besuchern der Passage die Möglichkeit bieten möchte mittels Indoor Maps die Einkaufspassage von innen zu betrachten und gegebenenfalls eine Innenraumnavigation zur Verfügung zu stellen. Für den Vermieter wäre daher wichtig, dass die Bereitstellung für ihn preislich stemmbar ist und dennoch alle Vorteile der Indoor Maps genutzt werden könnne.\pbreak%
+%
+Es gibt bereits Anwendungen, die für eine Erstellung von Indoor Maps geeignet sind, worunter sich unter anderem Software des Herstellers Autodesk befindet. Autodesk bietet Programme wie AutoCAD und Autodesk Civil an, die sich besonders auf den Schwerpunkt ``Computer-aided design`` (CAD) konzentrieren und ist mit AutoCAD bereits seit 1982 auf dem Markt unterwegs \parencite{HUR2008}. Die Lizenzkosten für die angebotene Software betragen für AutoCAD \SI{2135}{\eur}/Jahr und für Autodesk Civil \SI{2315}{\eur}/Jahr (Stand: 14. Juli 2020, Autodesk).
+
+Dazu kommt, dass das Indoor Mapping weitesgehend nicht spezifiziert ist. Die sich auf dem Markt befindlichen Programme nutzen teils unterschiedliche Dateiformate für ähnlich abgebldete Strukturen, sodass ein Export und Import zwischen zwei unterschiedlichen CAD-Programmen zu einem Verlust von Daten führen kann \parencite{GEL2019}. Um dieses Problem zu lösen muss eine Spezifikation erstellt werden, die eine Struktur einer Indoor Map definiert, an die sich alle Anwendungen halten können. Laut \cite{GEL2019} wäre eine Möglichkeit einen Standard zu etablieren, dass er viel verbreitet genutzt wird.
 % Nicht einfach Indoor Kartendaten bereitzustellen\\
 % Gebäude von außen generisch angezeigt ist nicht schwer (Umrisse der Anlage)\\
 % Innenleben eines Gebäudes ist bei jedem Gebäude unterschiedlich\\

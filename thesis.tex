@@ -9,6 +9,23 @@
 \author{Dennis Prudlo}
 \date{\today}
 
+%
+% Glossary entries
+\makeglossaries
+\newglossaryentry{library}{
+	name={Programmbibliothek},
+	plural={Programmbibliotheken},
+	description={Eine Sammlung von Programmcode und Funktionen, die sich in eine Anwendung einbinden lassen. Programmbibliotheken sind üblicherweise keine eigenständigen Programme}
+}
+\newglossaryentry{pwa}{
+	name={Progressive Web App},
+	description={Webbasierte Anwendungen, welche Offlinefunktionalität bieten und auf native Funktionen, wie Benachrichtigungen und Sensordaten des Gerätes zugreifen können}
+}
+\newglossaryentry{sdk}{
+	name={Software Development Kit},
+	description={Sammlung von Werkzeugen, Compilern, Entwicklungsumgebungen und Programmbibliotheken, die zum Entwickeln von Software benötigt werden.}
+}
+
 \newcounter{currentpage}
 
 \begin{document}
@@ -38,9 +55,9 @@
 
 	\input chapters/01-introduction
 	\input chapters/02-theory-and-basics
-	% \input chapters/03-analysis
-	% \input chapters/04-implementation
-	% \input chapters/05-conclusion
+	\input chapters/03-analysis
+	\input chapters/04-implementation
+	\input chapters/05-conclusion
 	\clearpage
 	\setcounter{currentpage}{\arabic{page}}
 

@@ -20,6 +20,9 @@ do
 	if test $arg = '--release'; then
 		TEXFILE=release
 	fi
+	if test $arg = '--debug'; then
+		TEXFILE=debug
+	fi
 	if test $arg = '--publish'; then
 		PUBLISH=true
 	fi
@@ -28,11 +31,14 @@ done
 [ -d build ] || mkdir ./build
 [ -d build/thesis ] || mkdir ./build/thesis
 [ -d build/release ] || mkdir ./build/release
+[ -d build/debug ] || mkdir ./build/debug
 rm ./thesis.pdf
 
 log "Compiling $TEXFILE.tex" compile
 echo -e "\033[33m"
+
 latexmk -xelatex -shell-escape -jobname=./build/${TEXFILE}/${TEXFILE} ./$TEXFILE.tex
+
 log "$TEXFILE.tex was compiled successfully" success
 log "Copying generated document to root directory" success
 cp build/${TEXFILE}/${TEXFILE}.pdf ./thesis.pdf
