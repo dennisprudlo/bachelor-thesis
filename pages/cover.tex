@@ -1,0 +1,57 @@
+\newgeometry{top=30mm, bottom=30mm, centering}
+\pagestyle{empty}
+
+%
+% begin Titlepage
+\begin{center}
+	% \footnotesize{%
+	% 	Hochschule für Technik und Wirtschaft Berlin\\
+	% 	Fachbereich 4: Informatik, Kommunikation und Wirtschaft
+	% }\\[20pt]
+	\includegraphics[scale=1]{images/htwlogo}\\[40pt]
+	\begin{spacing}{1.5}
+		\Large{\textbf{\thetitle}}
+		\normalsize\\[10pt]
+		\large Bachelorthesis
+		\normalsize\\[40pt]
+	\end{spacing}
+\end{center}
+\begin{center}
+	% \newcolumntype{R}{>{\raggedleft\arraybackslash}p{5cm}}
+	% \newcolumntype{L}{>{\raggedright\arraybackslash}p{5cm}}
+	% \begin{tabular}{RL}
+	% 	\textbf{Studiengang:} & Wirtschaftsinformatik\\[-5pt]
+	% 	& \scriptsize{Fachbereich 4: Informatik, Kommunikation und Wirtschaft}\\[20pt]
+	% 	\textbf{Vorgelegt von:} & \theauthor\\[-5pt]
+	% 	& \scriptsize{mail@dennisprudlo.com}\\[20pt]
+	% 	\textbf{Datum:} & Berlin, \today
+	% \end{tabular}
+	\newcolumntype{R}{>{\raggedleft\arraybackslash}p{7cm}}
+	\newcolumntype{L}{>{\raggedright\arraybackslash}p{7cm}}
+	\begin{tabular}{RL}
+		\textbf{Name des Studiengangs:} & Wirtschaftsinformatik\\[0pt]
+		& \footnotesize{Fachbereich 4}\\[20pt]
+		\textbf{Vorgelegt von:} & \theauthor\\[20pt]
+		\textbf{Datum:} & \today
+	\end{tabular}
+	\mbox{}\vfill
+	\begin{tabular}{RL}
+		\textbf{Erstgutachter} & Prof. Dr. Axel Hochstein \\
+		\textbf{Zweitgutachter} & Prof. Dr. Burkhard Messer
+	\end{tabular}
+\end{center}
+\clearpage
+
+%
+% Begin Edition
+Fassung \today
+\mbox{}\vfill
+\footnotesize{%
+	© \the\year{} \theauthor\par
+	Bachelorthesis zur Erlangung des Grades eines Bachelor of Science (B.Sc.)\\%
+	an der Hochschule für Technik und Wirtschaft Berlin\par
+	Satz: \XeLaTeX \the\eTeXversion\eTeXrevision
+}
+\restoregeometry
+\normalsize
+\clearpage

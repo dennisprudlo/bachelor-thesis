@@ -17,13 +17,17 @@
 	plural={Programmbibliotheken},
 	description={Eine Sammlung von Programmcode und Funktionen, die sich in eine Anwendung einbinden lassen. Programmbibliotheken sind üblicherweise keine eigenständigen Programme}
 }
-\newglossaryentry{pwa}{
-	name={Progressive Web App},
-	description={Webbasierte Anwendungen, welche Offlinefunktionalität bieten und auf native Funktionen, wie Benachrichtigungen und Sensordaten des Gerätes zugreifen können}
-}
 \newglossaryentry{sdk}{
 	name={Software Development Kit},
-	description={Sammlung von Werkzeugen, Compilern, Entwicklungsumgebungen und Programmbibliotheken, die zum Entwickeln von Software benötigt werden.}
+	description={Sammlung von Werkzeugen, Compilern, Entwicklungsumgebungen und Programmbibliotheken, die zum Entwickeln von Software benötigt werden}
+}
+\newglossaryentry{i18n}{
+	name={Internationalisierung},
+	description={In der Entwicklung der Vorgang die Software so vorzubereiten und aufzubauen, dass ein einfaches Hinzufügen von Übersetzungen in andere Sprachen möglich ist}
+}
+\newglossaryentry{l10n}{
+	name={Lokalisierung},
+	description={Das Durchführen einer Übersetzung der Anwendung in eine andere Sprache bzw. Kultur}
 }
 
 \newcounter{currentpage}
@@ -32,19 +36,47 @@
 
 	%
 	% Include the thesis titlepage
-	\input matters/cover
+	\input pages/cover
 
 	%
 	%	FRONT MATTER
 	\pagenumbering{roman}
 	\pagestyle{plain}
 
-	\input matters/front/preface
-	\input matters/front/abstract
-	\input matters/front/tableofcontents
-	\input matters/front/listoffigures
-	\input matters/front/listoftables
-	\input matters/front/tableofacronyms
+	\input pages/preface
+	\input pages/abstract
+
+	%
+	% Table of contents
+	\tableofcontents
+	\clearpage
+
+	%
+	% List of figures
+	\listoffigures
+	\addtableofcontentsitem{Abbildungsverzeichnis}
+	\clearpage
+
+	%
+	% List of tables
+	\listoftables
+	\addtableofcontentsitem{Tabellenverzeichnis}
+	\clearpage
+
+	%
+	% Table of acronyms
+	\chapter*{Abkürzungsverzeichnis}
+	\addtableofcontentsitem{Abkürzungsverzeichnis}
+	\begin{acronym}
+		\acro{geojson}[GeoJSON]{Geospatial JavaScript Object Notation}
+		\acro{imdf}[IMDF]{Indoor Mapping Data Format}
+		\acro{json}[JSON]{JavaScript Object Notation}
+		\acro{mvc}[MVC]{Model-View-Controller}
+		\acro{sdk}[SDK]{Software Development Kit}
+		\acro{uuid}[UUID]{Universally Unique Identifier}
+	\end{acronym}
+	\clearpage
+
 	\setcounter{currentpage}{\arabic{page}}
 
 	%
@@ -56,8 +88,9 @@
 	\input chapters/01-introduction
 	\input chapters/02-theory-and-basics
 	\input chapters/03-analysis
-	\input chapters/04-implementation
-	\input chapters/05-conclusion
+	\input chapters/04-conception
+	\input chapters/05-implementation
+	\input chapters/06-conclusion
 	\clearpage
 	\setcounter{currentpage}{\arabic{page}}
 
@@ -67,9 +100,37 @@
 	\pagestyle{plain}
 	\setcounter{page}{\thecurrentpage}
 
-	\input matters/rear/bibliography
-	\input matters/rear/glossary
-	\input matters/rear/attachments
-	\input matters/rear/declarationofauthorship
+	%
+	% Bibliography
+	\printbibliography
+	\addtableofcontentsitem{Literaturverzeichnis}
+	\clearpage
+
+	%
+	% Glossary
+	\printglossary
+	\addtableofcontentsitem{Glossar}
+	\clearpage
+
+	%
+	% Attachments
+	\chapter*{Anhang}
+	\appendix
+	\addtableofcontentsitem{Anhang}
+	\clearpage
+
+	%
+	% Declaration of Authorship
+	\chapter*{Eidesstattliche Versicherung}
+	Ich versichere hiermit, dass ich die vorliegende Bachelorthesis selbstständig und ohne fremde Hilfe
+	angefertigt und keine andere als die angegebene Literatur benutzt habe. Alle von anderen Autoren
+	wörtlich übernommenen Stellen wie auch die sich an die Gedankengänge anderer Autoren eng anlehnenden
+	Ausführungen meiner Arbeit sind besonders gekennzeichnet.\\[1ex]
+	Diese Arbeit wurde bisher in gleicher oder ähnlicher Form keiner anderen Prüfungsbehörde vorgelegt
+	und auch nicht veröffentlicht.\\[3ex]
+	Berlin, den \today\\[20ex]
+	\line(1,0){200}\\
+	Dennis Prudlo
+	\clearpage
 
 \end{document}

@@ -5,13 +5,18 @@
 
 %
 % Fonts
-\newfontfamily\monaco{SF Mono}[NFSSFamily=SFMono]
-\setmonofont{SF Mono}
-% \renewcommand{\theFancyVerbLine}{\monaco\textcolor{gray25}{\scriptsize\oldstylenums{\arabic{FancyVerbLine}}}}
+\newfontfamily\sfmono{SF Mono}[NFSSFamily=SFMono, Scale=1]
+\setmonofont[Scale=0.9]{SF Mono}
+
+%
+% Use monospaced line numbers in listings only when the release flag is set
+\ifdefined\isrelease
+	\renewcommand{\theFancyVerbLine}{\sfmono\textcolor{gray25}{\scriptsize\oldstylenums{\arabic{FancyVerbLine}}}}
+\fi
 
 %
 % Inserts a chapter title into the table of contents
-\newcommand{\mattertoc}[1]{
+\newcommand{\addtableofcontentsitem}[1]{
 	\addcontentsline{toc}{chapter}{#1}
 }
 
@@ -36,6 +41,7 @@
 
 %
 % Insert a code listing
+\lstset{breaklines=true, breakatwhitespace=true}
 \newcommand{\codelisting}[4]{
 	\begin{listing}[ht]
 		\inputminted[fontsize=\scriptsize,obeytabs=true,tabsize=4,linenos,xleftmargin=1.7em]{#4}{listings/#3}
