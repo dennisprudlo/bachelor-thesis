@@ -1,4 +1,5 @@
 \chapter{Theorie und Grundlagen}
+\label{ch:theorybasics}
 \section{Signifikanz von Kartendaten}
 % Kartendaten Decken alles ab\\
 % Parks, Points of Interests etc.\\
@@ -24,8 +25,7 @@ Bei der \ac{geojson} handelt es sich um ein Datenaustauschformat, welches auf \a
 Für die Darstellung von Geometrien werden sogenannte \textit{Features} erstellt, die eine \textit{Geometry} und \textit{Properties} haben. In der Geometry werden die Koordinaten und der Typ der Geometrie angegeben, während man in den Properties die Möglichkeit hat beliebige weitere Daten zu hinterlegen. Die \ac{geojson}-Spezifikation bietet sechs verschiedene Geometrie-Typen an, die die angegebenen Koordinaten unterschiedlich verarbeiten. Diese sind \texttt{Point}, \texttt{LineString}, \texttt{Polygon}, \texttt{MultiPoint}, \texttt{MultiLineString} und \texttt{MultiPolygon}.
 \codelisting{Beispielcode eines GeoJSON-Features}{lst:geojsonfeature}{geojson-feature-example.geojson}{json}\pbreak
 Möchte man Features gruppieren, kann man diese in eine \texttt{FeatureCollection} ablegen. Eine FeatureCollection hat keine weiteren Eigenschaften wie einen Namen, sie gruppiert lediglich mehrere Features.
-\codelisting{Beispielcode einer GeoJSON-FeatureCollection}{lst:geojsonfeaturecol}{geojson-featurecol-example.geojson}{json}\pbreak
-asd
+\codelisting{Beispielcode einer GeoJSON-FeatureCollection}{lst:geojsonfeaturecol}{geojson-featurecol-example.geojson}{json}
 
 \subsection{Indoor Mapping Data Format}
 Das \ac{imdf} ist ein gebündeltes Format bestehend aus 16 \ac{geojson} und einer \ac{json}-Datei. Die Spezifikation wurde erstmals 2019 auf der World Wide Developer Conference vorgestellt \parencite{GOD2019} und seitdem weiterentwickelt. In der Spezifikation beschreibt sich das Format selbst mit den Worten \blockquote{[...][IMDF] provides a generalized, yet comprehensive model for any indoor location, providing a basis for orientation, navigation and discovery.} \parencite{HOA2019}\pbreak%

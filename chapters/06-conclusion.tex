@@ -1,19 +1,61 @@
 \chapter{Fazit}
-Zusammenfassung der Ergebnisse
+\label{ch:conclusion}
+Im Rahmen der Ihnen vorliegenden Bachelorthesis wurde ein mobile Anwendung entwickelt, die es einem ermöglicht Indoor Maps zu gestalten.
+In \autoref{ch:theorybasics} wurde auf die Theorie und die Grundlagen dieser Thesis eingegangen.
+Darunter Kartendaten im Allgemeinen, wie man auf diesen zeichnet und welche Typen mobiler Anwendungen es gibt.\pbreak%
+%
+In \autoref{ch:analysis} wurden im Anschluss die aktuellen Lösungen analysiert.
+Dabei wurden Anforderungen aufgestellt, die ein System zur Erstellung von Indoor Maps erfüllen sollte und diese mit den aktuellen Lösungen verglichen.
+Dabei wurde etwas genauer auf Geoinformationssysteme eingegangen und die Probleme bei diesen herausgelesen.\pbreak%
+%
+Nach dem Abschluss der Analyse wurde in \autoref{ch:conception} mit dem Konzept für die Anwendung begonnen.
+Zu Beginn des Konzepts wurde ein grobes Design-Konzept erstellt, sodass die unterschiedlichen Komponenten der Anwendung ein ansehnliches und benutzerfreundliches Auftreten haben.
+Anschließend wurde dargelegt, wie ein Projekt der Anwendung aufgebaut und gespeichert wird.
+Des Weiteren wurde Pläne beschrieben, wie das Bearbeiten der Kartendaten und der Export der erstellten Indoor Maps funktionieren soll.\pbreak%
+%
+Das \autoref{ch:implementation} hat darauffolgend den Prozess der Implementierung beschrieben und es wurde in \autoref{sec:devios} anfangs auf die Entwicklung auf iOS-Geräten eingegangen.
+In diesem Abschnitt wurden die zur Verfügung stehenden Programmiersprachen vorgestellt und ein grober Einblick in die Struktur und den Aufbau eines iOS-Projektes gegeben.
+Im \autoref{sec:techimp} wurde dann genauer auf die technische Umsetzung eingegangen.
+...ADD...\pbreak%
+%
+Zum Ende des \autoref{ch:implementation} wurde im \autoref{sec:localizing} der Prozess der \Gls{l10n} beschrieben.
+Dabei wurde zum Einen auf die bereits existierenden Schnittstellen zum Lokalisieren eingegangen, als auch auf die Problematik bei der Auswahl von Untereinheiten von Regionen bei der Adressauswahl.
 
 \section{Herausforderungen}
 Evaluierung der Herausforderungen
+- Generics
+- MapOverlays
+- Gesture Recognizers
+- ISO Country Codes (IMDF erfordert ein subdivision Identifier)
 
 \section{Analyse der Anwendung}
-
 \subsection{Abgleich mit den Anforderungen}
 Abgleich mit den voerher aufgestellten Anforderungen
 \subsection{Usability Tests}
 Unabhängige Tests der Bedienbarkeit
 
 \section{Ausblick}
+In Zukunft kann die Anwendung mit vielen weiteren Funktionen erweitert werden.
+Außerdem könnte eine einfache Nutzung einer Anwendung zur Erstellung von Indoor Maps dazu beitragen Indoor Maps weiter zu verbreiten.
+Auf diese zwei Punkte wird in diesem Kapitel etwas genau eingegangen.
+
 \subsection{Erweiterbarkeit}
-Erweiterbarkeit der Anwendung
-Ausbreitung für die Plattformen Android und Web
+Die Anwendung kann um viele weitere Funktionen erweitert werden.
+Einige Funktionen, die nicht essenziell zum Bearbeiten der Kartendaten sind, jedoch den Aufwand deutlich verringern, sind zum Beispiel das automatische erkennen von Eckpunkten, wenn ein Punkt in der nähe gesetzt wurde.
+Dadurch könnte man den Vorgang des Hinzufügen von Elementen, die an eine andere anknüpfen deutlich schneller machen.\pbreak
+%
+Eine weitere geplante Funktion ist die Möglichkeit ein transparentes Bild über die Karte zu legen, wenn man dabei ist die Kartendaten zu bearbeiten.
+Dadurch könnte man mit bereits existierenden Bauplänen das Gebäude einfach anhand der transparenten Grafik nachzeichnen und im Anschluss die Detailarbeit vollziehen.\pbreak%
+%
+Besonders in Anwendungen, in denen Inhalte bearbeitet werden, ist es sinnvoll eine Möglichkeit zu bieten die getätigten Änderungen rückgängig zu machen oder zu wiederholen.
+Falls bei dem Erstellen eines Polygons ein Fehler unterlaufen ist und man den gezeichneten Punkt rückgängig machen möchte, müsste solch eine Funktion existieren.
+Dies ist eine der höher priorisierten Erweiterungen.\pbreak%
+%
+Das \ac{imdf}-Format definiert in der Spezifikation sehr genau, was valide Daten sind\footnote{\url{https://register.apple.com/resources/imdf/Validations/}. Abruf: 22.08.2020}.
+Darunter fallen einfache Formfehler, wie \texttt{AddressMustHaveLocality}, womit validiert wird, dass eine hinterlegte Adresse auch immer eine angegebene Stadt hat, als auch semantische Fehler, wie \texttt{AnchorMustBeWithinReferencedUnit}, womit validiert wird, dass ein gesetzter Anchor mit einer Referenz zu einer bestimmten Unit auch immer innerhalb dieser Unit sein muss.
+Zwar bietet Apple selbst eine \ac{imdf}-Sandbox an, in welcher man ein \ac{imdf}-Archiv hochladen kann und einfache Fehler angezeigt bekommt und beheben kann, doch eine eingebaute \ac{imdf}-Validierung könnte auch hier Arbeit abnehmen.
+Es wäre nicht mehr notwendig das Projekt zu exportieren und im Anschluss in der Sandbox hochzuladen, sondern man könnte eine Validierung direkt in der Anwendung anstoßen und Fehlermeldungen und Lösungsvorschläge erhalten.
+Bei einfachen Formfehlern wäre es auch möglich die Probleme automatisch von der Anwendung lösen zu lassen.
+
 \subsection{Nutzen für Indoor Maps}
-Einfache Bedienung führt zu weiterer Verbreitung?
+Eine deutlich interessantere Frage ist jedoch, ob eine einfach zu bedienende Anwendung einen Nutzen für Indoor Maps im Allgemeinen oder deren Verbreitung hat.
