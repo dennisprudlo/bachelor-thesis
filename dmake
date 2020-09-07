@@ -51,4 +51,4 @@ if test $PUBLISH = 'true'; then
 	log "Published successfully" success
 fi
 
-open thesis.pdf
+#open thesis.pdf

@@ -3,6 +3,11 @@
 \definecolor{gray75}{gray}{0.75}
 \definecolor{gray25}{gray}{0.25}
 
+\definecolor{redL}{RGB}{255,59,48}
+\definecolor{redDL}{RGB}{255,69,58}
+\definecolor{redH}{RGB}{215,0,21}
+\definecolor{redDH}{RGB}{255,105,97}
+
 %
 % Fonts
 \newfontfamily\sfmono{SF Mono}[NFSSFamily=SFMono, Scale=1]
@@ -41,7 +46,6 @@
 
 %
 % Insert a code listing
-\lstset{breaklines=true, breakatwhitespace=true}
 \newcommand{\codelisting}[4]{
 	\begin{listing}[ht]
 		\inputminted[fontsize=\scriptsize,obeytabs=true,tabsize=4,linenos,xleftmargin=1.7em]{#4}{listings/#3}
