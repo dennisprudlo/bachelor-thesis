@@ -27,6 +27,7 @@ Evaluierung der Herausforderungen
 - MapOverlays
 - Gesture Recognizers
 - ISO Country Codes (IMDF erfordert ein subdivision Identifier)
+- Kein Export und Fehlende Features (zeitlich nicht alle aufgestellten Anforderungen erfüllt)
 
 \section{Analyse der Anwendung}
 \subsection{Abgleich mit den Anforderungen}
@@ -55,11 +56,13 @@ Besonders in Anwendungen, in denen Inhalte bearbeitet werden, ist es sinnvoll ei
 Falls bei dem Erstellen eines Polygons ein Fehler unterlaufen ist und man den gezeichneten Punkt rückgängig machen möchte, müsste solch eine Funktion existieren.
 Dies ist eine der höher priorisierten Erweiterungen.\pbreak%
 %
-Das \ac{imdf}-Format definiert in der Spezifikation sehr genau, was valide Daten sind\footnote{\url{https://register.apple.com/resources/imdf/Validations/}. Abruf: 22.08.2020}.
-Darunter fallen einfache Formfehler, wie \texttt{AddressMustHaveLocality}, womit validiert wird, dass eine hinterlegte Adresse auch immer eine angegebene Stadt hat, als auch semantische Fehler, wie \texttt{AnchorMustBeWithinReferencedUnit}, womit validiert wird, dass ein gesetzter Anchor mit einer Referenz zu einer bestimmten Unit auch immer innerhalb dieser Unit sein muss.
+Das \ac{imdf}-Format definiert in der Spezifikation sehr genau, was valide Daten sind und der in \autoref{ch:conception} im Abschnitt \autoref{sec:validation} erwähnte Audit wäre für die Anwender von Vorteil.
 Zwar bietet Apple selbst eine \ac{imdf}-Sandbox an, in welcher man ein \ac{imdf}-Archiv hochladen kann und einfache Fehler angezeigt bekommt und beheben kann, doch eine eingebaute \ac{imdf}-Validierung könnte auch hier Arbeit abnehmen.
 Es wäre nicht mehr notwendig das Projekt zu exportieren und im Anschluss in der Sandbox hochzuladen, sondern man könnte eine Validierung direkt in der Anwendung anstoßen und Fehlermeldungen und Lösungsvorschläge erhalten.
-Bei einfachen Formfehlern wäre es auch möglich die Probleme automatisch von der Anwendung lösen zu lassen.
+Bei einfachen Formfehlern wäre es auch möglich die Probleme automatisch von der Anwendung lösen zu lassen.\pbreak%
+%
+Neben einem Export wäre es auch sinnvoll einen Import für \ac{imdf}-Archive anzubieten.
+Ein bestehendes \ac{imdf}-Archiv könnte von der Anwendung interpretiert werden und zu einem Indoor Architect Projekt umgewandelt werden, sodass jedes \ac{imdf}-Archiv in Indoor Architect bearbeitet werden kann und nicht nur die dort erstellten.
 
 \subsection{Nutzen für Indoor Maps}
 Eine deutlich interessantere Frage ist jedoch, ob eine einfach zu bedienende Anwendung einen Nutzen für Indoor Maps im Allgemeinen oder deren Verbreitung hat.

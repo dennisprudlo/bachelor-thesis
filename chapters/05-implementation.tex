@@ -155,10 +155,11 @@ Dies kann in der Programmiersprache Swift mit dem \texttt{super}-Keyword erreich
 In jedem iOS-Projekt muss eine sogenannte \textit{Information Property List} vorhanden sein.
 Diese kann als \texttt{Info.plist}-Datei an einer beliebigen Stelle im Projekt abgelegt sein, es muss nur der Pfad zu ihr hinterlegt werden.
 Die Property List ist ein Key-Value-Store und basiert auf XML (siehe Listing \ref{lst:plist}).
-In dieser Liste werden unter anderem der Name der Anwendung, die Version, die Buildnummer und weitere Einstellungen vorgenommen.
+In dieser Liste werden unter anderem der Name der Anwendung, die Version und die Buildnummer hinterlegt, sowie weitere Einstellungen vorgenommen.
 Außerdem werden in der Property List auch die Begründungstexte für Berechtigungsanfragen abgelegt.
 Wenn eine Anwendung versucht den Zugriff auf das Mikrofon anzufragen, allerdings kein Begründungstext hinterlegt wurde, der dem Benutzer angezeigt werden kann, wird die Berechtigung nicht angefragt.
 \codelisting{Beispielinhalt einer Property List}{lst:plist}{plist-example.plist}{xml}\\
+In der Information Property List können auch eigene Werte hinterlegt werden, die sowohl in der Anwendung selbst abgefragt werdne können als auch in den Buildprozessen der Anwendung verwendet werden können.
 
 \section{Technische Umsetzung}
 \label{sec:techimp}

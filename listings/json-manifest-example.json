@@ -1,0 +1,15 @@
+{
+	"uuid" : "96E62FA3-2D32-4112-BC43-2DDB3D32EF0E",
+	"title" : "New Project",
+	"client" : null,
+	"description" : null,
+	"imdfprojVersion" : 1,
+	"session" : {
+		"centerLatitude": 52.516266,
+		"centerLongitude": 13.377775,
+		"spanLatitude": 1,
+		"spanLongitude": 1
+	},
+	"createdAt" : "2020-04-14T09:50:36Z",
+	"updatedAt" : "2020-04-14T09:50:36Z"
+}

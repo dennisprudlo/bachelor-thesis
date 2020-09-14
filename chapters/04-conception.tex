@@ -86,19 +86,115 @@ Auch in diesem Fall kann diese Barrierefreiheitfunktion außer acht gelassen wer
 Selbst mit den entsprechenden Funktionen der Barrierefreiheit ist das Zeichnen auf den Kartendaten mit einer Blindheit in dieser Anwendung schwer zu verwirklichen.
 
 \section{Erstellen von Projekten}
-Navigationsbaum\\
-Verweise auf Anhänge\\
-Eingabe von Titel, Client und Description\\
-Eingehen auf das Format, wie das Projekt gespeichert werden soll (JSON, Struktur)
+Das Erstellen eines Projektes sollte möglichst einfach und ohne großen Aufwand erfolgen.
+Aus diesem Grund wird es ähnlich dem Auswählen von existierenden Projekten auch in der Sidebar die Möglichkeit geben ein Projekt zu erstellen.
+Es muss lediglich ein Plus-Symbol geklickt werden und der Anwender kann die Grundinformationen für das Projekt eingeben.
+Da das Erstellen eines Projektes nur ein kleiner Schritt ist und der Anwender nicht eine komplett neue Ansicht bekommen muss wird das Formular als \emph{Popover} angezeigt.
+Ein Popover ist eine Ansicht, die über den aktuellen Inhalt gelegt wird, welcher verdunkelt wird.
+In der Abbildung \ref{fig:design-project-create} kann man erkennen, dass der Fokus auf das neue Formular gelegt wird, obwohl die Projektübersicht im Hintergrund weiter sichtbar ist.
+Sobald der Anwender die Erstellung des Projektes bestätigt, wird er zu der Projektübersicht des neuen Projektes weitergeleitet.
+Das Formular zur Erstellung bietet die Möglichkeit an drei Felder auszufüllen:
+\emph{Projekttitel}, \emph{Projektkunde} und \emph{Projektbeschreibung}, von denen nur der Projekttitel ein Pflichtfeld ist.
+Alle drei Felder können nach der Erstellung beliebig oft bearbeitet werden.
+\newpage
+\begin{figure}[h!]
+	\centering
+	\vspace{15pt}
+	\includegraphics[scale=0.4]{images/design-project-create}
+	\caption{Mockup der Erstellung eines neuen Projektes}
+	\label{fig:design-project-create}
+\end{figure}
+Neben dem geplanten Ablauf der Erstellung eines Projektes muss zusätzlich definiert werden, wie ein Projekt gespeichert wird.
+Um das weitergeben von Indoor Architect Projekten möglichst leicht zu halten ist ein Projekt lediglich ein Ordner, welcher eine bestimmte Struktur haben muss.
+Die Ordner müssen die Endung \texttt{imdfproj} haben, wie zum Beispiel \texttt{ein-projekt.imdfproj/}.
+Innerhalb dieses Ordners muss folgende Struktur eingehalten werden:
+\vspace{5pt}
+\dirtree{%
+	.1 /.
+	.2 archive.imdf/.
+	.3 address.geojson.
+	.3 amenity.geojson.
+	.3 ....
+	.2 manifest.json.
+	.2 overlays/.
+	.3 overlay-1/.
+	.4 overlay.json.
+	.4 overlay.png.
+}
+\vspace{5pt}
+Der Ordner \texttt{archive.imdf/} muss alle Dateien enthalten, die für ein gültiges \acl{imdf} Archiv benötigt werden.
+Wenn die Kartendaten eines Projektes bearbeitet werden, dann werden die Koordinaten und Beziehungen in diesen Dateien angepasst.
+Obwohl dieser Ordner alle Dateien enthält, handelt es sich nicht um ein gültiges \ac{imdf}-Archiv.
+Der Inhalt der \ac{geojson}-Dateien selbst muss nicht ein gültiges \ac{imdf}-Format haben, da auch zusätzliche Informationen in den Dateien hinterlegt werden, die für ein Indoor Architect Projekt nützlich sein können.\pbreak%
+%
+Das \texttt{overlays/}-Verzeichnis enthält alle verwendeten \emph{Overlays}, die über die Kartendaten gelegt werden können.
+Dabei handelt es sich um Grafiken, wie zum Beispiel Grundrisse der Gebäude, die man mit einer transparenz über die Kartendaten legen kann, um die einzelnen Gebäude und Räume besser nachzeichnen zu können.
+Jedes Overlay ist dabei ein eigener Ordner, welcher zum Einen die zu verwendende Grafik enthält, sowie eine \texttt{overlay.json}, welche die Positionsinformationen zu diesem Overlay speichert.
+Im Listing \ref{lst:overlay} wird eine Beispieldarstellung einer \texttt{overlay.json}-Datei gezeigt, in der zum Einen der Dateityp der Grafik hinterlegt wird und zum Anderen die Darstellungsoptionen.
+Darunter befinden sich die Position, an der die Grafik angezeigt werden soll, sowie die Skalierung und die Rotation der Grafik auf den Kartendaten.
+\codelisting{Beispieldarstellung einer \texttt{overlay.json}}{lst:overlay}{json-overlay-example.json}{json}\\
+Zu guter Letzt bleibt die \texttt{manifest.json}-Datei, welche die grundlegenden Projektinformationen enthält.
+Im folgenden werden die einzelnen Felder des Listings \ref{lst:manifest} genauer erklärt.
+\codelisting{Beispieldarstellung einer \texttt{manifest.json} eines Indoor Architect Projektes}{lst:manifest}{json-manifest-example.json}{json}\\
+Die \texttt{uuid} identifiziert das Projekt neben allen anderen existierenden Projekten innerhalb der Anwendung.
+Neben einfachen Zusatzinformationen, wie dem Titel des Projektes gibt es noch die \texttt{imdfprojVersion}, welche dazu dient die Version des Projektes zu identifizieren.
+Falls sich die Projektstruktur verändert kann man anhand dieser Versionsnummer erkennen welche Schritte zum migrieren auf die neue Version nötig sind und die Anwendung kann diese Migration dann selbst übernehmen.
+Die Felder \texttt{createdAt} und \texttt{updatedAt} bilden nur Zeitstempel der Erstellung und der letzten Bearbeitung des Projektes ab und die \texttt{session} speichert die Position des Anwenders in den Kartendaten, bevor das Projekt geschlossen wurde.
+Das Speichern der Session ermöglicht es der Anwendung beim Nächsten Öffnen des Bearbeitungsmodus der Kartendaten an die Stelle zu springen, an der der Anwender zuvor aufgehört hat.
+
 \section{Bearbeiten der Kartendaten}
-Navigationsbaum (Eingehen auf die andere Art der Navigation)\\
-Beschreiben der Tools für die Bearbeitung\\
-Anklicken von Items öffnet die Edit Form
+Die Bearbeitung der Kartendaten gehört zu den wichtigsten Aufgaben von Indoor Architect.
+Um die verschiedenen Feature-Typen des \acl{imdf}s erstellen zu können werden fünf verschiedene Werkzeuge bereitgestellt, von denen drei zum Zeichnen von Elementen gedacht sind.
+\begin{description}
+\item[Pointer]
+Das Pointer-Werkzeug dient als neutrales Werkzeug, mit dem einzelne Elemente ausgewählt werden können beziehungsweise mit ihnen interagiert werden kann.
+Neue Elemente lassen sich damit nicht erstellen.
+\item[Anchor]
+Das Anchor-Werkzeug funktioniert ähnlich wie das Pointer-Werkzeug, nur dass in diesem Fall ein Element, also ein \ac{imdf}-Feature erzeugt wird.
+Beim ersten Erstellen wird ein \emph{Anchor}-Feature erstellt, welches im Anschluss bearbeitet werden kann.
+\item[Line]
+Das Line-Werkzeug dient dazu Linien zu zeichnen, die als anschließendes Feature gespeichert werden können.
+Beim erstmaligen Erstellen einer Linie wird diese als \emph{Opening}-Feature erstellt.
+\item[Polygon]
+Analog zum Line-Werkzeug werden mit dem Polygon-Werkzeug Linien gezeichnet.
+Nach dem Abschluss des Zeichnens werden diese Linien geschlossen und als Polygon hinterlegt.
+Beim ersten Erstellen eines Polygons wird dieses als \emph{Unit}-Feature hinterlegt und kann auch im Anschluss bearbeitet werden.
+\item[Ruler]
+Das Ruler-Werkzeug dient lediglich dazu Abstände besser visualisieren zu können.
+Wenn dieses Werkzeug aktiviert ist, kann der Abstand zwischen zwei Punkten in Metern angezeigt werden.
+\end{description}
+Die Werkzeuge können über die Werkzeugleiste auf der linken Seite der Ansicht, welche in der Abbildung \ref{fig:design-map-edit} zu erkennen ist, gewechselt werden.
+Wenn mit dem Pointer-Werkzeug auf ein Element geklickt wird, können die Eigenschaften des Features in dem sich öffnenden Popover bearbeitet werden.
+\begin{figure}[h!]
+	\centering
+	\vspace{15pt}
+	\includegraphics[scale=0.4]{images/design-map-edit}
+	\caption{Mockup der Bearbeitung eines Features in der Kartenansicht}
+	\label{fig:design-map-edit}
+\end{figure}
+In der oberen Leiste werden weitere Informationen agezeigt, wie zum Beispiel die Koordinaten des letzten angeklickten Punktes oder das ausgewählte Werkzeug.
+
 \section{Ausführen eines Audits}
-Navigationsbaum\\
-Erklärung der Validation Rules\\
-Anzeige mit Lösungsvorschlägen\\
-Automatisches Resolven von Issues
+\label{sec:validation}
+Nach dem Erstellen der Kartendaten soll es möglich sein einen Audit durchzuführen, welcher Rückmeldung darüber gibt, ob die Kartendaten valide sind.
+Neben leicht zu identifizierenden Fehlern in der Formalität der gespeicherten Daten, wie ein Fehlender Projekttitel oder eine referenzierte UUID, welche nicht existiert gibt es auch viele semantische Fehler die auftreten können.
+Das \acl{imdf} definiert eine große Menge an \emph{Validation Rules}\footnote{\url{https://register.apple.com/resources/imdf/Validations/}. Abruf: 22.08.2020}, welche erfolgreich sein müssen, damit es sich um ein valides \ac{imdf} handelt.
+Darunter fallen unter anderem Regeln wie \texttt{AddressMustHaveLocality}, mit welcher validiert wird, dass eine hinterlegte Adresse auch immer eine angegebene Stadt hat, oder auch \texttt{AnchorMustBeWithinReferencedUnit}, womit validiert wird, dass ein gesetzter Anchor mit einer Referenz zu einer bestimmten Unit auch immer innerhalb dieser Unit sein muss.
+\begin{figure}[h!]
+	\centering
+	\vspace{15pt}
+	\includegraphics[scale=0.4]{images/design-project-audit}
+	\caption{Mockup der Ausführung eines Projektaudits}
+	\label{fig:design-project-audit}
+\end{figure}
+Der Audit sollte die Fehler in den Kartendaten erkennen und dem Anwender aufzeigen (siehe Abbildung \ref{fig:design-project-audit}).
+Wenn Warnungen oder gar Fehler auftreten sollten Lösungen vorgeschlagen werden und nach Möglichkeit die Fehler automatisch behoben werden.
+
 \section{Exportieren der Projekte}
-Export als IMDF Format\\
-Export als Indoor Architect Archiv
+Nach dem erfolgreichen validieren der Kartendaten steht in der Regel der Export in ein \ac{imdf}-Archiv an.
+Da die Kartendaten in dem Indoor Architect Projekt selbst in der \ac{imdf}-Struktur hinterlegt sind besteht ein Export grundlegend nur aus dem archivieren der Daten und dem Speichern an einem gewählten Speicherort.
+Das exportierte ZIP-Archiv kann im Anschluss für eine beliebige Verwendung weitergegeben werden.\pbreak%
+%
+Neben dem Export als \ac{imdf}-Archiv sollte auch ein Export als Indoor Architect Projekt möglich sein.
+Das Projekt enthält Zusatzinformationen zu allen Features und Overlays, die an verschiedenen Stellen auf den Kartendaten positioniert sind.
+Diese Informationen sind notwendig, wenn das eigene Projekt auf einem anderen Gerät weitergeführt werden soll.
