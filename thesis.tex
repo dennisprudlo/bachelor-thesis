@@ -92,44 +92,6 @@
 	\clearpage
 	\setcounter{currentpage}{\arabic{page}}
 
-	%
-	%	REAR MATTER
-	\pagenumbering{Roman}
-	\pagestyle{plain}
-	\setcounter{page}{\thecurrentpage}
-
-	%
-	% Bibliography
-	\printbibliography
-	\addtableofcontentsitem{Literaturverzeichnis}
-	\clearpage
-
-	%
-	% Glossary
-	\printglossary
-	\addtableofcontentsitem{Glossar}
-	\clearpage
-
-	%
-	% Attachments
-	\chapter*{Anhang}
-	\appendix
-	\addtableofcontentsitem{Anhang}
 	\input pages/appendix
-	\clearpage
-
-	%
-	% Declaration of Authorship
-	\chapter*{Eidesstattliche Versicherung}
-	Ich versichere hiermit, dass ich die vorliegende Bachelorthesis selbstständig und ohne fremde Hilfe
-	angefertigt und keine andere als die angegebene Literatur benutzt habe. Alle von anderen Autoren
-	wörtlich übernommenen Stellen wie auch die sich an die Gedankengänge anderer Autoren eng anlehnenden
-	Ausführungen meiner Arbeit sind besonders gekennzeichnet.\\[1ex]
-	Diese Arbeit wurde bisher in gleicher oder ähnlicher Form keiner anderen Prüfungsbehörde vorgelegt
-	und auch nicht veröffentlicht.\\[3ex]
-	Berlin, den \today\\[20ex]
-	\line(1,0){200}\\
-	Dennis Prudlo
-	\clearpage
 
 \end{document}

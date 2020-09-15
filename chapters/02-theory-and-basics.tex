@@ -1,13 +1,16 @@
 \chapter{Theorie und Grundlagen}
 \label{ch:theorybasics}
-\section{\textcolor{red}{Signifikanz von Kartendaten}}
-% Kartendaten Decken alles ab\\
-% Parks, Points of Interests etc.\\
-% Ansichten für Satellit und Map\\
-% ÖPNV von Bus/Tram bis zu internationalen Zügen\\
-
-\section{\textcolor{red}{Verwendung von Indoor Maps}}
-% Einkaufszentren, Stadien, Flughäfen, Bahnhöfen
+\section{Signifikanz von Kartendaten}
+Mit steigender Mobilität der Menschen steigt auch die Bedeutung von Kartendaten.
+Doch zu den Kartendaten gehören längst nicht mehr nur die Position von Ortschaften und die Führung von Straßen.
+Neben den Satellitenkartendaten, welche bei Google Maps, Apple Maps und Bing Maps zur Verfügung gestellt werden, sind in den letzten Jahren weitere Funktionen dazugekommen, welche die Kartendaten um Karteninformationen erweitert.
+Aktuell unterstützen Google Maps und Apple Maps den öffentlichen Personennahverkehr, sodass Routen nicht nur für den Fußweg oder den Fahrtweg mit dem Auto berechnet werden können, sondern auch Strecken des Nah-, Regional- und Fernverkehrs berücksichtigt werden können.
+Zusätzlich Google Maps hat im Mai 2007 die Funktion \emph{Street View} vorgestellt, mit welcher der Benutzer Fotoaufnahmen der Straßen sehen kann \parencite{PUD2007}.
+Apple folgte im September 2019 mit \emph{Look Around} \parencite{APP2019}.\pbreak%
+%
+Auch das Suchen und Finden von \emph{Points of Interest}, wie unter anderem Parks, Restaurants und Kulturstätten, findet vermehrt über die Kartendienstleister statt.
+In einer Studie von Brandify aus dem November 2019 wurden über 1000 Personen in den Vereinigten Staaten befragt, welche Werkzeuge sie verwenden, um Informationen zu verschiedenen Unternehmen in ihrer Nähe zu finden.
+Dabei ist herausgekommen, dass \SI{81}{\prc} der Verbraucher ihr Mobiltelefon für die Suche bevorzugen und \SI{77}{\prc} der Verbraucher Google Maps für ihre Suche verwenden \parencite{ROL2019}.
 
 \section{Zeichnen auf Kartendaten}
 Indoor Maps beschreiben in erster Linie die Positionen, Strukturen und Funktionsweisen von Räumlichkeiten in Gebäuden. Diese Informationen, die auf Kartendaten gezeichnet werden müssen, lassen sich mit Hilfe der \acs{geojson} beschreiben. Dabei muss beachtet werden, dass man die Syntax des Formats einhält.
@@ -22,10 +25,15 @@ Das \texttt{parents}-Array kann wieder Objekte beinhalten, die eine Person besch
 \subsection{Das GeoJSON-Format}
 Bei der \ac{geojson} handelt es sich um ein Datenaustauschformat, welches auf \ac{json} basiert und sich an der Syntax von \ac{json} orientiert. Der Standard wurde Anfang 2007 begonnen und Mitte 2008 als GeoJSON Specification veröffentlicht. In 2015 wurde eine neue GeoJSON Working Group von der Internet Engineering Task Force gegründet, die den Standard nun spezifiziert\footnote{RFC 7948}. Die veraltete GeoJSON Specification wurde daher für obsolet erklärt und wird nicht mehr verwendet \parencite{BUT2008}.\pbreak%
 %
-Für die Darstellung von Geometrien werden sogenannte \textit{Features} erstellt, die eine \textit{Geometry} und \textit{Properties} haben. In der Geometry werden die Koordinaten und der Typ der Geometrie angegeben, während man in den Properties die Möglichkeit hat beliebige weitere Daten zu hinterlegen. Die \ac{geojson}-Spezifikation bietet sechs verschiedene Geometrie-Typen an, die die angegebenen Koordinaten unterschiedlich verarbeiten. Diese sind \texttt{Point}, \texttt{LineString}, \texttt{Polygon}, \texttt{MultiPoint}, \texttt{MultiLineString} und \texttt{MultiPolygon}.
+Für die Darstellung von Geometrien werden sogenannte \textit{Features} erstellt, die eine \textit{Geometry} und \textit{Properties} haben.
+Erkennbar im Listing \ref{lst:geojsonfeature} werden in der Geometry die Koordinaten und der Typ der Geometrie angegeben, während man in den Properties die Möglichkeit hat beliebige weitere Daten zu hinterlegen.
+Die \ac{geojson}-Spezifikation bietet sechs verschiedene Geometrie-Typen an, die die angegebenen Koordinaten unterschiedlich verarbeiten.
+Diese sind \texttt{Point}, \texttt{LineString}, \texttt{Polygon}, \texttt{MultiPoint}, \texttt{MultiLineString} und \texttt{MultiPolygon}.
 \codelisting{Beispielcode eines GeoJSON-Features}{lst:geojsonfeature}{geojson-feature-example.geojson}{json}\pbreak
-Möchte man Features gruppieren, kann man diese in eine \texttt{FeatureCollection} ablegen. Eine FeatureCollection hat keine weiteren Eigenschaften wie einen Namen, sie gruppiert lediglich mehrere Features.
+Möchte man Features gruppieren, kann man diese in eine \texttt{FeatureCollection} ablegen.
+Eine FeatureCollection hat keine weiteren Eigenschaften wie einen Namen, sie gruppiert lediglich mehrere Features.
 \codelisting{Beispielcode einer GeoJSON-FeatureCollection}{lst:geojsonfeaturecol}{geojson-featurecol-example.geojson}{json}
+Wichtig dabei ist, dass eine FeatureCollection ein Objekt ist, welches einen \texttt{type} mit dem Wert \texttt{FeatureCollection} hat und eine Liste von allen dazugehörigen Features, die als Array dem Key \texttt{features} zugeordnet sind (siehe Listing \ref{lst:geojsonfeaturecol}).
 
 \subsection{Indoor Mapping Data Format}
 Das \ac{imdf} ist ein gebündeltes Format bestehend aus 16 \ac{geojson} und einer \ac{json}-Datei. Die Spezifikation wurde erstmals 2019 auf der World Wide Developer Conference vorgestellt \parencite{GOD2019} und seitdem weiterentwickelt. In der Spezifikation beschreibt sich das Format selbst mit den Worten \blockquote{[...][IMDF] provides a generalized, yet comprehensive model for any indoor location, providing a basis for orientation, navigation and discovery.} \parencite{HOA2019}\pbreak%
