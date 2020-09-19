@@ -26,6 +26,10 @@ do
 	if test $arg = '--publish'; then
 		PUBLISH=true
 	fi
+	if test $arg = 'open'; then
+		open thesis.pdf
+		exit
+	fi
 done
 
 [ -d build ] || mkdir ./build
