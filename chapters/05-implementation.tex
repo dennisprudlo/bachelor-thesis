@@ -164,12 +164,70 @@ In der Information Property List können auch eigene Werte hinterlegt werden, di
 \section{\textcolor{red}{Technische Umsetzung}}
 \label{sec:techimp}
 \subsection{\textcolor{red}{Autolayout}}
+\label{subsec:autolayout}
 \subsection{\textcolor{red}{JSON Encoding und Decoding}}
 \subsection{\textcolor{red}{Generics}}
 \subsection{\textcolor{red}{Gesture Recognizers}}
 \subsection{\textcolor{red}{MapKit Overlays}}
 
-\section{\textcolor{red}{Lokalisierung der Anwendung}}
+\section{Lokalisierung der Anwendung}
 \label{sec:localizing}
-\subsection{\textcolor{red}{Localizable-Dictionary}}
-\subsection{\textcolor{red}{ISO Country Codes}}
+Um Indoor Architect für eine breitere Masse an Benutzern bereitzustellen ist es wichtig, dass die Anwendung auch in den Sprachen verfügbar ist, die der Benutzer spricht.
+Während des Entwicklungsprozesses musste dabei darauf geachtet werden, dass die Anwendung internationalisiert wird.
+Dabei wird so entwickelt, dass im Anschluss das Übertragen der Anwendung in eine andere Sprache oder Kultur leichter gemacht wird.
+Das World Wide Web Consortium (W3C) beschreibt den Prozess der Internationalisierung unter anderem als \blockquote{[d]esigning and developing in a way that removes barriers to localization or international deployment. This includes such things as enabling the use of Unicode [...]} \parencite{ISH2005}.\pbreak%
+%
+Bei der Internationalisierung muss neben unterschiedlichen Sprachen auch berücksichtigt werden, dass es verschiedene Schriftsysteme gibt.
+Auch Grafiken sollten lokalisiert sein, da sie mögliche politische oder religiöse Sensibilitäten enthalten könnten.
+Da bei Indoor Architect keine Grafiken zum Einsatz kommen, muss bei der Internationalisierung nur darauf geachtet werden, dass Texte übersetzt werden können.
+Die Leserichtigung einer Sprache darf dabei nicht vergessen werden.
+Im \autoref{subsec:autolayout} wurde bereits darauf eingegangen, wie man dafür sorgen kann, dass die Leserichtung richtig dargestellt wird.
+
+\subsection{Localizable-Dictionary}
+Die Übersetzung der Entwicklungssprache ist relativ einfach, wenn man sich an den Werkzeugen des \Glspl{sdk} bedient.
+Wenn man eine Anwendung für eine Bibliothek entwickelt und für den Suchfilter die Kategorie ``Book`` verwenden möchte bleiben einem zwei Möglichkeiten.
+\codelisting{Zuweisung eines statischen und dynamischen Strings}{lst:l10n-key}{l10n-key.swift}{swift}
+In der Zeile 3 des Listings \ref{lst:l10n-key} wird ein einfacher String einer Variable zugewiesen.
+Dieser Wert kann nun für den Suchfilter verwendet werden, allerdings wird in jeder Sprache der Text ``Book``angezeigt.
+Anders ist es bei dem Beispiel aus der Zeile 7, in der \texttt{NSLocalizedString} verwendet wird.
+Dort wird als erster Parameter der zu lokalisierende Werte in der Entwicklungssprache (die Sprache, in der die Anwendung vor der Lokalisierung entwickelt wurde) eingetragen und ein Kommentar mitgegeben.
+Der Kommentar soll als Hilfe dienen, wenn man die zu lokalisierenden Text und Grafiken exportiert und einem Übersetzer weiterleitet.\pbreak%
+%
+Für jede Sprache muss nun ein Unterordner im Projekt angelegt werden mit dem Format \texttt{<lang>.lproj}, wobei \texttt{<lang>} die Sprach- und Länderkennung ist.
+Die Übersetzung in die deutsche Sprache hätte den Ordnernamen \texttt{de.lproj}, da die Lokalisierung auch für alle deutschsprachigen Regionen gelten soll.
+In diesem Ordner muss sich eine \texttt{Localizable.strings}-Datei befinden, welche mit Key-Value-Paaren den Übersetzten Text enthält, wie im Listing \ref{lst:l10n-localizable} zu sehen ist.
+\codelisting{Inhalt der entsprechenden Übersetzungsdateien}{lst:l10n-localizable}{l10n-localizable.swift}{swift}
+Wenn es für die ausgewählte Sprache keine Übersetzungsdatei gibt, oder kein Key-Value-Paar vorhanden ist, wird der angegebene Standardtext, in diesem Fall ``Book``, verwendet. Die Übersetzungsdatei für die englische Sprache entfällt, da es sich dabei um die Entwicklungssprache handelt.\pbreak%
+%
+Diese einfache Wort-zu-Wort-Übersetzung funktioniert aber nur bedingt.
+Würde die Bibliothek beispielsweise Veranstaltungen anbieten, die man buchen kann, wird für die Aktion ``Buchen`` im Englischen einfach wieder ``Book`` verwendet.
+Im Deutschen würde das nicht funktionieren, da das Substantiv und Verb, anders als im Englischen, unterschiedliche Wörter sind.
+Aus diesem Grund wurde sich dafür entschieden in jedem Fall eindeutige Übersetzungsschlüssel zu verwenden.
+\codelisting{Inhalt der entsprechenden Übersetzungsdateien (Eindeutig)}{lst:l10n-localizable-unique}{l10n-localizable-unique.swift}{swift}
+Dadurch können die Text getrennt werden und die Problematik verschwindet.
+Damit auch der richtige Text im Englischen angezeigt wird, muss auch eine Übersetzungsdatei für die englische Sprache angelegt werden und eine Instanz von \texttt{NSLocalizedString} mit dem entsprechenden neuen Key erzeugt werden.\pbreak%
+%
+In der Abbildung \ref{fig:localized-results} kann man zwei Darstellungen der selben Ansicht sehen.
+Die linke Seite nutzt die englische Lokalisierung währen die rechte Seite die deutsche Lokalisierung verwendet.
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.25]{images/localized.png}
+	\caption{Gegenüberstellung der lokalisierten Versionen}
+	\label{fig:localized-results}
+\end{figure}
+Viele Übersetzungen konnten vom System übernommen werden.
+Der ``Cancel` beziehungsweise der ``Abbrechen``-Button wird automatisch vom System lokalisiert, sodass man für diese Fälle keine Übersetzungen anlegen muss.
+Gleiches gilt für die Anzeige eines Datums oder für die Auswahl von Ländern.
+
+\subsection{ISO Country Codes}
+In dem Formular zur Erstellung einer neuen Adresse (Abbildung \ref{fig:localized-results}) muss auch ein Land ausgewählt werden.
+Für diese Informationen bietet das \Gls{sdk} eine Schnittstelle an, um die lokalisierten Namen der Staaten abzufragen.
+Je nach ausgewählter Sprache bekommt man zum Beispiel die Rückgabewerte \emph{Deutschland} und \emph{Österreich} oder \emph{Germany} und \emph{Austria}.
+Für eine gültige \ac{imdf}-Adresse muss aber noch eine Provinz bzw. Subdivision ausgewählt werden.
+Diese Informationen kann man nicht nur unlokalisiert, sondern gar nicht über die Schnittstelle.
+Das Bundesland mit der ISO 3166 Kennung \texttt{DE-BY} würde in der deutschen Sprache \emph{Bayern} und in der englischen \emph{Bavaria} heißen.
+Auf die Lokalisierung der Provinzen wurde daher verzichtet, da der Aufwand für die manuelle Lokalisierung der Provinzen aller existierenden Länder zu hoch ist.
+Es wurden lediglich die Provinzen aller Länder in der entsprechenden Amtssprache manuell zusammengesucht und als Property List (Listing \ref{lst:isoprop}) abgespeichert.
+\codelisting{Ausschnitt aus der Property List mit den Provinzen der Ländern}{lst:isoprop}{isoprop.plist}{xml}
+Im Anschluss konnte auf die Liste der Provinzen anhand der Länderkennung zugegriffen werden.
+Wurde bei der Länderauswahl das Land Belgien (\texttt{BE}) ausgewählt, wurde bei der Provinzauswahl die entsprechende Liste der Provinzen angezeigt.

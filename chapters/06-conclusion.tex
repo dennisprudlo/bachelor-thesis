@@ -29,12 +29,55 @@ Evaluierung der Herausforderungen
 - ISO Country Codes (IMDF erfordert ein subdivision Identifier)
 - Kein Export und Fehlende Features (zeitlich nicht alle aufgestellten Anforderungen erfüllt)
 
-\section{\textcolor{red}{Analyse der Anwendung}}
-\subsection{\textcolor{red}{Abgleich mit den Anforderungen}}
-Abgleich mit den voerher aufgestellten Anforderungen
-\subsection{\textcolor{red}{Usability Tests}}
-Unabhängige Tests der Bedienbarkeit
+\section{Analyse der Anwendung}
+Im \autoref{ch:analysis} wurden Anforderungen aufgestellt und die aktuelle Situation auf dem Markt analysiert.
+Nach Abschluss der Entwicklung findet nun auch ein Abgleich mit den Anforderung bei Indoor Architect statt, sodass das Ergebnis besser bewertet werden kann.
 
+\subsection{Abgleich mit den Anforderungen}
+Nach Abschluss der Entwicklung der ersten Version von Indoor Architect kann mit dem Abgleich der Anforderungen begonnen werden.
+Für den Vermieter im Anwendungsfall waren die Punkte \emph{Presisliche Stemmbarkeit}, \emph{Schnelle Einarbeitungszeit}, \emph{Leichte und Nachvollziehbare Bedienung} und die \emph{Mobile Nutzung} von Relevanz.
+\analysisresults{
+Da Indoor Architect nicht monetarisiert wird und der Programmquellcode offen zur Verfügung steht, fallen für die Anwendung selbst keine Kosten an.
+Ähnlich wie bei den anylsierten Anwendungen müssen die Geräte für die Nutzung der Software vorhanden sein.
+}{
+Die Anwendung nutzt an vielen Stellen Beschreibungstexte, die erklären welche Informationen in welchem Format in das entsprechende Feld eingetragen werden müssen.
+In den Abbildungen \hyperref[fig:04-address]{A.4}, \hyperref[fig:11-label]{A.11} und \hyperref[fig:13-venue]{A.13} im Anhang kann gesehen werden, wie die Beschreibungstexte dem Anwender näher bringen was eingetragen werden muss.
+Das Kennenlernen der Anwendung findet daher nicht über eine externe Dokumentation statt, sondern über das Benutzen der Anwendung selbst.
+}{
+Beim Benutzen von Indoor Architect wird dem Anwender sofort Rückmeldung über die ausgeführte Aktion gegeben, sodass eine Aktion immer nachvollziehbar ist.
+Beim Erstellen von Adressen wird im Hintergrund die Liste der Adressen sofort aktualisiert und bei der Bearbeitung der Kartendaten kann man zu jeder Zeit erkennen, worauf die Anwendung wartet.
+}{
+Die Anwendung Indoor Architect ist eine iPad-App und kann daher mobil genutzt werden.
+Für die Verwaltung der Projekte und die Bearbeitung der Kartendaten wird außerdem keine Internetanbindung benötigt, sodass die Anwendung an jedem Ort genutzt werden kann.
+}{
+Die entwickelte Anwendung erfüllt die aufgestellten Anforderung in der ersten Entwicklungsversion.
+Dabei sollte man bedenken, dass die Erfüllung der Anforderungen ein kontinuierlich fortschreitender Prozess ist.
+Bei der Entwicklung neuer Funktionen muss weiter darauf geachtet werden, dass die Einarbeitungszeit kurz gehalten wird und die Bedienung der Funktionen leicht und nachvollziehbar ist.\pbreak%
+%
+Der aktuelle Stand der entwickelten Anwendung kann noch nicht dafür verwendet werden alle Möglichkeiten des \acl{imdf}s abbilden zu können.
+Eine Implementierung aller benötigten Funktionen beansprucht mehr Arbeitszeit, da bei jeder Entwicklung die Anforderungen und die Vorgaben aus dem Design-Konzept eingehalten werden müssen.
+}
+
+\subsection{Usability Tests}
+Um die Anforderung der schnellen Einarbeitungszeit und der leichten und nachvollziehbaren Bedienung besser einordnen zu können wurde ein Usability Test mit der entwickelten Anwendung durchgeführt.
+Die Testpersonen haben eine Liste mit Aufgaben erhalten, die sie innerhalb der Anwendung erfüllen sollten.
+Im Anschluss war es ihnen möglich die Benutzung der Anwendung zu bewerten.
+Die genauen Aufgabenstellungen und anschließende Bewertungsmöglichkeiten können im \hyperref[sec:appendixc]{Anhang C} eingesehen werden.\pbreak%
+%
+Bei der Auswertung konnte ermittelt werden, dass von den 11 Testpersonen drei Schwierigkeiten bei der Benutzung der Anwendung vermeldet haben.
+Die genau Verteilung der gemeldeten Probleme bei den Aufgaben ist in der Abbildung \ref{fig:usability-column} dargestellt.
+\begin{figure}[h]
+	\centering
+	\vspace{15pt}
+	\includegraphics[scale=0.8]{images/usability-results-column.pdf}
+	\caption{Benannte Probleme bei den gestellten Aufgaben}
+	\label{fig:usability-column}
+\end{figure}
+Alle drei Personen haben auf eine Schwierigkeit bei der Aufgabe 6 hingewiesen, während zusätzlich bei zweien noch jeweils die Aufgaben 2 und 4 Schwierigkeiten bereitet haben.
+Bei der Aufgabe 6 sollten die Benutzer eine Entfernung zwischen zwei Orten messen.
+Bei der Bewertung wurde beschrieben, dass nicht klar war wie eine Messung ausgeführt werden kann.
+Das lag laut Angaben in erster Linie daran, dass das verwendete Icon die Funktion dahinter nicht klar kommuniziert.
+Für eine Optimierung der Usability sollten daher die Icon überprüft und gegebenenfalls ausgewechselt werden.
 \section{Ausblick}
 In Zukunft kann die Anwendung mit vielen weiteren Funktionen erweitert werden.
 Außerdem könnte eine einfache Nutzung einer Anwendung zur Erstellung von Indoor Maps dazu beitragen Indoor Maps weiter zu verbreiten.

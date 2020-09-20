@@ -1,0 +1,16 @@
+<plist version="1.0">
+	<dict>
+		<key>BE</key>
+		<dict>
+			<key>BE-VAN</key>
+			<string>Antwerpen</string>
+			<key>BE-VBR</key>
+			<string>Vlaams-Brabant</string>
+			...
+		</dict>
+		<key>...</key>
+		<dict>
+			...
+		</dict>
+	</dict>
+</plist>
