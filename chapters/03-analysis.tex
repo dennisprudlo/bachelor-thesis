@@ -59,7 +59,7 @@ Da QGIS ein Open-Source Projekt ist, kann man die Anwendung kostenlos auf der ei
 Die Anwendung steht für alle gängigen Betriebssystem zur Verfügung und obwohl QGIS kostenlos ist, nimmt die \emph{QGIS Anwendergruppe Deutschland} spenden an \parencite{QGI2020a}.
 }{
 Bei dieser Software handelt es sich um eine professionelle Anwendung zur Bearbeitung von Kartendaten jeglicher Art.
-Diese Komplexität trägt daui bei, dass die Einarbeitung in die Software Zeit in Anspruch nimmt.
+Diese Komplexität trägt dazu bei, dass die Einarbeitung in die Software Zeit in Anspruch nimmt.
 QGIS bietet eine ausführliche und somit auch lange Dokumentation zur Anwendung an \parencite{QGI2020b}.
 }{
 Nach der Installation und dem Öffnen ist nicht klar, wie man ein neuen Projekt erstellen beziehungsweise bearbeiten kann.
@@ -81,18 +81,46 @@ Trotz möglicher kostenloser Benutzung handelt es sich bei QGIS um eine Anwendun
 Die Nutzung der Funktionen ist teilweise nicht nachvollziehbar und es werden keine mobilen Lösungen angeboten.
 }
 
-\subsection{\textcolor{red}{ArcGIS Indoors}}
-\analysisresults{}{}{}{}{}
-	%Man braucht CAD files, damit kann man dann weiterarbeiten:
-	%https://www.esri.com/en-us/arcgis/products/arcgis-indoors/overview?rmedium=www_esri_com_EtoF&rsource=https%3A%2F%2Fwww.esri.com%2Fen-us%2Flanding-page%2Fproduct%2F2018%2Farcgis-indoors
+\subsection{Autodesk AutoCAD \& Civil}
+Das Unternehmen Autodesk ist spezialisiert auf Software für 3D Planung und Konstruktion.
+Mit den Programmen Autodesk AutoCAD und Autodesk Civil erhält man zwei mächtige CAD (Computer-aided design) und BIM (Building Information Modeling) Werkzeuge, um Indoor Maps zu erstellen.
+\analysisresults{
+Wie bereits in der Einleitung bei der Beschreibung der Problemstellung genannt betragen die Lizenzkosten für Autodesk AutoCAD \SI{2135}{\eur}/Jahr und für Autodesk Civil \SI{2315}{\eur}/Jahr (Stand: 14. Juli 2020, Autodesk).
+Das von Autodesk genutzte Abomodell sorgt dafür, dass regelmäßig gezahlt werden muss, auch wenn die Software nicht genutzt wird.
+Dieses Modell rentiert sich nicht für den Vermieter, da nach erster Fertigstellung der Kartendaten an dem Projekt nur selten Änderungen vorgenommen werden.
+}{
+Da es sich hierbei um eine auf Computer-aided design spezialisierte Software handelt, die vorwiegend im professionellen Bereich genutzt wird, ist auch mit einer langen Einarbeitungszeit zu rechnen.
+\begin{figure}[h!]
+	\centering
+	\vspace{15pt}
+	\includegraphics[scale=0.2]{images/analysis/autocad-web.png}
+	\caption{Bearbeitungsansicht in der Autodesk AutoCAD Web App \parencite{AUT2020a}}
+	\label{fig:analysis-qgis}
+\end{figure}
+Die vielen Details und Möglichkeiten, welche für eine CAD-Software von Nöten sind, sorgen für einen komplizierteren Einstieg.
+Obwohl Autodesk ein \emph{Knowledge Network} bereitstellt mit Videos und Erklärungen zum Erlernen der Software, finden sich auf der Website eher Erklärungen zu speziellen Fällen anstatt zur grundlegenden Benutzung \parencite{AUT2020b}.
+}{
+Die Software Autodesk AutoCAD kann als Student oder Beschäftigter einer akademischen Einrichtung kostenlos getestet werden.
+Da es bei der Verifizierung des Studentenstatus Probleme gab, konnte die Bedienung der Software nicht getestet werden.
+}{
+Autodesk bietet für AutoCAD zwar eine mobile Anwendung für iOS- und Android-Endgeräte an, allerdings werden diese auch mit einem Abomodell vertrieben.
+Bei \SI{60}{\eur} im Jahr \parencite{AUT2020} verstärkt dies auch hier die Problematik der preislichen Stemmbarkeit.
+}{
+Besonders aufgrund der hohen Kosten und der nötigen Einarbeitungszeit in das Computer-aided design ist Autodesk AutoCAD keine gute Lösung für den Vermieter.
+Das Abomodell würde dafür sorgen, dass regelmäßig Kosten für den Vermieter anfallen, die seinerseits nicht gerechtfertigt sind.
+}
 
-\subsection{\textcolor{red}{Autodesk AutoCAD \& Civil}}
-\analysisresults{}{}{}{}{}
-
-\section{\textcolor{red}{Dienstleistungslösungen}}
+\section{Dienstleistungslösungen}
 Neben den Softwarelösungen zur Erstellung von Indoor Maps gibt es auch Dienstleistungslösungen.
 Die Räumlichkeiten werden von den Dienstleistern vermessen und die Kartendaten ebenfalls von diesen erstellt.
-%- Kosten hoch
+Unter anderem bieten folgende Unternehmen Dienstleistungen für Indoor Navigation an:
+\begin{itemize}
+	\item https://www.infsoft.com/
+	\item https://www.locuslabs.com/
+	\item https://www.esri.com/en-us/arcgis/products/arcgis-indoors/overview
+\end{itemize}
+Einige weitere finden sich außerdem im Anhang der \emph{Community Standard Justification} des \acl{imdf}s \parencite{HOA2019}.
+Bei der Kostenbestimmung der Dienstleistungslösungen können keine genauen Angaben getroffen werden, da die Kosten je nach Aufwand für den Dienstleister variieren.
 
 \section{Probleme bei den vorhanden Lösungen}
 Bei allen anlysierten Softwarelösungen handelte es sich nicht um eine Software zum Erstellen von Indoor Maps.
