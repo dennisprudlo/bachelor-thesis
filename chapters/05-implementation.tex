@@ -161,8 +161,11 @@ Wenn eine Anwendung versucht den Zugriff auf das Mikrofon anzufragen, allerdings
 \codelisting{Beispielinhalt einer Property List}{lst:plist}{plist-example.plist}{xml}\\
 In der Information Property List können auch eigene Werte hinterlegt werden, die sowohl in der Anwendung selbst abgefragt werden können als auch in den Buildprozessen der Anwendung verwendet werden können.
 
-\section{\textcolor{red}{Technische Umsetzung}}
+\section{Technische Umsetzung}
 \label{sec:techimp}
+Während der Implementierung sind auch bei der technischen Umsetzung immer wieder Fragen aufgekommen.
+Es gab verschiedene Möglichkeiten an bestimmte Probleme heranzugehen und die zu lösen.
+In den folgenden Abschnitten wird genauer auf diese Probleme eingegangen beziehwungsweise dargelegt, wieso sich für welchen Ansatz der teschnischen Umsetzung entschieden wurde.
 \subsection{\textcolor{red}{Autolayout}}
 \label{subsec:autolayout}
 \subsection{JSON Encoding und Decoding}
@@ -215,8 +218,38 @@ Nachdem die Strukur enkodiert wurde erhält man wieder ein \texttt{Data}-Objekt,
 Die Verwendung dieses automatischen Ansatzes hat dafür gesorgt die Anzahl an Zeilen im Quellcode deutlich zu verringern.
 Da der Aufbau der \ac{json}-Dateien immer gleich bleibt, muss nicht manuell übersetzt werden und das Enkodieren und Dekodieren der Daten zwischen Anwendung und Dateien finden in nur wenigen Zeilen statt.
 
-\subsection{\textcolor{red}{Generics}}
+\subsection{Generics}
 \label{subsec:generics}
+Kurz nachdem festegelgt wurde mit welchem Ansatz die Daten zwischen Dateien und Anwendung enkodiert und dekodiert werden sollen, kam es zur nächsten Schwierigkeit.
+Das \acl{imdf} spezifiziert 16 verschiedene Feature-Typen, die alle unterschiedliche \ac{json}-Strukturen haben, da sie unterschiedliche Eigenschaften besitzen (siehe Listing \ref{lst:geojsonfeature} auf Seite \pageref{lst:geojsonfeature}).
+Wenn nun 16 Klassen angelegt werden, damit die Struktur für jeden Feature-Typ erstellt werden kann, heißt das auch, dass 16 mal ein relativ ähnlicher Code für die Enkodierung und die Dekodierung geschrieben werden muss.
+Der einzige Unterschied liegt dabei in der Kodierung der Eigenschaften.
+Doch für die Kodierung der \ac{uuid}, der Geometrie und des Typs würde redundanter Programmcode in allen 16 Klassen der Feature-Typen enthalten sein.
+Um dem entgegenzuwirken können \emph{Generics} verwendet werden.\pbreak%
+%
+Unsere globale Idee eines ``Features`` ist ein Objekt, welches immer eine UUID, eine Geometrie, einen Typ und Eigenschaften hat.
+Die Eigenschaften können dabei jedesmal unterschiedlich sein, aber die Tatsache, dass ein Feature Eigenschaften besitzt bleibt.
+Da wir die Features auch kodieren wollen, fügen wir unserer Idee noch an, dass die Eigenschaften kodierbar sein müssen.
+\codelisting{\texttt{Feature}-Klasse mit generischem Typ}{lst:swift-generics-feature}{swift-generics-feature.swift}{swift}
+Im Listing \ref{lst:swift-generics-feature} wird nun eine Klasse definiert, welche die vier eben genannten Bedingungen eines Features erfüllen (Zeile 2 bis 5).
+Da die Eigenschaften unterschiedlich sein können, wird die Klasse zu einer generischen Klasse gemacht.
+Dazu wird dem Klassennamen hinzugefügt, dass ein \texttt{Properties}-Typ mit angegeben werden muss, welcher das \Gls{protocol} \texttt{Codable} implementiert (Zeile 1).
+Der Name des generischen Typs (hier \texttt{Properties}) ist dabei frei wählbar.
+Nun können wir der Variable, welche die Eigenschaften speichert, den generischen Typ zuweisen (Zeile 3).\pbreak%
+%
+Wenn eine neue Instanz der Klasse erstellt wird, können wir jetzt eine Strukur übergeben, welche den Anforderungen entspricht und die Instanz wird den generischen Typ wie den übergebenen behandeln.
+Wird zum Beispiel die Struktur übergeben, die im Listing \ref{lst:swift-codable-struct} auf Seite \pageref{lst:swift-codable-struct} vorgestellt wurde, hätten wir eine gültige Feature-Instanz erstellt (Zeile 8).
+Bei einer Enkodierung der Instanz würde versucht werden die Daten in eine \ac{json}-Struktur zu bringen, wie sie in den Zeilen 10 bis 20 zu sehen ist.
+Um die Vorteile zu nutzen, die uns Generics bringen, können wir nun die einzelnen Klassen für die 16 verschiedenen Feature-Typen anlegen.
+\codelisting{\texttt{Anchor}-Klasse, die den Anchor-Feature-Type repräsentiert}{lst:swift-generics-properties}{swift-generics-properties.swift}{swift}
+Im Listing \ref{lst:swift-generics-properties} wird eine neue Klasse angelegt mit dem Namen \texttt{Anchor}, die von der \texttt{Feature}-Klasse erbt (Zeile 1).
+Da es sich dabei um eine generische Klasse handelt, muss auch hier ein Typ angegeben werden, welcher für die Eigenschaften verwendet werden soll und das \texttt{Codable}-\Gls{protocol} implementiert.
+Als Typ wird eine Struktur übergeben, die in der \texttt{Anchor}-Klasse selbst definiert ist und die Eigenschaften eines Anchor-Features enthält.
+Wenn jetzt eine Instanz der \texttt{Anchor}-Klasse erstellt wird, muss kein Typ mehr übergeben werden, da die Klasse selbst impliziert welcher Typ verwendet werden soll.
+Dazu kommt, dass die \texttt{Anchor}-Klasse von der \texttt{Feature}-Klasse erbt und deshalb auch die Enkodierung und Dekodierung anstoßen kann.
+Dabei würde die Enkodierung die Daten in ein Format bringen, wie es in den Zeilen 10 bis 18 zu sehen ist.\pbreak%
+%
+Jetzt muss jede Klasse eines speziellen Features nur die Struktur ihrer eigenen Eigenschaften beschreiben und die Kodierung übernimmt die \texttt{Feature}-Klasse von welcher geerbt wird.
 
 \subsection{Gesture Recognizers}
 \label{subsec:gesturerecognizer}

@@ -16,18 +16,21 @@ Des Weiteren wurde Pläne beschrieben, wie das Bearbeiten der Kartendaten und de
 Das \autoref{ch:implementation} hat darauffolgend den Prozess der Implementierung beschrieben und es wurde in \autoref{sec:devios} anfangs auf die Entwicklung auf iOS-Geräten eingegangen.
 In diesem Abschnitt wurden die zur Verfügung stehenden Programmiersprachen vorgestellt und ein grober Einblick in die Struktur und den Aufbau eines iOS-Projektes gegeben.
 Im \autoref{sec:techimp} wurde dann genauer auf die technische Umsetzung eingegangen.
-...ADD...\pbreak%
+Dabei wurden besonders die Themen Kodierung der Datenstrukturen und Generics besprochen, sowie genauer auf die Gesture Recognizer eingegangen und welche Probleme bestanden.
+Außerdem wude auch beschreiben, warum sich für die programmatische Entwicklung der Benutzeroberfläche entschieden wurde und wie die Elemente auf der angezeigten Karte gezeichnet wurden.\pbreak%
 %
 Zum Ende des \autoref{ch:implementation} wurde im \autoref{sec:localizing} der Prozess der \Gls{l10n} beschrieben.
 Dabei wurde zum Einen auf die bereits existierenden Schnittstellen zum Lokalisieren eingegangen, als auch auf die Problematik bei der Auswahl von Untereinheiten von Regionen bei der Adressauswahl.
 
 \section{\textcolor{red}{Herausforderungen}}
-Evaluierung der Herausforderungen
-- Generics
-- MapOverlays
-- Gesture Recognizers
-- ISO Country Codes (IMDF erfordert ein subdivision Identifier)
-- Kein Export und Fehlende Features (zeitlich nicht alle aufgestellten Anforderungen erfüllt)
+Bei der Entwicklung der Anwendung gab es einige Herausforderungen, die man überwinden musste.
+Vor allem das Kodieren der Daten zwischen den \ac{json}-Repräsentationen aus den Dateien und den Datenmodellen in der Anwendung war herausfordernd.
+
+%- Generics
+%- MapOverlays
+%- Gesture Recognizers
+%- ISO Country Codes (IMDF erfordert ein subdivision Identifier)
+%- Kein Export und Fehlende Features (zeitlich nicht alle aufgestellten Anforderungen erfüllt)
 
 \section{Analyse der Anwendung}
 Im \autoref{ch:analysis} wurden Anforderungen aufgestellt und die aktuelle Situation auf dem Markt analysiert.
