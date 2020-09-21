@@ -159,15 +159,120 @@ In dieser Liste werden unter anderem der Name der Anwendung, die Version und die
 Außerdem werden in der Property List auch die Begründungstexte für Berechtigungsanfragen abgelegt.
 Wenn eine Anwendung versucht den Zugriff auf das Mikrofon anzufragen, allerdings kein Begründungstext hinterlegt wurde, der dem Benutzer angezeigt werden kann, wird die Berechtigung nicht angefragt.
 \codelisting{Beispielinhalt einer Property List}{lst:plist}{plist-example.plist}{xml}\\
-In der Information Property List können auch eigene Werte hinterlegt werden, die sowohl in der Anwendung selbst abgefragt werdne können als auch in den Buildprozessen der Anwendung verwendet werden können.
+In der Information Property List können auch eigene Werte hinterlegt werden, die sowohl in der Anwendung selbst abgefragt werden können als auch in den Buildprozessen der Anwendung verwendet werden können.
 
 \section{\textcolor{red}{Technische Umsetzung}}
 \label{sec:techimp}
 \subsection{\textcolor{red}{Autolayout}}
 \label{subsec:autolayout}
-\subsection{\textcolor{red}{JSON Encoding und Decoding}}
+\subsection{JSON Encoding und Decoding}
+\label{subsec:encodingdecoding}
+Alle Daten, die bearbeiten werden können, liegen im \ac{json}-Format vor.
+Darunter Fallen zum einen Indoor Architect Projektstrukturen, sowie die \ac{imdf}-Features, die als \ac{geojson}-Dateien abgelegt werden.
+Mit Hilfe der \texttt{FileManager}-Klasse kann man die Inhalte von Dateien auslesen.
+Diesen Manager machen wir uns auch zu Nutze und erhalten durch Aufruf der Funktion \texttt{manager.contents(atPath: "...")} ein Objekt des Typs \texttt{Data}, wobei \texttt{"..."} eine Zeichenkette mit dem absoluten Pfad zur Datei ist.
+Ein solches \texttt{Data}-Objekt enthält nun einfache Byte-Daten ohne jegliche Information, wie die Daten aufgebaut sind und in welchem Format sie vorliegen.
+Für das Übertragen der Daten aus den Dateien in die Anwendung, sodass damit gearbeitet werden kann, gibt es zwei oft verwendete Möglichkeiten.
+\subsubsection{Manuelles Encoden und Decoden}
+Die direkte Umwandlung der Daten kann mit der \texttt{JSONSerialization}-Klasse erfolgen.
+Dabei wird das \texttt{Data}-Objekt in ein \texttt{Dictionary} umgewandelt.
+\codelisting{Umwandeln von JSON-\texttt{Data} in ein \texttt{Dictionary}}{lst:swift-json-decode}{swift-json-decode.swift}{swift}
+In Zeile 2 des Listing \ref{lst:swift-json-decode} wird das Datenobjekt übergeben und in der Zeile 4 spezifiziert, dass das Dictionary String-Schlüssel besitzt und die Werte vom Typ \texttt{Any} sind.
+Das hat damit zu tun, dass ein Wert sowohl eine einfache Zeichenkette sein kann, aber auch eine Zahl, ein Array oder ein weiteres Dictionary.
+Aus diesem Grund kann kein spezieller Datentyp für die Werte angegeben werden, da sie unterschiedlich sein können.
+\codelisting{Umwandeln eines \texttt{Dictionary}-Objekts in ein \texttt{Data}-Objekt}{lst:swift-json-encode}{swift-json-encode.swift}{swift}
+Das Umwandeln eines existierenden Dictionaries in ein \texttt{Data}-Objekt erfolgt sehr ähnlich (Listing \ref{lst:swift-json-encode}).
+Dort wird in Zeile 2 das Dictionary übergeben und man erhält das \texttt{Data}-Objekt.\pbreak%
+%
+Zwar ist diese Variante schnell und einfach, allerdings kann es zu einem Mehraufwand kommen, wenn man viel mit den erhaltenen Daten tut.
+Da es sich bei allen Werten nun um \texttt{Any}-Typen handelt, können bestimmte Operationen nicht ausgeführt werden.
+Möchte man die möglichen Werte \texttt{dict["num1"]} und \texttt{dict["num2"]} addieren, wird ein Fehler angezeigt, dass man mit zwei Werte des Typs \texttt{Any} keine Rechenoperationen ausführen kann.
+Auch wenn man weiß, dass sich hinter den beiden Werten Zahlen befinden, ist es dem Compiler nicht bekannt.
+Im Laufe der Anwendung müssten die entsprechenden Werte einzeln in Datentypen umgewandelt werden, die Rechenoperationen erlauben, damit man diese Werte addieren kann.\pbreak%
+%
+Dieser manuelle Ansatz eignet sich gut, wenn es einem unbekannt ist, in welchem Format die Daten vorliegen.
+So kann man Schritt für Schritt die erhaltenen Daten analysieren und in den richtigen Datentyp konvertieren.
+Da es sich in dem Fall von Indoor Architect um eine vorgeschriebene Strukur der Daten handelt ist auch zu jeder Zeit bekannt, wie das \ac{json}-Konstrukt aussieht.
+Daher wurde sich dazu entschieden einen anderen Ansatz zu wählen.
+\subsubsection{Encoden und Decoden mittels \texttt{Codable}}
+Wenn die Struktur des \ac{json}-Objekts klar definiert ist und nicht davon abweicht, kann man mit dem \texttt{Codeable}-\Gls{protocol} die Strukturen automatisch umwandeln lassen.
+\codelisting{\texttt{Codable}-Struktur und dazugehörige JSON-Strukur}{lst:swift-codable-struct}{swift-codable-struct.swift}{swift}
+Im Listing \ref{lst:swift-codable-struct} wird in den Zeilen 1 bis 6 eine Struktur mit dem Namen \texttt{Project} angelegt.
+Damit unser automatische Ansatz funktioniert, muss diese Struktur das \texttt{Codeable}-\Gls{protocol} implementieren.
+Alle verwendeten Datentypen in dieser Strukur müssen ebenfalls dieses \Gls{protocol} implementiert haben.
+Es können also auch eigene Datentypen erstellt und hier verwendet werden, solange sie den Anforderungen des \Glspl{protocol} gerecht werden.
+In den Zeilen 8 bis 13 sieht man die in einer Datei gespeicherten \ac{json}-Struktur.
+\codelisting{Automatisches dekodieren von JSON in Swift}{lst:swift-codable-decode}{swift-codable-decode.swift}{swift}
+Nun kann man den \texttt{JSONDecoder} verwenden, um die Daten in eine Form zu bringen, mit der man in der Anwendung einfacher arbeiten kann.
+Als Parameter für den Dekodierungsprozess kann man zum Beispiel mitgeben, dass im Snake-Case vorliegende Schlüssel (\texttt{created\_at}) zum Camel-Case (\texttt{createdAt}) konvertiert werden sollen (Zeile 2).
+Außerdem kann auch spezifiziert werden, in welchem Format die Datumsfelder vorliegen (Zeile 3).
+Nach dem Dekodieren lässt sich über die \texttt{project}-Variable auf die verschiedenen Daten zugreifen und entsprechende Operationen mit ihnen durchführen.
+\codelisting{Automatisches enkodieren von JSON in Swift}{lst:swift-codable-encode}{swift-codable-encode.swift}{swift}
+Nachdem Änderungen durchgeführt wurden können die Daten wieder enkodiert werden und in einer Datei persistent abgelegt werden.
+In diesem Fall nutzt man dann analog zum \texttt{JSONDecoder} den \texttt{JSONEncoder} und spezifiziert auch hier wieder, worauf beim Enkodierungsprozess geachtet werden muss (Listing \ref{lst:swift-codable-encode}).
+Nachdem die Strukur enkodiert wurde erhält man wieder ein \texttt{Data}-Objekt, welches als String in eine Datei geschrieben werden kann.\pbreak%
+%
+Die Verwendung dieses automatischen Ansatzes hat dafür gesorgt die Anzahl an Zeilen im Quellcode deutlich zu verringern.
+Da der Aufbau der \ac{json}-Dateien immer gleich bleibt, muss nicht manuell übersetzt werden und das Enkodieren und Dekodieren der Daten zwischen Anwendung und Dateien finden in nur wenigen Zeilen statt.
+
 \subsection{\textcolor{red}{Generics}}
-\subsection{\textcolor{red}{Gesture Recognizers}}
+\label{subsec:generics}
+
+\subsection{Gesture Recognizers}
+\label{subsec:gesturerecognizer}
+Wie bei vielen anderen Sprachen auch werden Eingaben unter iOS mit Events abgebildet.
+Eine Ansicht mit Grafiken, Texten und Bildern wird daher angezeigt und wartet auf eine Aktion, um Änderungen vorzunehmen.
+Die unterschiedlichen Komponenten reagieren auch auf unterschiedliche Events.
+Eine \texttt{UISwitch}-Komponente, welche einen An/Aus-Button darstellt, kann auch das \texttt{.valueChanged}-Event reagieren.
+Dieses wird ausgeführt, sobald sich der An/Aus-Status des Buttons verändert.
+Ein ganz normaler Button mit einem Text kann unter anderem auf die Events \texttt{.touchUpInside} oder \texttt{.touchUpOutside} hören.
+Ersteres wird ausgeführt, wenn man einen Button antippt und den Button – mit dem Finger innerhalb des Buttons selbst – wieder anhebt.
+Zweiteres wird ausgeführt, wenn man einen Button antippt, den Finger auf dem Bildschirm von dem Button wegbewegt und ihn im Anschluss anhebt.
+Wenn man nur auf das \texttt{.touchUpInside}-Event hört, kann man dafür sorgen, dass ein Benutzer bei einem fälschlichen antippen eines Buttons noch die Möglichkeit hat die Aktion dahinter nicht auszuführen.\pbreak%
+%
+Für komplexere Gesten, wie das heran- und herauszoomen von Inhalten oder das rotieren von Elementen, gibt es die sogenannten \emph{Gesture Recognizer}, zu Deutsch in etwa \emph{Gesten-Erkenner}.
+Diese Gesture Recognizer können jeder beliebigen Komponente angehangen werden, damit man auf die erkannten Gesten reagieren kann.
+Um zu unterscheiden auf welche Gesten reagiert werden soll, kann man auf mehrere verschiedene Gesture Recognizer hören.
+Die folgenden Möglichkeiten zur Gestenerkennung stehen zur Verfügung:
+\begin{description}
+	\item[\texttt{UITapGestureRecognizer}] Reagiert bei einem einfachen antippen. Wird in der Regel für Komponenten genutzt, die keine eingebauten Events für diesen Fall besitzen, wie zum Beispiel Bilder.
+	\item[\texttt{UIPinchGestureRecognizer}] Reagiert, wenn zwei Finger sich auf dem Bildschirm bewegen und gibt Informationen zur Distanz der beiden Finger.
+	\item[\texttt{UIRotationGestureRecognizer}] Reagiert, wenn zwei Finger sich auf dem Bildschirm bewegen und gibt Informationen zur Rotation der beiden Finger.
+	\item[\texttt{UISwipeGestureRecognizer}] Regiert, wenn sich auf dem Bildschirm von einem Punkt A zu einem Punkt B in einer vorgeschriebenen Richtung bewegt wird.
+	\item[\texttt{UIPanGestureRecognizer}] Reagiert, wenn sich auf dem Bildschirm von einem Punkt A zu einem Punkt B bewegt wird.
+	\item[\texttt{UIScreenEdgePanGestureRecognizer}] Reagiert, wenn sich von einer Bildschirmkante in Richtung Mitte bewegt wird.
+	\item[\texttt{UILongPressGestureRecognizer}] Reagiert, wenn ein langanhaltendes antippen stattfindet.
+\end{description}
+Alle aufgezählten Gesture Recognizer können unterschiedliche Parameter enthalten, die die Funktionsweise dieser bestimmt.
+Anders als bei den einfachen Events, meldet sich zum Beispiel ein \texttt{UIPinchGestureRecognizer} nicht nur einmal, wenn ein ``Pinch`` stattgefunden hat.
+Bei minimaler Bewegung der beiden Finger wird sich ein Gesture Recognizer immer wieder melden und darüber informieren, wie die aktuellen Parameter aussehen.
+In diesem Fall wäre das die Entfernung der beiden Finger und die Geschwindigkeit, mit der sich die Distanz zwischen den Fingern erhöht oder verringert.\pbreak%
+%
+Für die Funktion zum Messen der Distanz zwischen zwei Orten auf der Karte wurde anfangs ein \texttt{UIPanGestureRecognizer} verwendet.
+Dieser sollte beim ausführen der Geste die Distanz zwischen dem initialen Berührungspunkt und dem Punkt, an dem die Bewegung beendet wurde, berechnet werden.
+\codelisting{Setzen eines \texttt{UIPanGestureRecognizers} auf die Map-View}{lst:swift-gesture}{swift-gesture.swift}{swift}
+Der Gesture Recognizer wurde wie im Listing \ref{lst:swift-gesture} angelegt und die minimale und maximale Anzahl von Bewegungen auf 1 gesetzt.
+Dies hat zur Folge, dass der Gesture Recognizer nur reagiert, wenn nur ein Finger den Bildschirm berührt.
+In der referenzierten Funktion \texttt{didPanMap} in Zeile 8 konnte dann auf die Antwort des Gesture Recognizer gewartet werden.\pbreak%
+%
+Dabei ist das Problem aufgetreten, dass der Gesture Recognizer als initialen Punkt nicht den Punkt zurückgegeben hat, an dem die Bewegung gestartet ist.
+Es wurde der Punkt zurückgegeben, andem der Gesture Recognizer bemerkt hat, dass eine Pan-Geste stattfindet und diese weiter verfolgt hat.
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.25]{images/pangesture.png}
+	\caption{Visualisierung der Reaktion des \texttt{UIPanGestureRecognizer}}
+	\label{fig:pangesture}
+\end{figure}
+In der Abbildung \ref{fig:pangesture} erkennt man, wann die eigentliche Bewegung stattgefunden hat (A) und wann sie beendet wurde (C).
+Für den Gesture Recognizer war allerdings erst ab Punkt B klar, dass es sich gerade um eine Pan-Geste handelt.
+Als Rückmeldung hat man dann den angeblichen initialen Punkt B und den Endpunkt C erhalten.
+Um diesem Verhalten entgegenzuwirken musste eine eigene Implementierung des \texttt{UIPanGestureRecognizer} entwickelt werden.
+\codelisting{Implementierung des \texttt{InitialPanGestureRecognizer}}{lst:swift-gesture-custom}{swift-gesture-custom.swift}{swift}
+Die eigene Implementierung (zu sehen im Listing \ref{lst:swift-gesture-custom}) erbt vom \texttt{UIPanGestureRecognizer}, sodass alle internen Funktionen übernommen werden können (Zeile 4).
+Zusätzlich wird eine weitere Eigenschaft angelegt, welche den echten initialen Punkt speichert, und eine Funktion zur Verfügung gestellt, die diesen Wert zurückgibt (Zeile 5 und 19).
+In der \texttt{touchesBegan()}-Methode, welche aufgerufen wird sobald ein antippen bemerkt wird, kann dann der initiale Punkt gespeichert werden (Zeile 14 und 16).
+Nun wird anstelle des \texttt{UIPanGestureRecognizers} der eigene \texttt{InitialPanGestureRecognizer} verwendet und es kann der echte initiale Punkt zur Berechnung der Distanz verwendet werden.
+
 \subsection{\textcolor{red}{MapKit Overlays}}
 
 \section{Lokalisierung der Anwendung}
