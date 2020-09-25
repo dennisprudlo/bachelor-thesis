@@ -11,24 +11,23 @@ Dabei wurde etwas genauer auf Geoinformationssysteme eingegangen und die Problem
 Nach dem Abschluss der Analyse wurde in \autoref{ch:conception} mit dem Konzept für die Anwendung begonnen.
 Zu Beginn des Konzepts wurde ein grobes Design-Konzept erstellt, sodass die unterschiedlichen Komponenten der Anwendung ein ansehnliches und benutzerfreundliches Auftreten haben.
 Anschließend wurde dargelegt, wie ein Projekt der Anwendung aufgebaut und gespeichert wird.
-Des Weiteren wurde Pläne beschrieben, wie das Bearbeiten der Kartendaten und der Export der erstellten Indoor Maps funktionieren soll.\pbreak%
+Des Weiteren wurden Pläne beschrieben, wie das Bearbeiten der Kartendaten und der Export der erstellten Indoor Maps funktionieren soll.\pbreak%
 %
 Das \autoref{ch:implementation} hat darauffolgend den Prozess der Implementierung beschrieben und es wurde in \autoref{sec:devios} anfangs auf die Entwicklung auf iOS-Geräten eingegangen.
 In diesem Abschnitt wurden die zur Verfügung stehenden Programmiersprachen vorgestellt und ein grober Einblick in die Struktur und den Aufbau eines iOS-Projektes gegeben.
 Im \autoref{sec:techimp} wurde dann genauer auf die technische Umsetzung eingegangen.
 Dabei wurden besonders die Themen Kodierung der Datenstrukturen und Generics besprochen, sowie genauer auf die Gesture Recognizer eingegangen und welche Probleme bestanden.
-Außerdem wude auch beschreiben, warum sich für die programmatische Entwicklung der Benutzeroberfläche entschieden wurde und wie die Elemente auf der angezeigten Karte gezeichnet wurden.\pbreak%
+Außerdem wude auch beschreiben, wie die Elemente auf der angezeigten Karte gezeichnet wurden.\pbreak%
 %
 Zum Ende des \autoref{ch:implementation} wurde im \autoref{sec:localizing} der Prozess der \Gls{l10n} beschrieben.
-Dabei wurde zum Einen auf die bereits existierenden Schnittstellen zum Lokalisieren eingegangen, als auch auf die Problematik bei der Auswahl von Untereinheiten von Regionen bei der Adressauswahl.
+Dabei wurde zum Einen auf die bereits existierenden Schnittstellen zum Lokalisieren eingegangen, als auch zum Anderen auf die Problematik bei der Auswahl von Untereinheiten von Regionen bei der Adressauswahl.
 
 \section{Herausforderungen}
 Bei der Entwicklung der Anwendung gab es einige Herausforderungen, die man überwinden musste.
 Da die Spezifikation von \ac{json} bekannt war, konnte sich schnell in die Spezifikation von \ac{geojson} und \ac{imdf} eingelesen werden.
 Aus diesem Grund konnte das \autoref{ch:theorybasics} mit den Grundlagen problemlos erstellt werden.
 Doch die Analyse der aktuellen Lösungen war schwierig und hat einige Hürden aufgestellt.
-Zu vielen Lösungen konnten nur wenige Informationen gefunden werden, da bei den meisten Lösungen keine Testversionen zur Verfügung standen und man über den Vertrieb der Hersteller einen Zugang erwerben musste.\pbreak%
-% Lediglich bei Open Source Lösungen... (online geojson editor?)
+Zu vielen Lösungen konnten nur wenige Informationen gefunden werden, da bei den meisten Lösungen keine Testversionen zur Verfügung gestellt wurde und man über den Vertrieb der Hersteller einen Zugang erwerben musste.\pbreak%
 %
 Bei der Implementierung war vor allem das Kodieren der Daten zwischen den \ac{json}-Repräsentationen aus den Dateien und den Datenmodellen in der Anwendung herausfordernd.
 In Kombination mit den Generics musste immer darauf geachtet werden, dass die generischen Klassen die Daten im richtigen Format halten, ansonsten kam es zu Fehlern bei der Enkodierung.
@@ -39,8 +38,8 @@ Doch für die Abfrage der verfügbaren Kennungen gibt es keine eingebaute Schnit
 Dies war ein viel Zeit in Anspruch nehmender Prozess, da geopolitische Ungereimtheiten dafür gesorgt haben, dass die Provinzen eines Landes nicht immer eindeutig waren.\pbreak%
 %
 Neben den bei der Entwicklung aufgetretenen Herausforderungen war auch die Zeit eines der größten Herausforderungen.
-Viele anfangs eingeplanten Features, wie der Audit eines Projektes und das fertige Exportieren in ein \ac{imdf}-Archov konnten nicht fertiggestellt werden.
-Es stellt sich aber heraus, dass die Entwicklung einer solchen Anwendung keine Frage der Machbarkeit ist, sofern genügend zeit vorhanden ist.
+Viele anfangs eingeplanten Features, wie der Audit eines Projektes und das fertige Exportieren in ein \ac{imdf}-Archiv konnten nicht fertiggestellt werden.
+Es stellt sich aber heraus, dass die Entwicklung einer solchen Anwendung keine Frage der Machbarkeit ist, sofern genügend Zeit vorhanden ist.
 
 \section{Analyse der Anwendung}
 Im \autoref{ch:analysis} wurden Anforderungen aufgestellt und die aktuelle Situation auf dem Markt analysiert.
@@ -48,13 +47,13 @@ Nach Abschluss der Entwicklung findet nun auch ein Abgleich mit den Anforderung 
 
 \subsection{Abgleich mit den Anforderungen}
 Nach Abschluss der Entwicklung der ersten Version von Indoor Architect kann mit dem Abgleich der Anforderungen begonnen werden.
-Für den Vermieter im Anwendungsfall waren die Punkte \emph{Presisliche Stemmbarkeit}, \emph{Schnelle Einarbeitungszeit}, \emph{Leichte und Nachvollziehbare Bedienung} und die \emph{Mobile Nutzung} von Relevanz.
+Für den Vermieter im Anwendungsfall waren die Punkte \emph{Preisliche Stemmbarkeit}, \emph{Schnelle Einarbeitungszeit}, \emph{Leichte und nachvollziehbare Bedienung} und die \emph{Mobile Nutzung} von Relevanz.
 \analysisresults{
 Da Indoor Architect nicht monetarisiert wird und der Programmquellcode offen zur Verfügung steht, fallen für die Anwendung selbst keine Kosten an.
 Ähnlich wie bei den anylsierten Anwendungen müssen die Geräte für die Nutzung der Software vorhanden sein.
 }{
 Die Anwendung nutzt an vielen Stellen Beschreibungstexte, die erklären welche Informationen in welchem Format in das entsprechende Feld eingetragen werden müssen.
-In den Abbildungen \hyperref[fig:04-address]{A.4}, \hyperref[fig:11-label]{A.11} und \hyperref[fig:13-venue]{A.13} im Anhang kann gesehen werden, wie die Beschreibungstexte dem Anwender näher bringen was eingetragen werden muss.
+In den Abbildungen \hyperref[fig:04-address]{A.4}, \hyperref[fig:11-label]{A.11} und \hyperref[fig:13-venue]{A.13} im Anhang kann man sehen, wie die Beschreibungstexte dem Anwender näher bringen was eingetragen werden muss.
 Das Kennenlernen der Anwendung findet daher nicht über eine externe Dokumentation statt, sondern über das Benutzen der Anwendung selbst.
 }{
 Beim Benutzen von Indoor Architect wird dem Anwender sofort Rückmeldung über die ausgeführte Aktion gegeben, sodass eine Aktion immer nachvollziehbar ist.
@@ -78,7 +77,7 @@ Im Anschluss war es ihnen möglich die Benutzung der Anwendung zu bewerten.
 Die genauen Aufgabenstellungen und anschließende Bewertungsmöglichkeiten können im \hyperref[sec:appendixc]{Anhang C} eingesehen werden.\pbreak%
 %
 Bei der Auswertung konnte ermittelt werden, dass von den 11 Testpersonen drei Schwierigkeiten bei der Benutzung der Anwendung vermeldet haben.
-Die genau Verteilung der gemeldeten Probleme bei den Aufgaben ist in der Abbildung \ref{fig:usability-column} dargestellt.
+Die genaue Verteilung der gemeldeten Probleme bei den Aufgaben ist in der Abbildung \ref{fig:usability-column} dargestellt.
 \begin{figure}[h]
 	\centering
 	\vspace{15pt}
@@ -90,22 +89,18 @@ Alle drei Personen haben auf eine Schwierigkeit bei der Aufgabe 6 hingewiesen, w
 Bei der Aufgabe 6 sollten die Benutzer eine Entfernung zwischen zwei Orten messen.
 Bei der Bewertung wurde beschrieben, dass nicht klar war wie eine Messung ausgeführt werden kann.
 Das lag laut Angaben in erster Linie daran, dass das verwendete Icon die Funktion dahinter nicht klar kommuniziert.
-Für eine Optimierung der Usability sollten daher die Icon überprüft und gegebenenfalls ausgewechselt werden.
-\section{Ausblick}
-In Zukunft kann die Anwendung mit vielen weiteren Funktionen erweitert werden.
-Außerdem könnte eine einfache Nutzung einer Anwendung zur Erstellung von Indoor Maps dazu beitragen Indoor Maps weiter zu verbreiten.
-Auf diese zwei Punkte wird in diesem Kapitel etwas genau eingegangen.
+Für eine Optimierung der Usability sollten daher die Icons überprüft und gegebenenfalls ausgewechselt werden.
 
-\subsection{Erweiterbarkeit}
-Die Anwendung kann um viele weitere Funktionen erweitert werden.
-Einige Funktionen, die nicht essenziell zum Bearbeiten der Kartendaten sind, jedoch den Aufwand deutlich verringern, sind zum Beispiel das automatische erkennen von Eckpunkten, wenn ein Punkt in der nähe gesetzt wurde.
-Dadurch könnte man den Vorgang des Hinzufügen von Elementen, die an eine andere anknüpfen deutlich schneller machen.\pbreak
+\section{Ausblick}
+Die Anwendung kann in Zukunft mit vielen weiteren Funktionen erweitert werden.
+Einige Funktionen, die nicht essenziell zum Bearbeiten der Kartendaten sind, jedoch den Aufwand deutlich verringern, sind zum Beispiel das automatische Erkennen von Eckpunkten, wenn ein Punkt in der Nähe gesetzt wurde.
+Dadurch könnte man den Vorgang des Hinzufügen von Elementen, die an ein anderes Element anknüpfen, deutlich schneller machen.\pbreak
 %
 Eine weitere geplante Funktion ist die Möglichkeit ein transparentes Bild über die Karte zu legen, wenn man dabei ist die Kartendaten zu bearbeiten.
 Dadurch könnte man mit bereits existierenden Bauplänen das Gebäude einfach anhand der transparenten Grafik nachzeichnen und im Anschluss die Detailarbeit vollziehen.\pbreak%
 %
 Im aktuellen Stand gibt es die Möglichkeit bei jedem Feature einen Kommentar zu hinterlegen.
-In einer zukünfitgen Version könnte diese Funktion dahingehen erweitert werden, dass Features auch Tags haben und einer Farbkategorie zugewiesen werden können.
+In einer zukünftigen Version könnte diese Funktion dahingehen erweitert werden, dass Features auch Tags haben und einer Farbkategorie zugewiesen werden können.
 Diese Informationen könnten in die Suche eingebaut werden, sodass nach Tags gesucht werden kann oder nach einer bestimmten Farbkategorie gefiltert werden kann.\pbreak%
 %
 Besonders in Anwendungen, in denen Inhalte bearbeitet werden, ist es sinnvoll eine Möglichkeit zu bieten die getätigten Änderungen rückgängig zu machen oder zu wiederholen.
