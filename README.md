@@ -2,7 +2,9 @@
 
 ### Inhalt
 * [Vorwort](#preface)  
-* [Abstract](#abstract)  
+* [Abstract](#abstract)
+* [Requirements](#requirements)
+* [Installation](#install)  
 
 <a name="preface"></a>
 ## Vorwort
@@ -16,3 +18,16 @@ Während der Tourismus und die Reiselust der Menschen steigt werden Kartendaten 
 Ziel dieser Bachelorthesis ist es eine benutzerfreundliche und einfach zu bedienende mobile Anwendung zu entwickeln, um Indoor Maps zu kartographieren und für die weitere Verwendung bereitszustellen. Um dieses Ziel zu erreichen werden Anforde- rungen an eine solche Anwendung aufgestellt und die aktuell existierenden Lösungen anhand dieser Anforderungen analysiert um etwaige Probleme zu erkennen.
 
 In der Anwendung sollen Benutzer Indoor Maps erstellen und für eine Bereitstellung exportieren können. In der technischen Umsetzung wurde das Software Development Kit von Apple genutzt, um mittels Swift eine Anwendung für das Betriebssystem iPadOS zu entwickeln.
+
+<a name="requirements"></a>
+## Requirements
+* Python, damit Pygments installiert werden kann.
+* Pygments (Version 2.6.1), damit die Listings gerendert werden können.
+
+<a name="install"></a>
+## Installation
+Um die Arbeit zu kompilieren, muss der `dmake`-Befehl ausgeführt werden. Dabei wird die PDF im Debug-Modus erstellt (es werden die Margins und die Hyperref-Boxen angezeigt).
+Soll die PDF als Release generiert werden, muss zusätzlich der `--release`-Flag gesetzt werden.
+```shell
+dmake --release
+```

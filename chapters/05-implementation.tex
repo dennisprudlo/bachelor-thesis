@@ -166,8 +166,6 @@ In der Information Property List können auch eigene Werte hinterlegt werden, di
 Während der Implementierung sind auch bei der technischen Umsetzung immer wieder Fragen aufgekommen.
 Es gab verschiedene Möglichkeiten an bestimmte Probleme heranzugehen und die zu lösen.
 In den folgenden Abschnitten wird genauer auf diese Probleme eingegangen beziehwungsweise dargelegt, wieso sich für welchen Ansatz der teschnischen Umsetzung entschieden wurde.
-\subsection{\textcolor{red}{Autolayout}}
-\label{subsec:autolayout}
 \subsection{JSON Encoding und Decoding}
 \label{subsec:encodingdecoding}
 Alle Daten, die bearbeiten werden können, liegen im \ac{json}-Format vor.
@@ -306,7 +304,41 @@ Zusätzlich wird eine weitere Eigenschaft angelegt, welche den echten initialen 
 In der \texttt{touchesBegan()}-Methode, welche aufgerufen wird sobald ein antippen bemerkt wird, kann dann der initiale Punkt gespeichert werden (Zeile 14 und 16).
 Nun wird anstelle des \texttt{UIPanGestureRecognizers} der eigene \texttt{InitialPanGestureRecognizer} verwendet und es kann der echte initiale Punkt zur Berechnung der Distanz verwendet werden.
 
-\subsection{\textcolor{red}{MapKit Overlays}}
+\subsection{MapKit Overlays}
+Das Zeichnen von Elementen auf einer Karte in der iOS-Entwicklung ist im Grunde ganz einfach.
+Es gibt eine fertige Komponenten namens \texttt{MKMapView}, welche eine leicht zu konfigurierende Kartenansicht darstellen kann.
+Man kann entscheiden, ob die Position des Benutzers angezeigt werden soll oder störende Informationen, wie zum Beispiel Haltestellen und Points of Interest ausblenden.
+Ebenso kann man auch einfache Elemente erstellen, wie \texttt{MKPolyline} oder \texttt{MKPolygon} und diese beliebig einfärben und konfigurieren, bevor man sie als Overlay auf die Karte legt.
+Im Fall der Anwendung werden aber nicht nur fertige Elemente auf die Karte gelegt, sondern sollen auch im Entstehungsprozess visualisiert werden.
+Wenn ein Benutzer ein Polygon zeichnen möchte und den Startpunkt auswählt, lässt sich aus dieser einen Koordinate kein \texttt{MKPolygon} erstellen, da für dieses Elemente mindestens drei Koordinaten vorliegen müssen.\pbreak%
+%
+\codelisting{Implementierung des \texttt{MCShapeAssembler}}{lst:swift-assembler}{swift-assembler.swift}{swift}
+Aus diesem Grund wurde eine Klasse erstellt, deren Aufgabe es ist die vom Benutzer ausgewählten Punkte beziehungsweise Koordinaten zu sammeln, damit daraus dann die entsprechende Visualisierung erstellt werden kann.
+Diese Klasse soll nur die allgemeine Aufgabe des Sammeln der Koordinaten übernehmen, während die Visualisierung von entsprechenden Unterklassen erstellt wird.
+Die erstellte Klasse im Listing \ref{lst:swift-assembler}, die den Namen \texttt{MCShapeAssembler} trägt, hält eine Referenz zur eigentlichen Karte vor, auf der die Elemente gezeichnet werden (Zeile 2) und dem Overlay, welches auf der Karte angezeigt wird und das aktuell gezeichnete Element repräsentiert (Zeile 3).
+Außerdem werden in der Variable \texttt{coordinates} alle gesammelten Koordinaten gespeichert (Zeile 4).
+Die \texttt{add}-Funktion in den Zeilen 10 bis 12 fügt nur eine bestimmte Koordinate den gespeicherten hinzu und die \texttt{collect}-Funktion gibt die Informationen als \texttt{MKGeoJSONObject} zurück, sodass die gesammelten Koordinaten als Feature für das \acl{imdf} gespeichert werden können.
+Die Funktion \texttt{renderActiveOverlay} bekommt ein Overlay übergeben, welches auf der Karte – hier referenziert über \texttt{canvas} – angezeigt wird (Zeile 18 bis 23).
+Zuvor wird das aktuelle Overlay entfernt und das zu zeichnenden als neues aktives Overlay gesetzt (Zeile 19 bis 21 und 25 bis 29).
+Von diesem Grundgerüst wird selbst keine Instanz erstellt, sondern die entsprechenden Unterklassen erben von dieser.\pbreak%
+Als Beispiel wird im Listing \ref{lst:swift-assembler-polygon} der \texttt{MCPolygonAssembler} erklärt.
+\codelisting{Implementierung des \texttt{MCPolygonAssembler}}{lst:swift-assembler-polygon}{swift-assembler-polygon.swift}{swift}
+Die \texttt{add}-Funktion wird dahingehend erweitert, dass neben dem Hinzufügen der Koordinaten auch automatisch ein Overlay aus den gesammelten Koordinaten erstellt wird (Zeile 6 bis 11).
+Für den Fall, dass der ``Assembler`` zwei Koordinaten kennt eine \texttt{MKPolyline} als Overlay erzeugt wird (Zeile 8).
+In Zeile 13 wird dann der soeben erstellte Overlay angezeigt, wobei das alte gelöscht und das neue gezeichnet wird.
+Zur besseren Erklärung des Ablaufs einer Zeichnung kann man in Zeile 21 erkennen, wie ein solcher Assembler erstellt wird.
+Sobald nun die \texttt{add}-Funktion aufgerufen wird und eine Koordinate hinzugefügt wird ist der Startpunkt bekannt und sichtbar.
+Wenn man nun eine zweite Koordinate hinzufügt, wird das alte Overlay gelöscht und das neue angezeigt, welches eine Polyline ist.
+Es ist also eine Linie vom Startpunkt zum Endpunkt sichtbar.
+Ab der dritten Koordinate haben wir genug Daten für ein richtiges Polygon und zeigen daher auch ein Overlay als Polygon an.
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.25]{images/assembler.png}
+	\caption{Schritte der Visualisierung eines Polygons bei der Zeichnung}
+	\label{fig:assembler}
+\end{figure}
+In der Abbildung \ref{fig:assembler} kann man die drei Visualisierungsschritte auf der Karte erkennen, wenn man ein Polygon zeichnet.
+Bei nur einer Koordinate sieht man einen Punkt, bei zwei Koordinaten eine Linie und bei drei ein vollwertiges Polygon.
 
 \section{Lokalisierung der Anwendung}
 \label{sec:localizing}
@@ -319,7 +351,11 @@ Bei der Internationalisierung muss neben unterschiedlichen Sprachen auch berück
 Auch Grafiken sollten lokalisiert sein, da sie mögliche politische oder religiöse Sensibilitäten enthalten könnten.
 Da bei Indoor Architect keine Grafiken zum Einsatz kommen, muss bei der Internationalisierung nur darauf geachtet werden, dass Texte übersetzt werden können.
 Die Leserichtigung einer Sprache darf dabei nicht vergessen werden.
-Im \autoref{subsec:autolayout} wurde bereits darauf eingegangen, wie man dafür sorgen kann, dass die Leserichtung richtig dargestellt wird.
+Mittels \emph{Autolayout} wird dafür gesorgt, dass die Elemente auf dem Bildschirm sich automatisch der Bildschirmgröße anpassen, sodass eine visuell ansehnliche Darstellung der Anwendung auf jedem Gerät erreicht wird.
+Ein Teil davon ist, dass die Elemente nicht mit Begriffen wie \emph{left} und \emph{right} positioniert werden, sondern mit \emph{leading} und \emph{trailing}.
+Dadurch bestimmen wir, dass zum Beispiel ein Button nicht ``link`` von einem Text ist, sondern ``vor`` dem Text.
+Auf Geräten mit einer Spracheinstellung mit Leserichtung von rechts nach link bedeutet ein ``vor dem Text`` dann, dass der Button rechts neben dem Text ist.
+Wenn man sich immer an diese Autolayout-Ausrichtungen hält, wird der Inhalt je nach Spracheinstellung automatisch angepasst.
 
 \subsection{Localizable-Dictionary}
 Die Übersetzung der Entwicklungssprache ist relativ einfach, wenn man sich an den Werkzeugen des \Glspl{sdk} bedient.
