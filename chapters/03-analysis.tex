@@ -7,37 +7,37 @@ Die Erkenntnisse, die bei der Analyse der aktuellen Lösungen und deren Probleme
 In diesem Abschnitt werden die Anforderungen an ein System zur Erstellung von Indoor Maps beschrieben.
 Dabei wird besonders die Situation des genannten Anwendungsfalls aus dem \autoref{sec:problems} der Einleitung berücksichtigt.
 Es handelt sich um einen Vermieter einer kleinen Einkaufspassage, welcher Indoor Maps und eine Innenraumnavigation für die Besucher der Einkaufspassage anbieten möchte.
-Für einen solchen Fall sind folgende Anforderungen ausschlaggebend:
+Für einen solchen Fall sind die folgenden Anforderungen ausschlaggebend.
 \begin{description}
-	\item[Presiliche Stemmbarkeit]
+	\item[Preisliche Stemmbarkeit]
 	Für den Vermieter sollte eine in Frage kommende Lösung preislich stemmbar sein.
 	Bei der Bereitstellung von Indoor Maps handelt es sich nicht um eine kritische Dienstleistung für die Besucher, sondern um ein mögliches Angebot.
-	Sind die Kosten für die Lösung zu hoch, so ist Verhältnis zwischen dem Preis und der erhaltenden Leistungen nicht ausgewogen und der Vermieter zieht die Lösung nicht erwägung.\pbreak%
+	Sind die Kosten für die Lösung zu hoch, so ist das Verhältnis zwischen dem Preis und der erhaltenden Leistungen nicht ausgewogen und der Vermieter zieht die Lösung nicht in Erwägung.\pbreak%
 	%
-	Eine mit Kosten verbundenen Lösung der Situation des Vermieters entsprechend ist für den Vermieter daher von hoher Relevanz.
+	Eine mit Kosten verbundene Lösung der Situation des Vermieters entsprechend ist für den Vermieter daher von hoher Relevanz.
 	\item[Schnelle Einarbeitungszeit]
-	Bei die Bereitstellung von Indoor Maps handelt es sich für den Vermieter um ein einmaliges Projekt.
+	Bei der Bereitstellung von Indoor Maps handelt es sich für den Vermieter um ein einmaliges Projekt.
 	Es würde nicht im Interesse des Vermieters stehen, wenn er sich zu Beginn in die Anwendung einarbeiten muss.
-	Die Zeit für die Einarbeitung ist wieder mit Kosten verbunden, da Arbeitszeit in Anspruch genommen wird und dadurch die Frage des ersten Punkt der preislichen Stemmbarkeit wieder eintritt.\pbreak%
+	Die Zeit für die Einarbeitung ist wieder mit Kosten verbunden, da Arbeitszeit in Anspruch genommen wird und dadurch die Frage des ersten Punktes der preislichen Stemmbarkeit wieder eintritt.\pbreak%
 	%
 	Eine Einarbeitungszeit sollte sehr kurz bis gar nicht vorhanden sein, sodass der Vermieter sofort mit dem Erstellen der Kartendaten beginnen kann.
-	\item[Leichte und Nachvollziehbare Bedienung]
+	\item[Leichte und nachvollziehbare Bedienung]
 	In direkter Beziehung zur schnellen Einarbeitungszeit sollte auch die leichte und nachvollziehbare Bedienung stehen.
-	Im Idealfall funktioniert die Erstellung der Kartendaten nach dem ``What You See Is What You Get``-Prinzip (WYSIWYG), zu Deutsch Was du siehst ist was du bekommst.
-	Dadurch ist es dem Anwender nacvollziehbar was das Ergebnis ist, da die Darstellung während der Bearbeitung gleich dem fertigen Produkt entspricht.
+	Im Idealfall funktioniert die Erstellung der Kartendaten nach dem ``What You See Is What You Get``-Prinzip (WYSIWYG), zu Deutsch: Was du siehst ist was du bekommst.
+	Dadurch ist es dem Anwender nachvollziehbar was das Ergebnis ist, da die Darstellung während der Bearbeitung dem fertigen Produkt entspricht.
 	Sind die Aktionen während der Bearbeitung der Kartendaten nicht nachvollziehbar, kann es dazu führen, dass der Vermieter den Überblick über das Projekt verliert.\pbreak%
 	%
 	Der Vermieter sollte zu keinem Zeitpunkt über das Ausführen einer Aktion nachdenken müssen.
 	Es sollte zu jeder Zeit klar sein, welche Funktion hinter welchem Button liegt und was sich im Projekt verändert, wenn diese Funktion genutzt wird.
 	\item[Mobile Nutzung]
-	Die Nutzung der Anwendung sollte für den Vermieter mobil nutzbar sein.
+	Die Nutzung der Anwendung sollte für den Vermieter mobil möglich sein.
 	Während Vermessungsbüros die Räumlichkeiten komplett ausmessen und die Kartendaten im Anschluss an einem festen Standort erstellen, hat der Vermieter nicht die Möglichkeit die Räumlichkeiten komplett auszumessen.
 	Ein immer wiederkehrender Weg zwischen Räumlichkeiten und der Stelle, an der die Kartendaten eingetragen werden wäre anstrengend und unattraktiv für den Vermieter.\pbreak%
 	%
 	Es sollte für den Vermieter möglich sein die Räumlichkeiten zu vermessen und die Kartendaten auch direkt dort einzutragen.
 	Die Mobilität erlaubt es dem Vermieter schnell die Orte zu wechseln und trotzdem weiterzuarbeiten.\pagebreak
 \end{description}
-Die aufgestellten Anforderungen werden mit den sich aktuell auf dem Markt befindlichen Lösungen vergleichen.
+Die aufgestellten Anforderungen werden mit den sich aktuell auf dem Markt befindlichen Lösungen verglichen.
 So können Übereinstimmungen und Probleme erkannt werden und im Anschluss in die Konzeption einfließen.
 
 \section{Softwarelösungen}
@@ -46,7 +46,7 @@ Ersteres beschreibt jegliche Software, mit welcher die benötigten Kartendaten e
 In diesem Abschnitt werden einige Softwarelösungen vorgestellt und analysiert.
 
 \subsection{QGIS}
-Bei dem Softwareprojekt QGIS handelt es sich um ein professionelles Geographisches-Informationssystem, was bis zum Release der Version 2.0 noch \emph{Quantum GIS} hieß \parencite{QGI2013, SUT2013}.
+Bei dem Softwareprojekt QGIS handelt es sich um ein professionelles Geographisches-Informationssystem, welches bis zum Release der Version 2.0 noch \emph{Quantum GIS} hieß \parencite{QGI2013, SUT2013}.
 \begin{figure}[h!]
 	\centering
 	\vspace{15pt}
@@ -75,7 +75,7 @@ Beim Klick auf ``\emph{Project > New}`` oder ``\emph{Project > New from Template
 }{
 Vom Hersteller selbst gibt es keine mobilen Anwendungen.
 Auf der Downloadseite wird zwar auf eine veraltete Android-Anwendung verwiesen, die allerdings nicht für Touch-Interaktionen optimiert ist.
-Außerdem wird darauf hingewiesen, dass die Anwendung Android Versionen ab der Version 5 nicht unterstützt, welche bereits 2014 veräffentlicht wurde \parencite{PIC2014}.
+Außerdem wird darauf hingewiesen, dass die Anwendung Android Versionen ab der Version 5 nicht unterstützt, welche bereits 2014 veröffentlicht wurde \parencite{PIC2014}.
 }{
 Trotz möglicher kostenloser Benutzung handelt es sich bei QGIS um eine Anwendung mit einer langen Einarbeitungszeit.
 Die Nutzung der Funktionen ist teilweise nicht nachvollziehbar und es werden keine mobilen Lösungen angeboten.
@@ -124,13 +124,13 @@ Bei der Kostenbestimmung der Dienstleistungslösungen können keine genauen Anga
 
 \section{Probleme bei den vorhanden Lösungen}
 Bei allen anlysierten Softwarelösungen handelte es sich nicht um eine Software zum Erstellen von Indoor Maps.
-Mit Geographischen-Informationssysteme kann man im Allgemeinen mit Kartendaten arbeiten.
+Mit Geographischen-Informationssystemen kann man im Allgemeinen mit Kartendaten arbeiten.
 Darunter fällt zwar auch das Erstellen von Objekten, wie Punkte, Linien und Polygone, allerdings ohne jeglichen Bezug zu Indoor Maps.
 Die Beziehungen zwischen den Objekten, wie sie im \acl{imdf} gewollt sind, können nicht sehr gut abgebildet werden.
 Bei den CAD-Anwendungen besteht ein ähnliches Problem.
 Dort wird zum Einen nicht direkt für Kartendaten gezeichnet, sondern eher die Grundrisse digital dargestellt, und zum Anderen besteht auch hier die Problematik, dass Beziehungen schlecht abgebildet werden können.\pbreak%
 %
-In beiden Fällen hat das zu bedeuten, dass die exportierten Informationen aus den Anwendung noch einmal überarbeitet werden müssen.
+In beiden Fällen hat das zu bedeuten, dass die exportierten Informationen aus den Anwendungen noch einmal überarbeitet werden müssen.
 Zwar finden sich auch \ac{imdf}-Export-Funktionen, allerdings können in diesem Export auch nur die Informationen abgebildet werden, die gezeichnet werden können.\pbreak%
 %
 Dienstleistungslösungen können diese Arbeit übernehmen.
