@@ -1,6 +1,6 @@
 \chapter{Erarbeitung des Konzepts}\label{ch:conception}
 Bevor mit der eigentlichen Implementierung begonnen werden kann wird ein grober Plan erstellt.
-In diesem Plan beziehungsweise Konzept wird die Art und Weise, wie die Anwendung funktionieren soll, definiert und gegebenenfalls werden UI-Prototypen erstellt.\pbreak%
+In diesem Plan beziehungsweise Konzept wird die Art und Weise definiert, wie die Anwendung funktionieren soll und gegebenenfalls werden UI-Prototypen erstellt.\pbreak%
 %
 Dieses Kapitel wird im Allgemeinen in die drei Hauptbereiche der Anwendung unterteilt, in denen die Ideen der Funktionsweise erklärt werden.
 Dazu gehört das Erstellen und Verwalten von Projekten, das Bearbeiten und Zeichnen der eigentlichen Kartendaten und das Exportieren eines fertigen Projektes in das \acl{imdf}.
@@ -10,7 +10,7 @@ Nach einigen Überlegungen und verschiedenen Arbeitstiteln wurde sich für den A
 Somit wird in den folgenden Abschnitten mit Indoor Architect die Anwendung gemeint.
 
 \section{Design-Konzept}
-In diesem Abschnitt werden die allgemeinen Fragen bezüglich des Design von Indoor Architect beschrieben.
+In diesem Abschnitt werden die allgemeinen Fragen bezüglich des Designs von Indoor Architect beschrieben.
 Dabei wird genauer auf die Navigation durch die Anwendung eingegangen.
 Im Anschluss wird vor allem die Trennung des Kartenbereichs von dem Rest der Anwendung genauer erklärt und die gewählten Farben dargestellt.\pbreak%
 %
@@ -22,10 +22,9 @@ Der Benutzer darf sich nicht in einem Projekt gefangen fühlen und sollte zu jed
 Die Navigation durch die Anwendung wird mittels Push- und Pop-Navigation erreicht.
 Dabei gibt es eine Hauptansicht, von der man in verschiedene Unteransichten navigieren kann und ebenso wieder zurück navigieren kann.
 Der Vorteil gegenüber anderen Arten der Navigtion ist, dass es nur einen Pfad zu jeder Ansicht gibt und man daher besser im Blick behalten kann wo man sich befindet.
-Dadurch kann in den folgenden Abschnitten ein Navigationsbaum erstellt werden, welcher die Navigations in den Bereichen beschreibt.\pbreak%
 %
-Um dem vorher beschreibenen Punkt gerecht zu werden, dass man schnell und einfach zwischen verschiedenen Projekten wechseln können sollte wird eine Seitenleiste vorhanden sein.
-In dieser Seitenleiste werden die Projekte und gegebenenfalls weitere Punkte aufgelistet über die man einen anderen Kontext öffnen kann.
+Um dem vorher beschreibenen Punkt gerecht zu werden, dass man schnell und einfach zwischen verschiedenen Projekten wechseln können sollte, wird eine Seitenleiste vorhanden sein.
+In dieser Seitenleiste werden die Projekte und gegebenenfalls weitere Punkte aufgelistet, über die man einen anderen Kontext öffnen kann.
 \begin{figure}[h!]
 	\centering
 	\vspace{15pt}
@@ -63,7 +62,7 @@ Ebenso kann das System die Schriftstärke je nach Präferenz des Benutzers wähl
 %
 Gleiches gilt für die Verwendung von Farben.
 Wenn in Indoor Architect Farben verwendet werden, dann müssen diese aus vier unterschiedlichen Farben bestehen.
-Zum einen lässt sich zwischen einem hellen und einem dunklen Modus wechseln, zum anderen gibt es für Benutzer mit Sehschwächen in den Geräteeinstellungen die Möglichkeit eine \emph{High Contrast}-Einstellung zu wählen.
+Zum Einen lässt sich zwischen einem hellen und einem dunklen Modus wechseln, zum Anderen gibt es für Benutzer mit Sehschwächen in den Geräteeinstellungen die Möglichkeit eine \emph{High Contrast}-Einstellung zu wählen.
 Damit Indoor Architect diese Funktion der Barrierefreiheit unterstützen kann, muss für jede Farbe auch immer eine \emph{High Contrast}-Variante bereitsgestellt werden.
 Daraus ergeben sich folgende vier Kombinationen pro Farbe:
 \begin{itemize}
@@ -76,7 +75,7 @@ Daraus ergeben sich folgende vier Kombinationen pro Farbe:
 Die dargestellten Farbkombinationen sind die der vom System bereitgestellten Farbe Rot (\texttt{systemRed}).
 Je nach Geräteeinstellung des Benutzers wird die entsprechende Farbe für den normalen oder den Hochkontrastmodus gewählt und angezeigt.\pbreak%
 %
-Neben der automatischen Anpassung der dargestellten Schrift und Farben gibt es noch weitere Möglichkeiten wie die Barrierefreiheit für Benutzer verbessert werden kann.
+Neben der automatischen Anpassung der dargestellten Schrift und Farben gibt es noch weitere Möglichkeiten, wie die Barrierefreiheit für Benutzer verbessert werden kann.
 Ein weiterer Schritt könnte das Vermeiden von Transparenzen und Animationen sein.
 In den \emph{Human Interface Guidelines} für iOS-Anwendungen, welche Empfehlungen und Ressourcen für das UI-Design auf Apple-Plattformen bereitstellen, weist Apple darauf hin, dass Transparenzen und Animationen für einige Personen ablenkend oder sogar unangenehm sein können \parencite{APP2020a}.
 Da keine starken Transparenzen in Indoor Architect eingebaut werden und die Animationen, die verwendet weden, bereits auf Barrierefreiheit achten, müssen dafür keine Schritte vorgenommen werden.
@@ -89,11 +88,11 @@ Selbst mit den entsprechenden Funktionen der Barrierefreiheit ist das Zeichnen a
 Das Erstellen eines Projektes sollte möglichst einfach und ohne großen Aufwand erfolgen.
 Aus diesem Grund wird es ähnlich dem Auswählen von existierenden Projekten auch in der Sidebar die Möglichkeit geben ein Projekt zu erstellen.
 Es muss lediglich ein Plus-Symbol geklickt werden und der Anwender kann die Grundinformationen für das Projekt eingeben.
-Da das Erstellen eines Projektes nur ein kleiner Schritt ist und der Anwender nicht eine komplett neue Ansicht bekommen muss wird das Formular als \emph{Popover} angezeigt.
+Da das Erstellen eines Projektes nur ein kleiner Schritt ist und der Anwender nicht eine komplett neue Ansicht bekommen muss, wird das Formular als \emph{Popover} angezeigt.
 Ein Popover ist eine Ansicht, die über den aktuellen Inhalt gelegt wird, welcher verdunkelt wird.
 In der Abbildung \ref{fig:design-project-create} kann man erkennen, dass der Fokus auf das neue Formular gelegt wird, obwohl die Projektübersicht im Hintergrund weiter sichtbar ist.
 Sobald der Anwender die Erstellung des Projektes bestätigt, wird er zu der Projektübersicht des neuen Projektes weitergeleitet.
-Das Formular zur Erstellung bietet die Möglichkeit an drei Felder auszufüllen:
+Das Formular zur Erstellung bietet die Möglichkeit, drei Felder auszufüllen:
 \emph{Projekttitel}, \emph{Projektkunde} und \emph{Projektbeschreibung}, von denen nur der Projekttitel ein Pflichtfeld ist.
 Alle drei Felder können nach der Erstellung beliebig oft bearbeitet werden.
 \newpage
@@ -128,10 +127,10 @@ Obwohl dieser Ordner alle Dateien enthält, handelt es sich nicht um ein gültig
 Der Inhalt der \ac{geojson}-Dateien selbst muss nicht ein gültiges \ac{imdf}-Format haben, da auch zusätzliche Informationen in den Dateien hinterlegt werden, die für ein Indoor Architect Projekt nützlich sein können.\pbreak%
 %
 Das \texttt{overlays/}-Verzeichnis enthält alle verwendeten \emph{Overlays}, die über die Kartendaten gelegt werden können.
-Dabei handelt es sich um Grafiken, wie zum Beispiel Grundrisse der Gebäude, die man mit einer transparenz über die Kartendaten legen kann, um die einzelnen Gebäude und Räume besser nachzeichnen zu können.
-Jedes Overlay ist dabei ein eigener Ordner, welcher zum Einen die zu verwendende Grafik enthält, sowie eine \texttt{overlay.json}, welche die Positionsinformationen zu diesem Overlay speichert.
+Dabei handelt es sich um Grafiken, wie zum Beispiel Grundrisse der Gebäude, die man mit einer Transparenz über die Kartendaten legen kann, um die einzelnen Gebäude und Räume besser nachzeichnen zu können.
+Jedes Overlay ist dabei ein eigener Ordner, welcher die zu verwendende Grafik enthält, sowie eine \texttt{overlay.json}, welche die Positionsinformationen zu diesem Overlay speichert.
 Im Listing \ref{lst:overlay} wird eine Beispieldarstellung einer \texttt{overlay.json}-Datei gezeigt, in der zum Einen der Dateityp der Grafik hinterlegt wird und zum Anderen die Darstellungsoptionen.
-Darunter befinden sich die Position, an der die Grafik angezeigt werden soll, sowie die Skalierung und die Rotation der Grafik auf den Kartendaten.
+Dabei handelt es sich um die Position, an der die Grafik angezeigt werden soll, sowie die Skalierung und die Rotation der Grafik auf den Kartendaten.
 \codelisting{Beispieldarstellung einer \texttt{overlay.json}}{lst:overlay}{json-overlay-example.json}{json}\\
 Zu guter Letzt bleibt die \texttt{manifest.json}-Datei, welche die grundlegenden Projektinformationen enthält.
 Im folgenden werden die einzelnen Felder des Listings \ref{lst:manifest} genauer erklärt.
@@ -172,7 +171,7 @@ Wenn mit dem Pointer-Werkzeug auf ein Element geklickt wird, können die Eigensc
 	\caption{Mockup der Bearbeitung eines Features in der Kartenansicht}
 	\label{fig:design-map-edit}
 \end{figure}
-In der oberen Leiste werden weitere Informationen agezeigt, wie zum Beispiel die Koordinaten des letzten angeklickten Punktes oder das ausgewählte Werkzeug.
+In der oberen Leiste werden weitere Informationen angezeigt, wie zum Beispiel die Koordinaten des letzten angeklickten Punktes oder das ausgewählte Werkzeug.
 
 \section{Ausführen eines Audits}
 \label{sec:validation}
@@ -188,10 +187,10 @@ Darunter fallen unter anderem Regeln wie \texttt{AddressMustHaveLocality}, mit w
 	\label{fig:design-project-audit}
 \end{figure}
 Der Audit sollte die Fehler in den Kartendaten erkennen und dem Anwender aufzeigen (siehe Abbildung \ref{fig:design-project-audit}).
-Wenn Warnungen oder gar Fehler auftreten sollten Lösungen vorgeschlagen werden und nach Möglichkeit die Fehler automatisch behoben werden.
+Wenn Warnungen oder gar Fehler auftreten, sollten Lösungen vorgeschlagen werden und nach Möglichkeit die Fehler automatisch behoben werden.
 
 \section{Exportieren der Projekte}
-Nach dem erfolgreichen validieren der Kartendaten steht in der Regel der Export in ein \ac{imdf}-Archiv an.
+Nach dem erfolgreichen Validieren der Kartendaten steht in der Regel der Export in ein \ac{imdf}-Archiv an.
 Da die Kartendaten in dem Indoor Architect Projekt selbst in der \ac{imdf}-Struktur hinterlegt sind besteht ein Export grundlegend nur aus dem archivieren der Daten und dem Speichern an einem gewählten Speicherort.
 Das exportierte ZIP-Archiv kann im Anschluss für eine beliebige Verwendung weitergegeben werden.\pbreak%
 %
