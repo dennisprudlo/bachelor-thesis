@@ -22,15 +22,25 @@ Außerdem wude auch beschreiben, warum sich für die programmatische Entwicklung
 Zum Ende des \autoref{ch:implementation} wurde im \autoref{sec:localizing} der Prozess der \Gls{l10n} beschrieben.
 Dabei wurde zum Einen auf die bereits existierenden Schnittstellen zum Lokalisieren eingegangen, als auch auf die Problematik bei der Auswahl von Untereinheiten von Regionen bei der Adressauswahl.
 
-\section{\textcolor{red}{Herausforderungen}}
+\section{Herausforderungen}
 Bei der Entwicklung der Anwendung gab es einige Herausforderungen, die man überwinden musste.
-Vor allem das Kodieren der Daten zwischen den \ac{json}-Repräsentationen aus den Dateien und den Datenmodellen in der Anwendung war herausfordernd.
-
-%- Generics
-%- MapOverlays
-%- Gesture Recognizers
-%- ISO Country Codes (IMDF erfordert ein subdivision Identifier)
-%- Kein Export und Fehlende Features (zeitlich nicht alle aufgestellten Anforderungen erfüllt)
+Da die Spezifikation von \ac{json} bekannt war, konnte sich schnell in die Spezifikation von \ac{geojson} und \ac{imdf} eingelesen werden.
+Aus diesem Grund konnte das \autoref{ch:theorybasics} mit den Grundlagen problemlos erstellt werden.
+Doch die Analyse der aktuellen Lösungen war schwierig und hat einige Hürden aufgestellt.
+Zu vielen Lösungen konnten nur wenige Informationen gefunden werden, da bei den meisten Lösungen keine Testversionen zur Verfügung standen und man über den Vertrieb der Hersteller einen Zugang erwerben musste.\pbreak%
+% Lediglich bei Open Source Lösungen... (online geojson editor?)
+%
+Bei der Implementierung war vor allem das Kodieren der Daten zwischen den \ac{json}-Repräsentationen aus den Dateien und den Datenmodellen in der Anwendung herausfordernd.
+In Kombination mit den Generics musste immer darauf geachtet werden, dass die generischen Klassen die Daten im richtigen Format halten, ansonsten kam es zu Fehlern bei der Enkodierung.
+Ebenso konnte es zu Fehlern kommen, wenn es Formatierungsfehler im gespeicherten \ac{json} gab.
+In diesem Fall konnten die Daten nicht zu einer ein Swift erstellen Klasse dekodiert werden.
+Des Weiteren musste durch die Pflicht einer ISO 3166-2 Provinzkennung in einem Adress-Feature des \acl{imdf}s auch eine Auswahlmöglichkeit für diese Kennung existieren.
+Doch für die Abfrage der verfügbaren Kennungen gibt es keine eingebaute Schnittstelle, weshalb die einzelnen Kennungen pro Land manuell eingetragen werden mussten.
+Dies war ein viel Zeit in Anspruch nehmender Prozess, da geopolitische Ungereimtheiten dafür gesorgt haben, dass die Provinzen eines Landes nicht immer eindeutig waren.\pbreak%
+%
+Neben den bei der Entwicklung aufgetretenen Herausforderungen war auch die Zeit eines der größten Herausforderungen.
+Viele anfangs eingeplanten Features, wie der Audit eines Projektes und das fertige Exportieren in ein \ac{imdf}-Archov konnten nicht fertiggestellt werden.
+Es stellt sich aber heraus, dass die Entwicklung einer solchen Anwendung keine Frage der Machbarkeit ist, sofern genügend zeit vorhanden ist.
 
 \section{Analyse der Anwendung}
 Im \autoref{ch:analysis} wurden Anforderungen aufgestellt und die aktuelle Situation auf dem Markt analysiert.
@@ -109,6 +119,3 @@ Bei einfachen Formfehlern wäre es auch möglich die Probleme automatisch von de
 %
 Neben einem Export wäre es auch sinnvoll einen Import für \ac{imdf}-Archive anzubieten.
 Ein bestehendes \ac{imdf}-Archiv könnte von der Anwendung interpretiert werden und zu einem Indoor Architect Projekt umgewandelt werden, sodass jedes \ac{imdf}-Archiv in Indoor Architect bearbeitet werden kann und nicht nur die dort erstellten.
-
-\subsection{\textcolor{red}{Nutzen für Indoor Maps}}
-Eine deutlich interessantere Frage ist jedoch, ob eine einfach zu bedienende Anwendung einen Nutzen für Indoor Maps im Allgemeinen oder deren Verbreitung hat.
