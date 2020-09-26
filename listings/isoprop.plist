@@ -2,11 +2,28 @@
 	<dict>
 		<key>BE</key>
 		<dict>
+			<key>BE-BRU</key>
+			<string>Brussels Hoofdstedelijk Gewest</string>
 			<key>BE-VAN</key>
 			<string>Antwerpen</string>
 			<key>BE-VBR</key>
 			<string>Vlaams-Brabant</string>
-			...
+			<key>BE-VLI</key>
+			<string>Limburg</string>
+			<key>BE-VOV</key>
+			<string>Oost-Vlaanderen</string>
+			<key>BE-VMV</key>
+			<string>West-Vlaanderen</string>
+			<key>BE-WBR</key>
+			<string>Brabant wallon</string>
+			<key>BE-WHT</key>
+			<string>Hainaut</string>
+			<key>BE-WLG</key>
+			<string>Liège</string>
+			<key>BE-WLX</key>
+			<string>Luxembourg</string>
+			<key>BE-WNA</key>
+			<string>Namur</string>
 		</dict>
 		<key>...</key>
 		<dict>

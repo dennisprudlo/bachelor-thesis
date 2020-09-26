@@ -1,7 +1,7 @@
 \chapter{Implementierung}
 \label{ch:implementation}
 Die aufgestellten Anforderungen und das darauf basierende Design-Konzept kann nun in eine eigene Anwendung implementiert werden.
-Dabei wird zuerst auf die Entwicklung auf iOS-Geräten eingegangen und anschließend die Technische Umsetzung dokumentiert.
+Dabei wird zuerst auf die Entwicklung auf iOS-Geräten eingegangen und anschließend die technische Umsetzung dokumentiert.
 Bei der Umsetzung wird auf die \Gls{i18n} geachtet, sodass es im Anschluss möglich ist die Anwendung mittels \Gls{l10n} in verschiedene Sprachen zu übersetzen.\pbreak%
 %
 Die Nutzung der Anwendung findet idealerweise auf einem Tablet statt, da dort mehr Platz für das Zeichnen und das Vornehmen von Einstellungen bereitsteht.
@@ -9,11 +9,11 @@ Für die Entwicklung wird die Entwicklungsumgebung \textit{Xcode} verwendet, wel
 
 \section{Entwicklung auf iOS-Geräten}
 \label{sec:devios}
-Wenn man einen nativen Ansatz verfolgt, um eine Anwendung auf iOS-Geräten zu entwickeln, stehen einem drei Technologien \textit{Objective-C}, \textit{Swift} und \textit{SwiftUI} zur Verfügung.
+Wenn man einen nativen Ansatz verfolgt, um eine Anwendung auf iOS-Geräten zu entwickeln, stehen einem die drei Technologien \textit{Objective-C}, \textit{Swift} und \textit{SwiftUI} zur Verfügung.
 Außerdem wird die Entwicklungsumgebung Xcode, für dessen Nutzung ein macOS-Gerät notwendig ist, mit vielen hilfreichen Werkzeugen mitgeliefert.\pbreak%
 %
 Neben den Programmiersprachen selbst und den mitgelieferten Werkzeugen werden auch bestimmte Entwurfsmuster und Herangehensweisen empfohlen.
-Die Kommunikation zwischen den bereitgestellten Schnittstellen des Herstellers und dem selbstentwickelten Programmcodes ist wesentlich einfacher und verständlicher, wenn man die selbe Architektur verwendet.
+Die Kommunikation zwischen den bereitgestellten Schnittstellen des Herstellers und dem selbstentwickelten Programmcode ist wesentlich einfacher und verständlicher, wenn man die selbe Architektur verwendet.
 Es bleibt einem trotzdem selbst überlassen, wie man das eigene Projekt aufbauen möchte.
 Im Falle dieser Thesis wird sich an den empfohlenen Herangehensweisen orientiert, die auch in den folgenden Abschnitten erklärt werden.
 
@@ -38,13 +38,13 @@ Des Weiteren erkennt man, dass Methodenaufrufe und Initialisierungen von Objekte
 \subsection{SwiftUI}
 Seit 2019 gibt es auch die Möglichkeit mittels \textit{SwiftUI} mobile Anwendungen für Apple Geräte zu entwickeln.
 SwiftUI ist dabei weniger eine eigene Sprache, sondern eher ein deklarativer Ansatz in Swift Benutzeroberflächen zu bauen.
-In einfachen Swift Projekten mit dem Ziel eine iOS-Anwendung zu entwickeln wird für die Benutzeroberfläche das Framework \textit{UIKit} verwendet.
+In einfachen Swift Projekten, mit dem Ziel eine iOS-Anwendung zu entwickeln, wird für die Benutzeroberfläche das Framework \textit{UIKit} verwendet.
 SwiftUI soll in Zukunft UIKit ablösen, sodass alle Anwendungen in Zukunft mittels SwiftUI entwicklet werden können.\pbreak%
 %
 Da SwiftUI noch relativ jung ist und regelmäßig neue Funktionen implementiert werden ist es für eine komplexere Anwendung ungeeignet.
 Einfache Notizen- oder Todo-Apps lassen sich schnell und einfach bauen, doch für das Zeichnen auf Kartendaten müsste wieder auf das Framework UIKit zurückgegriffen werden.
-Das hat damit zu tun, dass viele Komponenten noch nicht kompatibel für SwiftUI gemacht wurde und im Hintergrund weiterhin auf UIKit basieren.
-Unter diesem Komponenten befindet sich auch die \texttt{MKMapView} aus dem \texttt{MapKit} Framework, die für das Darstellen einer Karte benötigt wird.
+Das hat damit zu tun, dass viele Komponenten noch nicht kompatibel für SwiftUI gemacht wurden und im Hintergrund weiterhin auf UIKit basieren.
+Unter diesen Komponenten befindet sich auch die \texttt{MKMapView} aus dem \texttt{MapKit} Framework, die für das Darstellen einer Karte benötigt wird.
 Es wäre theoretisch möglich die Map View innerhalb einer SwiftUI-Ansicht anzuzeigen, allerdings müsste auch hier für ein tieferes Eingreifen in die Funktionen der Map View wieder auf Swift mit UIKit zurückgegriffen werden.
 Aus diesem Grund ist es sinnvoller, für die zu entwickelnde Anwendung, auf SwiftUI zu verzichten.
 
@@ -71,13 +71,13 @@ Die \textbf{View} ist der Bereich, mit dem der Benutzer interagiert.
 Programmcode im View-Bereich sollte keine Geschäftslogik enthalten, sondern nur Code, welcher die View aktualisiert.
 Dies könnte zum Beispiel Programmlogik zum bedingten Einfärben eines Buttons sein.
 Wenn eine View Geschäftslogik benötigt, um bestimmte Aufgaben zu erfüllen, dann wird ein Verweis zu einem Model erzeugt, in dem die Geschäftslogik enthalten ist.
-Auch in diesem Fall wartet die View auf Aufgaben eines Controller, welcher zum Beispiel ein Aktualisieren der Ansicht anfordert.
+Auch in diesem Fall wartet die View auf Aufgaben eines Controllers, welcher zum Beispiel ein Aktualisieren der Ansicht anfordert.
 Andersherum kann die View den Controller darüber informieren, dass der Benutzer eine Aktion getätigt hat, wie zum Beispiel das Drücken eines Buttons.\pbreak%
 %
 Die Aufgabe der \textbf{Controller} ist es zwischen den Views und den Models zu vermitteln.
 Wenn es zum Beispiel Änderungen ein einem Model gibt, dessen Daten direkt an eine Ansicht gebunden sind, muss der Controller der entsprechenden View Bescheid geben die Ansicht zu aktualisieren.
 Ebenso muss der Controller das Model aktualisieren, wenn der Benutzer eine Aktion auf der Benutzeroberfläche geändert hat, welche direkt mit dem Model verbunden ist.
-Wie Kommunikation zwischen den drei Komponenten funktioniert kann bei jeder Implementierung des \ac{mvc}-Entwurfsmuster unterschiedlich sein.
+Wie die Kommunikation zwischen den drei Komponenten funktioniert kann bei jeder Implementierung des \ac{mvc}-Entwurfsmuster unterschiedlich sein.
 Bei einem iOS-Projekt wird standardmäßig das \textit{Delegation-Pattern} verwendet.
 
 \subsubsection{Delegation-Pattern}
@@ -92,7 +92,7 @@ Sobald der Location Manager die Ortungsdaten des Benutzers erfasst hat nutzt er 
 Diese Funktion muss existieren, da dem genannten \Gls{protocol} zugestimmt wurde und es deshalb implementiert werden muss.
 Fehlt die Implementierung der Funktion in der Referenz, handelt es sich dabei um einen Syntax-Fehler und das Programm kann nicht kompiliert werden.\pbreak%
 %
-Um die Funktionsweise des Delegation-Patterns besser darstellen zu können, wird im Folgenden Beispiel der Programmcode bei einer Delegation erläutert.
+Um die Funktionsweise des Delegation-Patterns besser darstellen zu können, wird im folgenden Beispiel der Programmcode bei einer Delegation erläutert.
 Im Listing \ref{lst:engine} wird die \texttt{Vehicle}-Klasse dahingehend erweitert, dass man mit der Methode \texttt{turnKey()} den Motor starten kann (Zeile 4).
 In der \texttt{Engine}-Klasse brauchen wir eine Referenz zum Fahrzeug, da der verbrauchte Kraftstoff des Fahrzeugs in der \texttt{run()}-Methode abgezogen werden muss (Zeile 17 bis 22).
 Das jetzt entstandene Problem ist, dass es eine direkte Beziehung zwischen Fahrzeug und Motor gibt und die \texttt{Engine}-Klasse nicht abstrakt eingesetzt werden kann.\\
@@ -155,7 +155,7 @@ Dies kann in der Programmiersprache Swift mit dem \texttt{super}-Keyword erreich
 In jedem iOS-Projekt muss eine sogenannte \textit{Information Property List} vorhanden sein.
 Diese kann als \texttt{Info.plist}-Datei an einer beliebigen Stelle im Projekt abgelegt sein, es muss nur der Pfad zu ihr hinterlegt werden.
 Die Property List ist ein Key-Value-Store und basiert auf XML (siehe Listing \ref{lst:plist}).
-In dieser Liste werden unter anderem der Name der Anwendung, die Version und die Buildnummer hinterlegt, sowie weitere Einstellungen vorgenommen.
+In dieser Liste wird unter anderem der Name der Anwendung, die Version und die Buildnummer hinterlegt, sowie weitere Einstellungen vorgenommen.
 Außerdem werden in der Property List auch die Begründungstexte für Berechtigungsanfragen abgelegt.
 Wenn eine Anwendung versucht den Zugriff auf das Mikrofon anzufragen, allerdings kein Begründungstext hinterlegt wurde, der dem Benutzer angezeigt werden kann, wird die Berechtigung nicht angefragt.
 \codelisting{Beispielinhalt einer Property List}{lst:plist}{plist-example.plist}{xml}\\
@@ -164,14 +164,14 @@ In der Information Property List können auch eigene Werte hinterlegt werden, di
 \section{Technische Umsetzung}
 \label{sec:techimp}
 Während der Implementierung sind auch bei der technischen Umsetzung immer wieder Fragen aufgekommen.
-Es gab verschiedene Möglichkeiten an bestimmte Probleme heranzugehen und die zu lösen.
+Es gab verschiedene Möglichkeiten an bestimmte Probleme heranzugehen und diese zu lösen.
 In den folgenden Abschnitten wird genauer auf diese Probleme eingegangen beziehwungsweise dargelegt, wieso sich für welchen Ansatz der teschnischen Umsetzung entschieden wurde.
 \subsection{JSON Encoding und Decoding}
 \label{subsec:encodingdecoding}
-Alle Daten, die bearbeiten werden können, liegen im \ac{json}-Format vor.
-Darunter Fallen zum einen Indoor Architect Projektstrukturen, sowie die \ac{imdf}-Features, die als \ac{geojson}-Dateien abgelegt werden.
-Mit Hilfe der \texttt{FileManager}-Klasse kann man die Inhalte von Dateien auslesen.
-Diesen Manager machen wir uns auch zu Nutze und erhalten durch Aufruf der Funktion \texttt{manager.contents(atPath: "...")} ein Objekt des Typs \texttt{Data}, wobei \texttt{"..."} eine Zeichenkette mit dem absoluten Pfad zur Datei ist.
+Alle Daten, die bearbeitet werden können, liegen im \ac{json}-Format vor.
+Darunter Fallen zum Einen Indoor Architect Projektstrukturen, sowie zum Anderen die \ac{imdf}-Features, die als \ac{geojson}-Dateien abgelegt werden.
+Mit Hilfe der Klasse \texttt{FileManager} kann man die Inhalte von Dateien auslesen.
+Diesen Manager machen wir uns auch zu Nutze und erhalten durch Aufruf der File Manager Funktion \texttt{manager.contents(atPath: "...")} ein Objekt des Typs \texttt{Data}, wobei \texttt{"..."} eine Zeichenkette mit dem absoluten Pfad zur Datei ist.
 Ein solches \texttt{Data}-Objekt enthält nun einfache Byte-Daten ohne jegliche Information, wie die Daten aufgebaut sind und in welchem Format sie vorliegen.
 Für das Übertragen der Daten aus den Dateien in die Anwendung, sodass damit gearbeitet werden kann, gibt es zwei oft verwendete Möglichkeiten.
 \subsubsection{Manuelles Encoden und Decoden}
@@ -187,7 +187,7 @@ Dort wird in Zeile 2 das Dictionary übergeben und man erhält das \texttt{Data}
 %
 Zwar ist diese Variante schnell und einfach, allerdings kann es zu einem Mehraufwand kommen, wenn man viel mit den erhaltenen Daten tut.
 Da es sich bei allen Werten nun um \texttt{Any}-Typen handelt, können bestimmte Operationen nicht ausgeführt werden.
-Möchte man die möglichen Werte \texttt{dict["num1"]} und \texttt{dict["num2"]} addieren, wird ein Fehler angezeigt, dass man mit zwei Werte des Typs \texttt{Any} keine Rechenoperationen ausführen kann.
+Möchte man die möglichen Werte \texttt{dict["num1"]} und \texttt{dict["num2"]} addieren, wird ein Fehler angezeigt, dass man mit zwei Werten des Typs \texttt{Any} keine Rechenoperationen ausführen kann.
 Auch wenn man weiß, dass sich hinter den beiden Werten Zahlen befinden, ist es dem Compiler nicht bekannt.
 Im Laufe der Anwendung müssten die entsprechenden Werte einzeln in Datentypen umgewandelt werden, die Rechenoperationen erlauben, damit man diese Werte addieren kann.\pbreak%
 %
@@ -196,15 +196,15 @@ So kann man Schritt für Schritt die erhaltenen Daten analysieren und in den ric
 Da es sich in dem Fall von Indoor Architect um eine vorgeschriebene Strukur der Daten handelt ist auch zu jeder Zeit bekannt, wie das \ac{json}-Konstrukt aussieht.
 Daher wurde sich dazu entschieden einen anderen Ansatz zu wählen.
 \subsubsection{Encoden und Decoden mittels \texttt{Codable}}
-Wenn die Struktur des \ac{json}-Objekts klar definiert ist und nicht davon abweicht, kann man mit dem \texttt{Codeable}-\Gls{protocol} die Strukturen automatisch umwandeln lassen.
+Wenn die Struktur des \ac{json}-Objekts klar definiert ist und nicht davon abweicht, kann man mit dem \texttt{Codable}-\Gls{protocol} die Strukturen automatisch umwandeln lassen.
 \codelisting{\texttt{Codable}-Struktur und dazugehörige JSON-Strukur}{lst:swift-codable-struct}{swift-codable-struct.swift}{swift}
 Im Listing \ref{lst:swift-codable-struct} wird in den Zeilen 1 bis 6 eine Struktur mit dem Namen \texttt{Project} angelegt.
-Damit unser automatische Ansatz funktioniert, muss diese Struktur das \texttt{Codeable}-\Gls{protocol} implementieren.
+Damit unser automatische Ansatz funktioniert, muss diese Struktur das \texttt{Codable}-\Gls{protocol} implementieren.
 Alle verwendeten Datentypen in dieser Strukur müssen ebenfalls dieses \Gls{protocol} implementiert haben.
 Es können also auch eigene Datentypen erstellt und hier verwendet werden, solange sie den Anforderungen des \Glspl{protocol} gerecht werden.
 In den Zeilen 8 bis 13 sieht man die in einer Datei gespeicherten \ac{json}-Struktur.
 \codelisting{Automatisches dekodieren von JSON in Swift}{lst:swift-codable-decode}{swift-codable-decode.swift}{swift}
-Nun kann man den \texttt{JSONDecoder} verwenden, um die Daten in eine Form zu bringen, mit der man in der Anwendung einfacher arbeiten kann.
+Nun kann man den \texttt{JSONDecoder} verwenden, um die Daten in eine Form zu bringen, mit der man in der Anwendung einfacher arbeiten kann (Listing \ref{lst:swift-codable-decode}).
 Als Parameter für den Dekodierungsprozess kann man zum Beispiel mitgeben, dass im Snake-Case vorliegende Schlüssel (\texttt{created\_at}) zum Camel-Case (\texttt{createdAt}) konvertiert werden sollen (Zeile 2).
 Außerdem kann auch spezifiziert werden, in welchem Format die Datumsfelder vorliegen (Zeile 3).
 Nach dem Dekodieren lässt sich über die \texttt{project}-Variable auf die verschiedenen Daten zugreifen und entsprechende Operationen mit ihnen durchführen.
@@ -225,11 +225,11 @@ Der einzige Unterschied liegt dabei in der Kodierung der Eigenschaften.
 Doch für die Kodierung der \ac{uuid}, der Geometrie und des Typs würde redundanter Programmcode in allen 16 Klassen der Feature-Typen enthalten sein.
 Um dem entgegenzuwirken können \emph{Generics} verwendet werden.\pbreak%
 %
-Unsere globale Idee eines ``Features`` ist ein Objekt, welches immer eine UUID, eine Geometrie, einen Typ und Eigenschaften hat.
+Unsere globale Idee eines ``Features`` ist ein Objekt, welches immer eine \ac{uuid}, eine Geometrie, einen Typ und Eigenschaften hat.
 Die Eigenschaften können dabei jedesmal unterschiedlich sein, aber die Tatsache, dass ein Feature Eigenschaften besitzt bleibt.
 Da wir die Features auch kodieren wollen, fügen wir unserer Idee noch an, dass die Eigenschaften kodierbar sein müssen.
 \codelisting{\texttt{Feature}-Klasse mit generischem Typ}{lst:swift-generics-feature}{swift-generics-feature.swift}{swift}
-Im Listing \ref{lst:swift-generics-feature} wird nun eine Klasse definiert, welche die vier eben genannten Bedingungen eines Features erfüllen (Zeile 2 bis 5).
+Im Listing \ref{lst:swift-generics-feature} wird nun eine Klasse definiert, welche die vier eben genannten Bedingungen eines Features erfüllt (Zeile 2 bis 5).
 Da die Eigenschaften unterschiedlich sein können, wird die Klasse zu einer generischen Klasse gemacht.
 Dazu wird dem Klassennamen hinzugefügt, dass ein \texttt{Properties}-Typ mit angegeben werden muss, welcher das \Gls{protocol} \texttt{Codable} implementiert (Zeile 1).
 Der Name des generischen Typs (hier \texttt{Properties}) ist dabei frei wählbar.
@@ -254,7 +254,7 @@ Jetzt muss jede Klasse eines speziellen Features nur die Struktur ihrer eigenen 
 Wie bei vielen anderen Sprachen auch werden Eingaben unter iOS mit Events abgebildet.
 Eine Ansicht mit Grafiken, Texten und Bildern wird daher angezeigt und wartet auf eine Aktion, um Änderungen vorzunehmen.
 Die unterschiedlichen Komponenten reagieren auch auf unterschiedliche Events.
-Eine \texttt{UISwitch}-Komponente, welche einen An/Aus-Button darstellt, kann auch das \texttt{.valueChanged}-Event reagieren.
+Eine \texttt{UISwitch}-Komponente, welche einen An/Aus-Button darstellt, kann auf das \texttt{.valueChanged}-Event reagieren.
 Dieses wird ausgeführt, sobald sich der An/Aus-Status des Buttons verändert.
 Ein ganz normaler Button mit einem Text kann unter anderem auf die Events \texttt{.touchUpInside} oder \texttt{.touchUpOutside} hören.
 Ersteres wird ausgeführt, wenn man einen Button antippt und den Button – mit dem Finger innerhalb des Buttons selbst – wieder anhebt.
@@ -280,29 +280,29 @@ Bei minimaler Bewegung der beiden Finger wird sich ein Gesture Recognizer immer 
 In diesem Fall wäre das die Entfernung der beiden Finger und die Geschwindigkeit, mit der sich die Distanz zwischen den Fingern erhöht oder verringert.\pbreak%
 %
 Für die Funktion zum Messen der Distanz zwischen zwei Orten auf der Karte wurde anfangs ein \texttt{UIPanGestureRecognizer} verwendet.
-Dieser sollte beim ausführen der Geste die Distanz zwischen dem initialen Berührungspunkt und dem Punkt, an dem die Bewegung beendet wurde, berechnet werden.
+Dieser sollte beim Ausführen der Geste die Distanz zwischen dem initialen Berührungspunkt und dem Punkt, an dem die Bewegung beendet wurde, berechnen.
 \codelisting{Setzen eines \texttt{UIPanGestureRecognizers} auf die Map-View}{lst:swift-gesture}{swift-gesture.swift}{swift}
 Der Gesture Recognizer wurde wie im Listing \ref{lst:swift-gesture} angelegt und die minimale und maximale Anzahl von Bewegungen auf 1 gesetzt.
 Dies hat zur Folge, dass der Gesture Recognizer nur reagiert, wenn nur ein Finger den Bildschirm berührt.
 In der referenzierten Funktion \texttt{didPanMap} in Zeile 8 konnte dann auf die Antwort des Gesture Recognizer gewartet werden.\pbreak%
 %
 Dabei ist das Problem aufgetreten, dass der Gesture Recognizer als initialen Punkt nicht den Punkt zurückgegeben hat, an dem die Bewegung gestartet ist.
-Es wurde der Punkt zurückgegeben, andem der Gesture Recognizer bemerkt hat, dass eine Pan-Geste stattfindet und diese weiter verfolgt hat.
+Es wurde der Punkt zurückgegeben, an dem der Gesture Recognizer bemerkt hat, dass eine Pan-Geste stattfindet und diese weiter verfolgt hat.
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.25]{images/pangesture.png}
 	\caption{Visualisierung der Reaktion des \texttt{UIPanGestureRecognizer}}
 	\label{fig:pangesture}
 \end{figure}
-In der Abbildung \ref{fig:pangesture} erkennt man, wann die eigentliche Bewegung stattgefunden hat (A) und wann sie beendet wurde (C).
-Für den Gesture Recognizer war allerdings erst ab Punkt B klar, dass es sich gerade um eine Pan-Geste handelt.
+In der Abbildung \ref{fig:pangesture} erkennt man, wann die eigentliche Bewegung begonnen hat (A) und wann sie beendet wurde (C).
+Für den Gesture Recognizer war allerdings erst etwas später (B) klar, dass es sich gerade um eine Pan-Geste handelt.
 Als Rückmeldung hat man dann den angeblichen initialen Punkt B und den Endpunkt C erhalten.
 Um diesem Verhalten entgegenzuwirken musste eine eigene Implementierung des \texttt{UIPanGestureRecognizer} entwickelt werden.
 \codelisting{Implementierung des \texttt{InitialPanGestureRecognizer}}{lst:swift-gesture-custom}{swift-gesture-custom.swift}{swift}
 Die eigene Implementierung (zu sehen im Listing \ref{lst:swift-gesture-custom}) erbt vom \texttt{UIPanGestureRecognizer}, sodass alle internen Funktionen übernommen werden können (Zeile 4).
 Zusätzlich wird eine weitere Eigenschaft angelegt, welche den echten initialen Punkt speichert, und eine Funktion zur Verfügung gestellt, die diesen Wert zurückgibt (Zeile 5 und 19).
 In der \texttt{touchesBegan()}-Methode, welche aufgerufen wird sobald ein antippen bemerkt wird, kann dann der initiale Punkt gespeichert werden (Zeile 14 und 16).
-Nun wird anstelle des \texttt{UIPanGestureRecognizers} der eigene \texttt{InitialPanGestureRecognizer} verwendet und es kann der echte initiale Punkt zur Berechnung der Distanz verwendet werden.
+Nun wird anstelle des \texttt{UIPanGestureRecognizer} der eigene \texttt{InitialPanGestureRecognizer} verwendet und es kann der echte initiale Punkt zur Berechnung der Distanz verwendet werden.
 
 \subsection{MapKit Overlays}
 Das Zeichnen von Elementen auf einer Karte in der iOS-Entwicklung ist im Grunde ganz einfach.
@@ -312,8 +312,8 @@ Ebenso kann man auch einfache Elemente erstellen, wie \texttt{MKPolyline} oder \
 Im Fall der Anwendung werden aber nicht nur fertige Elemente auf die Karte gelegt, sondern sollen auch im Entstehungsprozess visualisiert werden.
 Wenn ein Benutzer ein Polygon zeichnen möchte und den Startpunkt auswählt, lässt sich aus dieser einen Koordinate kein \texttt{MKPolygon} erstellen, da für dieses Elemente mindestens drei Koordinaten vorliegen müssen.\pbreak%
 %
-\codelisting{Implementierung des \texttt{MCShapeAssembler}}{lst:swift-assembler}{swift-assembler.swift}{swift}
 Aus diesem Grund wurde eine Klasse erstellt, deren Aufgabe es ist die vom Benutzer ausgewählten Punkte beziehungsweise Koordinaten zu sammeln, damit daraus dann die entsprechende Visualisierung erstellt werden kann.
+\codelisting{Implementierung des \texttt{MCShapeAssembler}}{lst:swift-assembler}{swift-assembler.swift}{swift}
 Diese Klasse soll nur die allgemeine Aufgabe des Sammeln der Koordinaten übernehmen, während die Visualisierung von entsprechenden Unterklassen erstellt wird.
 Die erstellte Klasse im Listing \ref{lst:swift-assembler}, die den Namen \texttt{MCShapeAssembler} trägt, hält eine Referenz zur eigentlichen Karte vor, auf der die Elemente gezeichnet werden (Zeile 2) und dem Overlay, welches auf der Karte angezeigt wird und das aktuell gezeichnete Element repräsentiert (Zeile 3).
 Außerdem werden in der Variable \texttt{coordinates} alle gesammelten Koordinaten gespeichert (Zeile 4).
@@ -324,8 +324,8 @@ Von diesem Grundgerüst wird selbst keine Instanz erstellt, sondern die entsprec
 Als Beispiel wird im Listing \ref{lst:swift-assembler-polygon} der \texttt{MCPolygonAssembler} erklärt.
 \codelisting{Implementierung des \texttt{MCPolygonAssembler}}{lst:swift-assembler-polygon}{swift-assembler-polygon.swift}{swift}
 Die \texttt{add}-Funktion wird dahingehend erweitert, dass neben dem Hinzufügen der Koordinaten auch automatisch ein Overlay aus den gesammelten Koordinaten erstellt wird (Zeile 6 bis 11).
-Für den Fall, dass der ``Assembler`` zwei Koordinaten kennt eine \texttt{MKPolyline} als Overlay erzeugt wird (Zeile 8).
-In Zeile 13 wird dann der soeben erstellte Overlay angezeigt, wobei das alte gelöscht und das neue gezeichnet wird.
+Für den Fall, dass der ``Assembler`` zwei Koordinaten kennt, wird eine \texttt{MKPolyline} als Overlay erzeugt (Zeile 8).
+In Zeile 13 wird dann das soeben erstellte Overlay angezeigt, wobei das alte gelöscht und das neue gezeichnet wird.
 Zur besseren Erklärung des Ablaufs einer Zeichnung kann man in Zeile 21 erkennen, wie ein solcher Assembler erstellt wird.
 Sobald nun die \texttt{add}-Funktion aufgerufen wird und eine Koordinate hinzugefügt wird ist der Startpunkt bekannt und sichtbar.
 Wenn man nun eine zweite Koordinate hinzufügt, wird das alte Overlay gelöscht und das neue angezeigt, welches eine Polyline ist.
@@ -351,7 +351,7 @@ Bei der Internationalisierung muss neben unterschiedlichen Sprachen auch berück
 Auch Grafiken sollten lokalisiert sein, da sie mögliche politische oder religiöse Sensibilitäten enthalten könnten.
 Da bei Indoor Architect keine Grafiken zum Einsatz kommen, muss bei der Internationalisierung nur darauf geachtet werden, dass Texte übersetzt werden können.
 Die Leserichtigung einer Sprache darf dabei nicht vergessen werden.
-Mittels \emph{Autolayout} wird dafür gesorgt, dass die Elemente auf dem Bildschirm sich automatisch der Bildschirmgröße anpassen, sodass eine visuell ansehnliche Darstellung der Anwendung auf jedem Gerät erreicht wird.
+Mittels \emph{Autolayout} wird dafür gesorgt, dass sich die Elemente auf dem Bildschirm automatisch der Bildschirmgröße anpassen, sodass eine visuell ansehnliche Darstellung der Anwendung auf jedem Gerät erreicht wird.
 Ein Teil davon ist, dass die Elemente nicht mit Begriffen wie \emph{left} und \emph{right} positioniert werden, sondern mit \emph{leading} und \emph{trailing}.
 Dadurch bestimmen wir, dass zum Beispiel ein Button nicht ``link`` von einem Text ist, sondern ``vor`` dem Text.
 Auf Geräten mit einer Spracheinstellung mit Leserichtung von rechts nach link bedeutet ein ``vor dem Text`` dann, dass der Button rechts neben dem Text ist.
@@ -365,11 +365,11 @@ In der Zeile 3 des Listings \ref{lst:l10n-key} wird ein einfacher String einer V
 Dieser Wert kann nun für den Suchfilter verwendet werden, allerdings wird in jeder Sprache der Text ``Book``angezeigt.
 Anders ist es bei dem Beispiel aus der Zeile 7, in der \texttt{NSLocalizedString} verwendet wird.
 Dort wird als erster Parameter der zu lokalisierende Werte in der Entwicklungssprache (die Sprache, in der die Anwendung vor der Lokalisierung entwickelt wurde) eingetragen und ein Kommentar mitgegeben.
-Der Kommentar soll als Hilfe dienen, wenn man die zu lokalisierenden Text und Grafiken exportiert und einem Übersetzer weiterleitet.\pbreak%
+Der Kommentar soll als Hilfe dienen, wenn man die zu lokalisierenden Texte und Grafiken exportiert und einem Übersetzer weiterleitet.\pbreak%
 %
 Für jede Sprache muss nun ein Unterordner im Projekt angelegt werden mit dem Format \texttt{<lang>.lproj}, wobei \texttt{<lang>} die Sprach- und Länderkennung ist.
 Die Übersetzung in die deutsche Sprache hätte den Ordnernamen \texttt{de.lproj}, da die Lokalisierung auch für alle deutschsprachigen Regionen gelten soll.
-In diesem Ordner muss sich eine \texttt{Localizable.strings}-Datei befinden, welche mit Key-Value-Paaren den Übersetzten Text enthält, wie im Listing \ref{lst:l10n-localizable} zu sehen ist.
+In diesem Ordner muss sich eine \texttt{Localizable.strings}-Datei befinden, welche mit Key-Value-Paaren den übersetzten Text enthält, wie im Listing \ref{lst:l10n-localizable} zu sehen ist.
 \codelisting{Inhalt der entsprechenden Übersetzungsdateien}{lst:l10n-localizable}{l10n-localizable.swift}{swift}
 Wenn es für die ausgewählte Sprache keine Übersetzungsdatei gibt, oder kein Key-Value-Paar vorhanden ist, wird der angegebene Standardtext, in diesem Fall ``Book``, verwendet. Die Übersetzungsdatei für die englische Sprache entfällt, da es sich dabei um die Entwicklungssprache handelt.\pbreak%
 %
@@ -378,11 +378,11 @@ Würde die Bibliothek beispielsweise Veranstaltungen anbieten, die man buchen ka
 Im Deutschen würde das nicht funktionieren, da das Substantiv und Verb, anders als im Englischen, unterschiedliche Wörter sind.
 Aus diesem Grund wurde sich dafür entschieden in jedem Fall eindeutige Übersetzungsschlüssel zu verwenden.
 \codelisting{Inhalt der entsprechenden Übersetzungsdateien (Eindeutig)}{lst:l10n-localizable-unique}{l10n-localizable-unique.swift}{swift}
-Dadurch können die Text getrennt werden und die Problematik verschwindet.
+Dadurch können die Texte getrennt werden und die Problematik verschwindet.
 Damit auch der richtige Text im Englischen angezeigt wird, muss auch eine Übersetzungsdatei für die englische Sprache angelegt werden und eine Instanz von \texttt{NSLocalizedString} mit dem entsprechenden neuen Key erzeugt werden.\pbreak%
 %
 In der Abbildung \ref{fig:localized-results} kann man zwei Darstellungen der selben Ansicht sehen.
-Die linke Seite nutzt die englische Lokalisierung währen die rechte Seite die deutsche Lokalisierung verwendet.
+Die linke Seite nutzt die englische Lokalisierung während die rechte Seite die deutsche Lokalisierung verwendet.
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.25]{images/localized.png}
@@ -398,10 +398,10 @@ In dem Formular zur Erstellung einer neuen Adresse (Abbildung \ref{fig:localized
 Für diese Informationen bietet das \Gls{sdk} eine Schnittstelle an, um die lokalisierten Namen der Staaten abzufragen.
 Je nach ausgewählter Sprache bekommt man zum Beispiel die Rückgabewerte \emph{Deutschland} und \emph{Österreich} oder \emph{Germany} und \emph{Austria}.
 Für eine gültige \ac{imdf}-Adresse muss aber noch eine Provinz bzw. Subdivision ausgewählt werden.
-Diese Informationen kann man nicht nur unlokalisiert, sondern gar nicht über die Schnittstelle.
+Diese Informationen kann man nicht nur unlokalisiert, sondern gar nicht über die Schnittstelle abfragen.
 Das Bundesland mit der ISO 3166-2 Kennung \texttt{DE-BY} würde in der deutschen Sprache \emph{Bayern} und in der englischen \emph{Bavaria} heißen.
 Auf die Lokalisierung der Provinzen wurde daher verzichtet, da der Aufwand für die manuelle Lokalisierung der Provinzen aller existierenden Länder zu hoch ist.
 Es wurden lediglich die Provinzen aller Länder in der entsprechenden Amtssprache manuell zusammengesucht und als Property List (Listing \ref{lst:isoprop}) abgespeichert.
-\codelisting{Ausschnitt aus der Property List mit den Provinzen der Ländern}{lst:isoprop}{isoprop.plist}{xml}
 Im Anschluss konnte auf die Liste der Provinzen anhand der Länderkennung zugegriffen werden.
-Wurde bei der Länderauswahl das Land Belgien (\texttt{BE}) ausgewählt, wurde bei der Provinzauswahl die entsprechende Liste der Provinzen angezeigt.
+Wurde bei der Länderauswahl das Land Belgien (\texttt{BE}) ausgewählt, wurde bei der Provinzauswahl die entsprechende Liste der Provinzen angezeigt.\clearpage
+\codelisting{Ausschnitt aus der Property List mit den Provinzen der Ländern}{lst:isoprop}{isoprop.plist}{xml}
