@@ -193,7 +193,7 @@ Im Laufe der Anwendung müssten die entsprechenden Werte einzeln in Datentypen u
 %
 Dieser manuelle Ansatz eignet sich gut, wenn es einem unbekannt ist, in welchem Format die Daten vorliegen.
 So kann man Schritt für Schritt die erhaltenen Daten analysieren und in den richtigen Datentyp konvertieren.
-Da es sich in dem Fall von Indoor Architect um eine vorgeschriebene Strukur der Daten handelt ist auch zu jeder Zeit bekannt, wie das \ac{json}-Konstrukt aussieht.
+Da es sich in dem Fall von Indoor Architect um eine vorgeschriebene Strukur der Daten handelt, ist auch zu jeder Zeit bekannt, wie das \ac{json}-Konstrukt aussieht.
 Daher wurde sich dazu entschieden, einen anderen Ansatz zu wählen.
 \subsubsection{Encoden und Decoden mittels \texttt{Codable}}
 Wenn die Struktur des \ac{json}-Objekts klar definiert ist und nicht davon abweicht, kann man mit dem \texttt{Codable}-\Gls{protocol} die Strukturen automatisch umwandeln lassen.
@@ -209,7 +209,7 @@ Als Parameter für den Dekodierungsprozess kann man zum Beispiel mitgeben, dass 
 Außerdem kann auch spezifiziert werden, in welchem Format die Datumsfelder vorliegen (Zeile 3).
 Nach dem Dekodieren lässt sich über die \texttt{project}-Variable auf die verschiedenen Daten zugreifen und entsprechende Operationen mit ihnen durchführen.
 \codelisting{Automatisches enkodieren von JSON in Swift}{lst:swift-codable-encode}{swift-codable-encode.swift}{swift}
-Nachdem Änderungen durchgeführt wurden können die Daten wieder enkodiert werden und in einer Datei persistent abgelegt werden.
+Nachdem Änderungen durchgeführt wurden, können die Daten wieder enkodiert werden und in einer Datei persistent abgelegt werden.
 In diesem Fall nutzt man dann analog zum \texttt{JSONDecoder} den \texttt{JSONEncoder} und spezifiziert auch hier wieder, worauf beim Enkodierungsprozess geachtet werden muss (Listing \ref{lst:swift-codable-encode}).
 Nachdem die Strukur enkodiert wurde erhält man wieder ein \texttt{Data}-Objekt, welches als String in eine Datei geschrieben werden kann.\pbreak%
 %
@@ -218,15 +218,15 @@ Da der Aufbau der \ac{json}-Dateien immer gleich bleibt, muss nicht manuell übe
 
 \subsection{Generics}
 \label{subsec:generics}
-Kurz nachdem festegelgt wurde mit welchem Ansatz die Daten zwischen Dateien und Anwendung enkodiert und dekodiert werden sollen, kam es zur nächsten Schwierigkeit.
+Kurz nachdem festegelgt wurde, mit welchem Ansatz die Daten zwischen Dateien und Anwendung enkodiert und dekodiert werden sollen, kam es zur nächsten Schwierigkeit.
 Das \acl{imdf} spezifiziert 16 verschiedene Feature-Typen, die alle unterschiedliche \ac{json}-Strukturen haben, da sie unterschiedliche Eigenschaften besitzen (siehe Listing \ref{lst:geojsonfeature} auf Seite \pageref{lst:geojsonfeature}).
 Wenn nun 16 Klassen angelegt werden, damit die Struktur für jeden Feature-Typ erstellt werden kann, heißt das auch, dass 16 mal ein relativ ähnlicher Code für die Enkodierung und die Dekodierung geschrieben werden muss.
 Der einzige Unterschied liegt dabei in der Kodierung der Eigenschaften.
 Doch für die Kodierung der \ac{uuid}, der Geometrie und des Typs würde redundanter Programmcode in allen 16 Klassen der Feature-Typen enthalten sein.
-Um dem entgegenzuwirken können \emph{Generics} verwendet werden.\pbreak%
+Um dem entgegenzuwirken, können \emph{Generics} verwendet werden.\pbreak%
 %
 Unsere globale Idee eines ``Features`` ist ein Objekt, welches immer eine \ac{uuid}, eine Geometrie, einen Typ und Eigenschaften hat.
-Die Eigenschaften können dabei jedesmal unterschiedlich sein, aber die Tatsache, dass ein Feature Eigenschaften besitzt bleibt.
+Die Eigenschaften können dabei jedesmal unterschiedlich sein. Aber die Tatsache, dass ein Feature Eigenschaften besitzt, bleibt.
 Da wir die Features auch kodieren wollen, fügen wir unserer Idee noch an, dass die Eigenschaften kodierbar sein müssen.
 \codelisting{\texttt{Feature}-Klasse mit generischem Typ}{lst:swift-generics-feature}{swift-generics-feature.swift}{swift}
 Im Listing \ref{lst:swift-generics-feature} wird nun eine Klasse definiert, welche die vier eben genannten Bedingungen eines Features erfüllt (Zeile 2 bis 5).
@@ -237,17 +237,17 @@ Nun können wir der Variable, welche die Eigenschaften speichert, den generische
 %
 Wenn eine neue Instanz der Klasse erstellt wird, können wir jetzt eine Strukur übergeben, welche den Anforderungen entspricht und die Instanz wird den generischen Typ wie den übergebenen behandeln.
 Wird zum Beispiel die Struktur übergeben, die im Listing \ref{lst:swift-codable-struct} auf Seite \pageref{lst:swift-codable-struct} vorgestellt wurde, hätten wir eine gültige Feature-Instanz erstellt (Zeile 8).
-Bei einer Enkodierung der Instanz würde versucht werden die Daten in eine \ac{json}-Struktur zu bringen, wie sie in den Zeilen 10 bis 20 zu sehen ist.
+Bei einer Enkodierung der Instanz würde versucht werden, die Daten in eine \ac{json}-Struktur zu bringen, wie sie in den Zeilen 10 bis 20 zu sehen ist.
 Um die Vorteile zu nutzen, die uns Generics bringen, können wir nun die einzelnen Klassen für die 16 verschiedenen Feature-Typen anlegen.
 \codelisting{\texttt{Anchor}-Klasse, die den Anchor-Feature-Type repräsentiert}{lst:swift-generics-properties}{swift-generics-properties.swift}{swift}
 Im Listing \ref{lst:swift-generics-properties} wird eine neue Klasse angelegt mit dem Namen \texttt{Anchor}, die von der \texttt{Feature}-Klasse erbt (Zeile 1).
 Da es sich dabei um eine generische Klasse handelt, muss auch hier ein Typ angegeben werden, welcher für die Eigenschaften verwendet werden soll und das \texttt{Codable}-\Gls{protocol} implementiert.
 Als Typ wird eine Struktur übergeben, die in der \texttt{Anchor}-Klasse selbst definiert ist und die Eigenschaften eines Anchor-Features enthält.
-Wenn jetzt eine Instanz der \texttt{Anchor}-Klasse erstellt wird, muss kein Typ mehr übergeben werden, da die Klasse selbst impliziert welcher Typ verwendet werden soll.
+Wenn jetzt eine Instanz der \texttt{Anchor}-Klasse erstellt wird, muss kein Typ mehr übergeben werden, da die Klasse selbst impliziert, welcher Typ verwendet werden soll.
 Dazu kommt, dass die \texttt{Anchor}-Klasse von der \texttt{Feature}-Klasse erbt und deshalb auch die Enkodierung und Dekodierung anstoßen kann.
 Dabei würde die Enkodierung die Daten in ein Format bringen, wie es in den Zeilen 10 bis 18 zu sehen ist.\pbreak%
 %
-Jetzt muss jede Klasse eines speziellen Features nur die Struktur ihrer eigenen Eigenschaften beschreiben und die Kodierung übernimmt die \texttt{Feature}-Klasse von welcher geerbt wird.
+Jetzt muss jede Klasse eines speziellen Features nur die Struktur ihrer eigenen Eigenschaften beschreiben und die Kodierung übernimmt die \texttt{Feature}-Klasse, von welcher geerbt wird.
 
 \subsection{Gesture Recognizers}
 \label{subsec:gesturerecognizer}
@@ -259,7 +259,7 @@ Dieses wird ausgeführt, sobald sich der An/Aus-Status des Buttons verändert.
 Ein ganz normaler Button mit einem Text kann unter anderem auf die Events \texttt{.touchUpInside} oder \texttt{.touchUpOutside} hören.
 Ersteres wird ausgeführt, wenn man einen Button antippt und den Button – mit dem Finger innerhalb des Buttons selbst – wieder anhebt.
 Zweiteres wird ausgeführt, wenn man einen Button antippt, den Finger auf dem Bildschirm von dem Button wegbewegt und ihn im Anschluss anhebt.
-Wenn man nur auf das \texttt{.touchUpInside}-Event hört, kann man dafür sorgen, dass ein Benutzer bei einem fälschlichen antippen eines Buttons noch die Möglichkeit hat die Aktion dahinter nicht auszuführen.\pbreak%
+Wenn man nur auf das \texttt{.touchUpInside}-Event hört, kann man dafür sorgen, dass ein Benutzer bei einem fälschlichen Antippen eines Buttons noch die Möglichkeit hat, die Aktion dahinter nicht auszuführen.\pbreak%
 %
 Für komplexere Gesten, wie das heran- und herauszoomen von Inhalten oder das rotieren von Elementen, gibt es die sogenannten \emph{Gesture Recognizer}, zu Deutsch in etwa \emph{Gesten-Erkenner}.
 Diese Gesture Recognizer können jeder beliebigen Komponente angehangen werden, damit man auf die erkannten Gesten reagieren kann.
@@ -269,10 +269,10 @@ Die folgenden Möglichkeiten zur Gestenerkennung stehen zur Verfügung:
 	\item[\texttt{UITapGestureRecognizer}] Reagiert bei einem einfachen antippen. Wird in der Regel für Komponenten genutzt, die keine eingebauten Events für diesen Fall besitzen, wie zum Beispiel Bilder.
 	\item[\texttt{UIPinchGestureRecognizer}] Reagiert, wenn zwei Finger sich auf dem Bildschirm bewegen und gibt Informationen zur Distanz der beiden Finger.
 	\item[\texttt{UIRotationGestureRecognizer}] Reagiert, wenn zwei Finger sich auf dem Bildschirm bewegen und gibt Informationen zur Rotation der beiden Finger.
-	\item[\texttt{UISwipeGestureRecognizer}] Regiert, wenn sich auf dem Bildschirm von einem Punkt A zu einem Punkt B in einer vorgeschriebenen Richtung bewegt wird.
+	\item[\texttt{UISwipeGestureRecognizer}] Reagiert, wenn sich auf dem Bildschirm von einem Punkt A zu einem Punkt B in einer vorgeschriebenen Richtung bewegt wird.
 	\item[\texttt{UIPanGestureRecognizer}] Reagiert, wenn sich auf dem Bildschirm von einem Punkt A zu einem Punkt B bewegt wird.
 	\item[\texttt{UIScreenEdgePanGestureRecognizer}] Reagiert, wenn sich von einer Bildschirmkante in Richtung Mitte bewegt wird.
-	\item[\texttt{UILongPressGestureRecognizer}] Reagiert, wenn ein langanhaltendes antippen stattfindet.
+	\item[\texttt{UILongPressGestureRecognizer}] Reagiert, wenn ein langanhaltendes Antippen stattfindet.
 \end{description}
 Alle aufgezählten Gesture Recognizer können unterschiedliche Parameter enthalten, die die Funktionsweise dieser bestimmt.
 Anders als bei den einfachen Events, meldet sich zum Beispiel ein \texttt{UIPinchGestureRecognizer} nicht nur einmal, wenn ein ``Pinch`` stattgefunden hat.
@@ -283,7 +283,7 @@ Für die Funktion zum Messen der Distanz zwischen zwei Orten auf der Karte wurde
 Dieser sollte beim Ausführen der Geste die Distanz zwischen dem initialen Berührungspunkt und dem Punkt, an dem die Bewegung beendet wurde, berechnen.
 \codelisting{Setzen eines \texttt{UIPanGestureRecognizers} auf die Map-View}{lst:swift-gesture}{swift-gesture.swift}{swift}
 Der Gesture Recognizer wurde wie im Listing \ref{lst:swift-gesture} angelegt und die minimale und maximale Anzahl von Bewegungen auf 1 gesetzt.
-Dies hat zur Folge, dass der Gesture Recognizer nur reagiert, wenn nur ein Finger den Bildschirm berührt.
+Dies hat zur Folge, dass der Gesture Recognizer erst reagiert, wenn nur ein Finger den Bildschirm berührt.
 In der referenzierten Funktion \texttt{didPanMap} in Zeile 8 konnte dann auf die Antwort des Gesture Recognizer gewartet werden.\pbreak%
 %
 Dabei ist das Problem aufgetreten, dass der Gesture Recognizer als initialen Punkt nicht den Punkt zurückgegeben hat, an dem die Bewegung gestartet ist.
@@ -297,11 +297,11 @@ Es wurde der Punkt zurückgegeben, an dem der Gesture Recognizer bemerkt hat, da
 In der Abbildung \ref{fig:pangesture} erkennt man, wann die eigentliche Bewegung begonnen hat (A) und wann sie beendet wurde (C).
 Für den Gesture Recognizer war allerdings erst etwas später (B) klar, dass es sich gerade um eine Pan-Geste handelt.
 Als Rückmeldung hat man dann den angeblichen initialen Punkt B und den Endpunkt C erhalten.
-Um diesem Verhalten entgegenzuwirken musste eine eigene Implementierung des \texttt{UIPanGestureRecognizer} entwickelt werden.
+Um diesem Verhalten entgegenzuwirken, musste eine eigene Implementierung des \texttt{UIPanGestureRecognizer} entwickelt werden.
 \codelisting{Implementierung des \texttt{InitialPanGestureRecognizer}}{lst:swift-gesture-custom}{swift-gesture-custom.swift}{swift}
 Die eigene Implementierung (zu sehen im Listing \ref{lst:swift-gesture-custom}) erbt vom \texttt{UIPanGestureRecognizer}, sodass alle internen Funktionen übernommen werden können (Zeile 4).
 Zusätzlich wird eine weitere Eigenschaft angelegt, welche den echten initialen Punkt speichert, und eine Funktion zur Verfügung gestellt, die diesen Wert zurückgibt (Zeile 5 und 19).
-In der \texttt{touchesBegan()}-Methode, welche aufgerufen wird sobald ein antippen bemerkt wird, kann dann der initiale Punkt gespeichert werden (Zeile 14 und 16).
+In der \texttt{touchesBegan()}-Methode, welche aufgerufen wird, sobald ein Antippen bemerkt wird, kann dann der initiale Punkt gespeichert werden (Zeile 14 und 16).
 Nun wird anstelle des \texttt{UIPanGestureRecognizer} der eigene \texttt{InitialPanGestureRecognizer} verwendet und es kann der echte initiale Punkt zur Berechnung der Distanz verwendet werden.
 
 \subsection{MapKit Overlays}
@@ -312,14 +312,14 @@ Ebenso kann man auch einfache Elemente erstellen, wie \texttt{MKPolyline} oder \
 Im Fall der Anwendung werden aber nicht nur fertige Elemente auf die Karte gelegt, sondern sollen auch im Entstehungsprozess visualisiert werden.
 Wenn ein Benutzer ein Polygon zeichnen möchte und den Startpunkt auswählt, lässt sich aus dieser einen Koordinate kein \texttt{MKPolygon} erstellen, da für dieses Elemente mindestens drei Koordinaten vorliegen müssen.\pbreak%
 %
-Aus diesem Grund wurde eine Klasse erstellt, deren Aufgabe es ist die vom Benutzer ausgewählten Punkte beziehungsweise Koordinaten zu sammeln, damit daraus dann die entsprechende Visualisierung erstellt werden kann.
+Aus diesem Grund wurde eine Klasse erstellt, deren Aufgabe es ist, die vom Benutzer ausgewählten Punkte beziehungsweise Koordinaten zu sammeln, damit daraus dann die entsprechende Visualisierung erstellt werden kann.
 \codelisting{Implementierung des \texttt{MCShapeAssembler}}{lst:swift-assembler}{swift-assembler.swift}{swift}
 Diese Klasse soll nur die allgemeine Aufgabe des Sammeln der Koordinaten übernehmen, während die Visualisierung von entsprechenden Unterklassen erstellt wird.
 Die erstellte Klasse im Listing \ref{lst:swift-assembler}, die den Namen \texttt{MCShapeAssembler} trägt, hält eine Referenz zur eigentlichen Karte vor, auf der die Elemente gezeichnet werden (Zeile 2) und dem Overlay, welches auf der Karte angezeigt wird und das aktuell gezeichnete Element repräsentiert (Zeile 3).
 Außerdem werden in der Variable \texttt{coordinates} alle gesammelten Koordinaten gespeichert (Zeile 4).
 Die \texttt{add}-Funktion in den Zeilen 10 bis 12 fügt nur eine bestimmte Koordinate den gespeicherten hinzu und die \texttt{collect}-Funktion gibt die Informationen als \texttt{MKGeoJSONObject} zurück, sodass die gesammelten Koordinaten als Feature für das \acl{imdf} gespeichert werden können.
 Die Funktion \texttt{renderActiveOverlay} bekommt ein Overlay übergeben, welches auf der Karte – hier referenziert über \texttt{canvas} – angezeigt wird (Zeile 18 bis 23).
-Zuvor wird das aktuelle Overlay entfernt und das zu zeichnenden als neues aktives Overlay gesetzt (Zeile 19 bis 21 und 25 bis 29).
+Zuvor wird das aktuelle Overlay entfernt und das zu zeichnende als neues aktives Overlay gesetzt (Zeile 19 bis 21 und 25 bis 29).
 Von diesem Grundgerüst wird selbst keine Instanz erstellt, sondern die entsprechenden Unterklassen erben von dieser.\pbreak%
 Als Beispiel wird im Listing \ref{lst:swift-assembler-polygon} der \texttt{MCPolygonAssembler} erklärt.
 \codelisting{Implementierung des \texttt{MCPolygonAssembler}}{lst:swift-assembler-polygon}{swift-assembler-polygon.swift}{swift}
@@ -342,7 +342,7 @@ Bei nur einer Koordinate sieht man einen Punkt, bei zwei Koordinaten eine Linie 
 
 \section{Lokalisierung der Anwendung}
 \label{sec:localizing}
-Um Indoor Architect für eine breitere Masse an Benutzern bereitzustellen ist es wichtig, dass die Anwendung auch in den Sprachen verfügbar ist, die der Benutzer spricht.
+Um Indoor Architect für eine breitere Masse an Benutzern bereitzustellen, ist es wichtig, dass die Anwendung auch in den Sprachen verfügbar ist, die der Benutzer spricht.
 Während des Entwicklungsprozesses musste dabei darauf geachtet werden, dass die Anwendung internationalisiert wird.
 Dabei wird so entwickelt, dass im Anschluss das Übertragen der Anwendung in eine andere Sprache oder Kultur leichter gemacht wird.
 Das World Wide Web Consortium (W3C) beschreibt den Prozess der Internationalisierung unter anderem als \blockquote{[d]esigning and developing in a way that removes barriers to localization or international deployment. This includes such things as enabling the use of Unicode [...]} \parencite{ISH2005}.\pbreak%
@@ -353,13 +353,13 @@ Da bei Indoor Architect keine Grafiken zum Einsatz kommen, muss bei der Internat
 Die Leserichtigung einer Sprache darf dabei nicht vergessen werden.
 Mittels \emph{Autolayout} wird dafür gesorgt, dass sich die Elemente auf dem Bildschirm automatisch der Bildschirmgröße anpassen, sodass eine visuell ansehnliche Darstellung der Anwendung auf jedem Gerät erreicht wird.
 Ein Teil davon ist, dass die Elemente nicht mit Begriffen wie \emph{left} und \emph{right} positioniert werden, sondern mit \emph{leading} und \emph{trailing}.
-Dadurch bestimmen wir, dass zum Beispiel ein Button nicht ``link`` von einem Text ist, sondern ``vor`` dem Text.
+Dadurch bestimmen wir, dass zum Beispiel ein Button nicht ``links`` von einem Text ist, sondern ``vor`` dem Text.
 Auf Geräten mit einer Spracheinstellung mit Leserichtung von rechts nach link bedeutet ein ``vor dem Text`` dann, dass der Button rechts neben dem Text ist.
 Wenn man sich immer an diese Autolayout-Ausrichtungen hält, wird der Inhalt je nach Spracheinstellung automatisch angepasst.
 
 \subsection{Localizable-Dictionary}
 Die Übersetzung der Entwicklungssprache ist relativ einfach, wenn man sich an den Werkzeugen des \Glspl{sdk} bedient.
-Wenn man eine Anwendung für eine Bibliothek entwickelt und für den Suchfilter die Kategorie ``Book`` verwenden möchte bleiben einem zwei Möglichkeiten.
+Wenn man eine Anwendung für eine Bibliothek entwickelt und für den Suchfilter die Kategorie ``Book`` verwenden möchte, bleiben einem zwei Möglichkeiten.
 \codelisting{Zuweisung eines statischen und dynamischen Strings}{lst:l10n-key}{l10n-key.swift}{swift}
 In der Zeile 3 des Listings \ref{lst:l10n-key} wird ein einfacher String einer Variable zugewiesen.
 Dieser Wert kann nun für den Suchfilter verwendet werden, allerdings wird in jeder Sprache der Text ``Book``angezeigt.
@@ -376,13 +376,13 @@ Wenn es für die ausgewählte Sprache keine Übersetzungsdatei gibt, oder kein K
 Diese einfache Wort-zu-Wort-Übersetzung funktioniert aber nur bedingt.
 Würde die Bibliothek beispielsweise Veranstaltungen anbieten, die man buchen kann, wird für die Aktion ``Buchen`` im Englischen einfach wieder ``Book`` verwendet.
 Im Deutschen würde das nicht funktionieren, da das Substantiv und Verb, anders als im Englischen, unterschiedliche Wörter sind.
-Aus diesem Grund wurde sich dafür entschieden in jedem Fall eindeutige Übersetzungsschlüssel zu verwenden.
+Aus diesem Grund wurde sich dafür entschieden, in jedem Fall eindeutige Übersetzungsschlüssel zu verwenden.
 \codelisting{Inhalt der entsprechenden Übersetzungsdateien (Eindeutig)}{lst:l10n-localizable-unique}{l10n-localizable-unique.swift}{swift}
 Dadurch können die Texte getrennt werden und die Problematik verschwindet.
 Damit auch der richtige Text im Englischen angezeigt wird, muss auch eine Übersetzungsdatei für die englische Sprache angelegt werden und eine Instanz von \texttt{NSLocalizedString} mit dem entsprechenden neuen Key erzeugt werden.\pbreak%
 %
 In der Abbildung \ref{fig:localized-results} kann man zwei Darstellungen der selben Ansicht sehen.
-Die linke Seite nutzt die englische Lokalisierung während die rechte Seite die deutsche Lokalisierung verwendet.
+Die linke Seite nutzt die englische Lokalisierung, während die rechte Seite die deutsche Lokalisierung verwendet.
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.25]{images/localized.png}

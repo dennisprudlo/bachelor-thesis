@@ -1,8 +1,8 @@
 \chapter{Fazit}
 \label{ch:conclusion}
-Im Rahmen der Ihnen vorliegenden Bachelorthesis wurde ein mobile Anwendung entwickelt, die es einem ermöglicht Indoor Maps zu gestalten.
+Im Rahmen der Ihnen vorliegenden Bachelorthesis wurde ein mobile Anwendung entwickelt, die es einem ermöglicht, Indoor Maps zu gestalten.
 In \autoref{ch:theorybasics} wurde auf die Theorie und die Grundlagen dieser Thesis eingegangen.
-Darunter Kartendaten im Allgemeinen, wie man auf diesen zeichnet und welche Typen mobiler Anwendungen es gibt.\pbreak%
+Darunter finden sich Themen, wie Kartendaten im Allgemeinen, wie man auf diesen zeichnet und welche Typen mobiler Anwendungen es gibt.\pbreak%
 %
 In \autoref{ch:analysis} wurden im Anschluss die aktuellen Lösungen analysiert.
 Dabei wurden Anforderungen aufgestellt, die ein System zur Erstellung von Indoor Maps erfüllen sollte und diese mit den aktuellen Lösungen verglichen.
@@ -11,13 +11,13 @@ Dabei wurde etwas genauer auf Geoinformationssysteme eingegangen und die Problem
 Nach dem Abschluss der Analyse wurde in \autoref{ch:conception} mit dem Konzept für die Anwendung begonnen.
 Zu Beginn des Konzepts wurde ein grobes Design-Konzept erstellt, sodass die unterschiedlichen Komponenten der Anwendung ein ansehnliches und benutzerfreundliches Auftreten haben.
 Anschließend wurde dargelegt, wie ein Projekt der Anwendung aufgebaut und gespeichert wird.
-Des Weiteren wurden Pläne beschrieben, wie das Bearbeiten der Kartendaten und der Export der erstellten Indoor Maps funktionieren soll.\pbreak%
+Des Weiteren wurden Pläne beschrieben, wie das Bearbeiten der Kartendaten und der Export der erstellten Indoor Maps funktionieren sollen.\pbreak%
 %
 Das \autoref{ch:implementation} hat darauffolgend den Prozess der Implementierung beschrieben und es wurde in \autoref{sec:devios} anfangs auf die Entwicklung auf iOS-Geräten eingegangen.
 In diesem Abschnitt wurden die zur Verfügung stehenden Programmiersprachen vorgestellt und ein grober Einblick in die Struktur und den Aufbau eines iOS-Projektes gegeben.
 Im \autoref{sec:techimp} wurde dann genauer auf die technische Umsetzung eingegangen.
 Dabei wurden besonders die Themen Kodierung der Datenstrukturen und Generics besprochen, sowie genauer auf die Gesture Recognizer eingegangen und welche Probleme bestanden.
-Außerdem wude auch beschreiben, wie die Elemente auf der angezeigten Karte gezeichnet wurden.\pbreak%
+Außerdem wurde auch beschrieben, wie die Elemente auf der angezeigten Karte gezeichnet wurden.\pbreak%
 %
 Zum Ende des \autoref{ch:implementation} wurde im \autoref{sec:localizing} der Prozess der \Gls{l10n} beschrieben.
 Dabei wurde zum Einen auf die bereits existierenden Schnittstellen zum Lokalisieren eingegangen, als auch zum Anderen auf die Problematik bei der Auswahl von Untereinheiten von Regionen bei der Adressauswahl.
@@ -27,18 +27,18 @@ Bei der Entwicklung der Anwendung gab es einige Herausforderungen, die man über
 Da die Spezifikation von \ac{json} bekannt war, konnte sich schnell in die Spezifikation von \ac{geojson} und \ac{imdf} eingelesen werden.
 Aus diesem Grund konnte das \autoref{ch:theorybasics} mit den Grundlagen problemlos erstellt werden.
 Doch die Analyse der aktuellen Lösungen war schwierig und hat einige Hürden aufgestellt.
-Zu vielen Lösungen konnten nur wenige Informationen gefunden werden, da bei den meisten Lösungen keine Testversionen zur Verfügung gestellt wurde und man über den Vertrieb der Hersteller einen Zugang erwerben musste.\pbreak%
+Zu vielen Lösungen konnten nur wenige Informationen gefunden werden, da bei den meisten Lösungen keine Testversionen zur Verfügung gestellt wurden und man über den Vertrieb der Hersteller einen Zugang erwerben musste.\pbreak%
 %
 Bei der Implementierung war vor allem das Kodieren der Daten zwischen den \ac{json}-Repräsentationen aus den Dateien und den Datenmodellen in der Anwendung herausfordernd.
 In Kombination mit den Generics musste immer darauf geachtet werden, dass die generischen Klassen die Daten im richtigen Format halten, ansonsten kam es zu Fehlern bei der Enkodierung.
 Ebenso konnte es zu Fehlern kommen, wenn es Formatierungsfehler im gespeicherten \ac{json} gab.
-In diesem Fall konnten die Daten nicht zu einer ein Swift erstellen Klasse dekodiert werden.
+In diesem Fall konnten die Daten nicht zu einer in Swift erstellen Klasse dekodiert werden.
 Des Weiteren musste durch die Pflicht einer ISO 3166-2 Provinzkennung in einem Adress-Feature des \acl{imdf}s auch eine Auswahlmöglichkeit für diese Kennung existieren.
 Doch für die Abfrage der verfügbaren Kennungen gibt es keine eingebaute Schnittstelle, weshalb die einzelnen Kennungen pro Land manuell eingetragen werden mussten.
 Dies war ein viel Zeit in Anspruch nehmender Prozess, da geopolitische Ungereimtheiten dafür gesorgt haben, dass die Provinzen eines Landes nicht immer eindeutig waren.\pbreak%
 %
 Neben den bei der Entwicklung aufgetretenen Herausforderungen war auch die Zeit eines der größten Herausforderungen.
-Viele anfangs eingeplanten Features, wie der Audit eines Projektes und das fertige Exportieren in ein \ac{imdf}-Archiv konnten nicht fertiggestellt werden.
+Viele anfangs eingeplante Features, wie der Audit eines Projektes und das fertige Exportieren in ein \ac{imdf}-Archiv, konnten nicht fertiggestellt werden.
 Es stellt sich aber heraus, dass die Entwicklung einer solchen Anwendung keine Frage der Machbarkeit ist, sofern genügend Zeit vorhanden ist.
 
 \section{Analyse der Anwendung}
@@ -52,8 +52,8 @@ Für den Vermieter im Anwendungsfall waren die Punkte \emph{Preisliche Stemmbark
 Da Indoor Architect nicht monetarisiert wird und der Programmquellcode offen zur Verfügung steht, fallen für die Anwendung selbst keine Kosten an.
 Ähnlich wie bei den anylsierten Anwendungen müssen die Geräte für die Nutzung der Software vorhanden sein.
 }{
-Die Anwendung nutzt an vielen Stellen Beschreibungstexte, die erklären welche Informationen in welchem Format in das entsprechende Feld eingetragen werden müssen.
-In den Abbildungen \hyperref[fig:04-address]{A.4}, \hyperref[fig:11-label]{A.11} und \hyperref[fig:13-venue]{A.13} im Anhang kann man sehen, wie die Beschreibungstexte dem Anwender näher bringen was eingetragen werden muss.
+Die Anwendung nutzt an vielen Stellen Beschreibungstexte, die erklären, welche Informationen in welchem Format in das entsprechende Feld eingetragen werden müssen.
+In den Abbildungen \hyperref[fig:04-address]{A.4}, \hyperref[fig:11-label]{A.11} und \hyperref[fig:13-venue]{A.13} im Anhang kann man sehen, wie die Beschreibungstexte dem Anwender näher bringen, was eingetragen werden muss.
 Das Kennenlernen der Anwendung findet daher nicht über eine externe Dokumentation statt, sondern über das Benutzen der Anwendung selbst.
 }{
 Beim Benutzen von Indoor Architect wird dem Anwender sofort Rückmeldung über die ausgeführte Aktion gegeben, sodass eine Aktion immer nachvollziehbar ist.
@@ -66,12 +66,12 @@ Die entwickelte Anwendung erfüllt die aufgestellten Anforderung in der ersten E
 Dabei sollte man bedenken, dass die Erfüllung der Anforderungen ein kontinuierlich fortschreitender Prozess ist.
 Bei der Entwicklung neuer Funktionen muss weiter darauf geachtet werden, dass die Einarbeitungszeit kurz gehalten wird und die Bedienung der Funktionen leicht und nachvollziehbar ist.\pbreak%
 %
-Der aktuelle Stand der entwickelten Anwendung kann noch nicht dafür verwendet werden alle Möglichkeiten des \acl{imdf}s abbilden zu können.
+Der aktuelle Stand der entwickelten Anwendung kann noch nicht dafür verwendet werden, alle Möglichkeiten des \acl{imdf}s abbilden zu können.
 Eine Implementierung aller benötigten Funktionen beansprucht mehr Arbeitszeit, da bei jeder Entwicklung die Anforderungen und die Vorgaben aus dem Design-Konzept eingehalten werden müssen.
 }
 
 \subsection{Usability Tests}
-Um die Anforderung der schnellen Einarbeitungszeit und der leichten und nachvollziehbaren Bedienung besser einordnen zu können wurde ein Usability Test mit der entwickelten Anwendung durchgeführt.
+Um die Anforderung der schnellen Einarbeitungszeit und der leichten und nachvollziehbaren Bedienung besser einordnen zu können, wurde ein Usability Test mit der entwickelten Anwendung durchgeführt.
 Die Testpersonen haben eine Liste mit Aufgaben erhalten, die sie innerhalb der Anwendung erfüllen sollten.
 Im Anschluss war es ihnen möglich die Benutzung der Anwendung zu bewerten.
 Die genauen Aufgabenstellungen und anschließende Bewertungsmöglichkeiten können im \hyperref[sec:appendixc]{Anhang C} eingesehen werden.\pbreak%
@@ -103,14 +103,14 @@ Im aktuellen Stand gibt es die Möglichkeit bei jedem Feature einen Kommentar zu
 In einer zukünftigen Version könnte diese Funktion dahingehen erweitert werden, dass Features auch Tags haben und einer Farbkategorie zugewiesen werden können.
 Diese Informationen könnten in die Suche eingebaut werden, sodass nach Tags gesucht werden kann oder nach einer bestimmten Farbkategorie gefiltert werden kann.\pbreak%
 %
-Besonders in Anwendungen, in denen Inhalte bearbeitet werden, ist es sinnvoll eine Möglichkeit zu bieten die getätigten Änderungen rückgängig zu machen oder zu wiederholen.
+Besonders in Anwendungen, in denen Inhalte bearbeitet werden, ist es sinnvoll, eine Möglichkeit zu bieten, die getätigten Änderungen rückgängig zu machen oder zu wiederholen.
 Falls bei dem Erstellen eines Polygons ein Fehler unterlaufen ist und man den gezeichneten Punkt rückgängig machen möchte, müsste solch eine Funktion existieren.
 Dies ist eine der höher priorisierten Erweiterungen.\pbreak%
 %
-Das \ac{imdf}-Format definiert in der Spezifikation sehr genau, was valide Daten sind und der in \autoref{ch:conception} im Abschnitt \autoref{sec:validation} erwähnte Audit wäre für die Anwender von Vorteil.
+Das \ac{imdf}-Format definiert in der Spezifikation sehr genau, was valide Daten sind und der in \autoref{ch:conception} im \autoref{sec:validation} erwähnte Audit wäre für die Anwender von Vorteil.
 Zwar bietet Apple selbst eine \ac{imdf}-Sandbox an, in welcher man ein \ac{imdf}-Archiv hochladen kann und einfache Fehler angezeigt bekommt und beheben kann, doch eine eingebaute \ac{imdf}-Validierung könnte auch hier Arbeit abnehmen.
 Es wäre nicht mehr notwendig das Projekt zu exportieren und im Anschluss in der Sandbox hochzuladen, sondern man könnte eine Validierung direkt in der Anwendung anstoßen und Fehlermeldungen und Lösungsvorschläge erhalten.
-Bei einfachen Formfehlern wäre es auch möglich die Probleme automatisch von der Anwendung lösen zu lassen.\pbreak%
+Bei einfachen Formfehlern wäre es auch möglich, die Probleme automatisch von der Anwendung lösen zu lassen.\pbreak%
 %
-Neben einem Export wäre es auch sinnvoll einen Import für \ac{imdf}-Archive anzubieten.
+Neben einem Export wäre es auch sinnvoll, einen Import für \ac{imdf}-Archive anzubieten.
 Ein bestehendes \ac{imdf}-Archiv könnte von der Anwendung interpretiert werden und zu einem Indoor Architect Projekt umgewandelt werden, sodass jedes \ac{imdf}-Archiv in Indoor Architect bearbeitet werden kann und nicht nur die dort erstellten.
