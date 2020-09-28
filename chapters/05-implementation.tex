@@ -19,7 +19,7 @@ Im Falle dieser Thesis wird sich an den empfohlenen Herangehensweisen orientiert
 
 \subsection{Objective-C und Swift}
 Objective-C war lange Zeit die einzige Programmiersprache für Geräte von Apple, bis Swift im Jahre 2014 angekündigt wurde.
-Des Weiteren ist Swift Open-Source und verfolgt den Ansatz plattformübergreifend genutzt werden zu können \parencite{APP2020}.
+Des Weiteren ist Swift Open-Source und verfolgt den Ansatz, plattformübergreifend genutzt werden zu können \parencite{APP2020}.
 Im Vergleich zu Objective-C hat Swift eine modernere Syntax und weniger Verbosität im Programmcode.
 Es wird nicht mehr in Header- und Implementierungs-Dateien unterschieden und der gesamte Aufbau erinnert an eine Kombination verschiedenster moderner Programmiersprachen.
 Dies lässt sich leicht erklären, da Chris \textcite{LAT} – Hauptentwickler der Programmiersprache Swift – auf seiner Website sagte \blockquote{Of course, it also greatly benefited from the experiences hard-won by many other languages in the field, drawing ideas from Objective-C, Rust, Haskell, Ruby, Python, C\#, CLU, and far too many others to list}.\pbreak%
@@ -27,7 +27,7 @@ Dies lässt sich leicht erklären, da Chris \textcite{LAT} – Hauptentwickler d
 Obwohl die Programmiersprachen Swift und Objective-C beide vom selben Hersteller sind und den selben Zweck erfüllen sollen, kann man die Unterschiede beider Sprachen sehr deutlich erkennen.
 Im folgenden Listing \ref{lst:objc} wird eine Beispielimplementierung einer \texttt{Vehicle}-Klasse gezeigt. Diese Klasse beinhaltet eine Methode, die zum Öffnen eines Fensters gedacht ist.
 Die Methode akzeptiert genau zwei Parameter, welche beide vom Datentyp \texttt{int} sein müssen.
-Als ersten Parameter muss mit \texttt{percentage} der Prozentwert der Öffnung angegeben werden und als zweiten Parameter mit \texttt{seat} übergeben werden, welches Fenster geöffnet werden soll.
+Als erster Parameter muss mit \texttt{percentage} der Prozentwert der Öffnung angegeben werden und als zweiter Parameter mit \texttt{seat} übergeben werden, welches Fenster geöffnet werden soll.
 Im Anschluss wird ein Objekt der Klasse erstellt und die Methode aufgerufen.
 \codelisting{Implementierung der Vehicle-Klasse in Objective-C}{lst:objc}{objc-example.m}{objc}
 Anders als beim Objective-C Programmcode im Listing \ref{lst:objc} zu erkennen, entfällt bei einer Swift-Implementierung im Listing \ref{lst:swift} das Einbinden von Header-Dateien komplett.
@@ -37,21 +37,21 @@ Des Weiteren erkennt man, dass Methodenaufrufe und Initialisierungen von Objekte
 
 \subsection{SwiftUI}
 Seit 2019 gibt es auch die Möglichkeit mittels \textit{SwiftUI} mobile Anwendungen für Apple Geräte zu entwickeln.
-SwiftUI ist dabei weniger eine eigene Sprache, sondern eher ein deklarativer Ansatz in Swift Benutzeroberflächen zu bauen.
+SwiftUI ist dabei weniger eine eigene Sprache, sondern eher ein deklarativer Ansatz, um in Swift Benutzeroberflächen zu gestalten.
 In einfachen Swift Projekten, mit dem Ziel eine iOS-Anwendung zu entwickeln, wird für die Benutzeroberfläche das Framework \textit{UIKit} verwendet.
 SwiftUI soll in Zukunft UIKit ablösen, sodass alle Anwendungen in Zukunft mittels SwiftUI entwicklet werden können.\pbreak%
 %
-Da SwiftUI noch relativ jung ist und regelmäßig neue Funktionen implementiert werden ist es für eine komplexere Anwendung ungeeignet.
+Da SwiftUI noch relativ jung ist und regelmäßig neue Funktionen implementiert werden, ist es für eine komplexere Anwendung ungeeignet.
 Einfache Notizen- oder Todo-Apps lassen sich schnell und einfach bauen, doch für das Zeichnen auf Kartendaten müsste wieder auf das Framework UIKit zurückgegriffen werden.
 Das hat damit zu tun, dass viele Komponenten noch nicht kompatibel für SwiftUI gemacht wurden und im Hintergrund weiterhin auf UIKit basieren.
 Unter diesen Komponenten befindet sich auch die \texttt{MKMapView} aus dem \texttt{MapKit} Framework, die für das Darstellen einer Karte benötigt wird.
-Es wäre theoretisch möglich die Map View innerhalb einer SwiftUI-Ansicht anzuzeigen, allerdings müsste auch hier für ein tieferes Eingreifen in die Funktionen der Map View wieder auf Swift mit UIKit zurückgegriffen werden.
+Es wäre theoretisch möglich, die Map View innerhalb einer SwiftUI-Ansicht anzuzeigen, allerdings müsste auch hier für ein tieferes Eingreifen in die Funktionen der Map View wieder auf Swift mit UIKit zurückgegriffen werden.
 Aus diesem Grund ist es sinnvoller, für die zu entwickelnde Anwendung, auf SwiftUI zu verzichten.
 
 \subsection{Entwurfsmuster}
 Es gibt viele verschiedene Möglichkeiten die Architektur einer Software aufzubauen.
 Bei einfachen iOS-Anwendungen wird dafür das Entwurfsmuster \ac{mvc} verwendet.
-Obwohl es möglich ist für die eigene Anwendung ein anderes Entwurfsmuster zu verwenden, lohnt es sich das bereitgestellte zu nutzen, da das \Gls{sdk} viele Werkzeuge mitbringt, die automatisiert Dateien erstellen und verwalten können, solange man sich an das \ac{mvc}-Entwurfsmuster hält.
+Obwohl es möglich ist, für die eigene Anwendung ein anderes Entwurfsmuster zu verwenden, lohnt es sich das bereitgestellte Muster zu nutzen, da das \Gls{sdk} viele Werkzeuge mitbringt, die automatisiert Dateien erstellen und verwalten können, solange man sich an das \ac{mvc}-Entwurfsmuster hält.
 \subsubsection{Model-View-Controller}
 Das \ac{mvc}-Entwurfsmuster teilt den Programmcode in die drei Bereiche \textit{Model}, \textit{View} und \textit{Controller} auf.
 Jeder dieser Bereiche hat eine eigene Zuständigkeit und sollte bis auf die Kommunikation streng von den anderen getrennt sein.
@@ -65,7 +65,7 @@ Die Einteilung ermöglicht eine bessere Wartbarkeit und Wiederverwendbarkeit von
 \pbreak%
 Der \textbf{Model}-Bereich beinhaltet in erster Linie den Code für das Datenmodell der Anwendung, allerdings können aber auch Hilfsklassen enthalten sein, die oft verwendeten Code zusammenfassen.
 Ein Model sollte nie selbst eine Referenz zu einer View oder einem Controller haben, sondern ein Controller oder eine View den Verweis zum Model.
-Wie man der Abbildung \ref{fig:model-view-controller} entnehmen kann wartet das Model darauf, dass es eine Aufgabe vom Controller erhält und informiert diesen gegebenenfalls sobald die Aufgabe erfüllt wurde.\pbreak%
+Wie man der Abbildung \ref{fig:model-view-controller} entnehmen kann, wartet das Model darauf, dass es eine Aufgabe vom Controller erhält und informiert diesen gegebenenfalls, sobald die Aufgabe erfüllt wurde.\pbreak%
 %
 Die \textbf{View} ist der Bereich, mit dem der Benutzer interagiert.
 Programmcode im View-Bereich sollte keine Geschäftslogik enthalten, sondern nur Code, welcher die View aktualisiert.
@@ -74,10 +74,10 @@ Wenn eine View Geschäftslogik benötigt, um bestimmte Aufgaben zu erfüllen, da
 Auch in diesem Fall wartet die View auf Aufgaben eines Controllers, welcher zum Beispiel ein Aktualisieren der Ansicht anfordert.
 Andersherum kann die View den Controller darüber informieren, dass der Benutzer eine Aktion getätigt hat, wie zum Beispiel das Drücken eines Buttons.\pbreak%
 %
-Die Aufgabe der \textbf{Controller} ist es zwischen den Views und den Models zu vermitteln.
-Wenn es zum Beispiel Änderungen ein einem Model gibt, dessen Daten direkt an eine Ansicht gebunden sind, muss der Controller der entsprechenden View Bescheid geben die Ansicht zu aktualisieren.
+Die Aufgabe der \textbf{Controller} ist es, zwischen den Views und den Models zu vermitteln.
+Wenn es zum Beispiel Änderungen ein einem Model gibt, dessen Daten direkt an eine Ansicht gebunden sind, muss der Controller der entsprechenden View Bescheid geben, die Ansicht zu aktualisieren.
 Ebenso muss der Controller das Model aktualisieren, wenn der Benutzer eine Aktion auf der Benutzeroberfläche geändert hat, welche direkt mit dem Model verbunden ist.
-Wie die Kommunikation zwischen den drei Komponenten funktioniert kann bei jeder Implementierung des \ac{mvc}-Entwurfsmuster unterschiedlich sein.
+Wie die Kommunikation zwischen den drei Komponenten funktioniert, kann bei jeder Implementierung des \ac{mvc}-Entwurfsmuster unterschiedlich sein.
 Bei einem iOS-Projekt wird standardmäßig das \textit{Delegation-Pattern} verwendet.
 
 \subsubsection{Delegation-Pattern}
@@ -88,7 +88,7 @@ Möchte man innerhalb einer Anwendung auf die Ortungsdaten zugreifen, kommt man 
 %
 Um auf die Ortungsdaten zugreifen zu können würde man aus dem Framework \texttt{CoreLocation} die Klasse \texttt{CLLocationManager} nutzen.
 Diesem Location Manager müsste man eine Referenz zur eigenen Klasse – beziehungsweise eine Referenz zu der Klasse, in welcher die Daten als Antowort ankommen sollen – mitgeben, die das entsprechende \Gls{protocol}, in diesem Fall \texttt{CLLocationManagerDelegate}, implementiert.
-Sobald der Location Manager die Ortungsdaten des Benutzers erfasst hat nutzt er die zuvor mitgegebene Referenz zur entsprechenden Klasse und ruft dort die Funktion \texttt{locationManager(manager:didUpdateLocations:)} auf, in der die Ortungsdaten übermittelt werden.
+Sobald der Location Manager die Ortungsdaten des Benutzers erfasst hat, nutzt er die zuvor mitgegebene Referenz zur entsprechenden Klasse und ruft dort die Funktion \texttt{locationManager(manager:didUpdateLocations:)} auf, in der die Ortungsdaten übermittelt werden.
 Diese Funktion muss existieren, da dem genannten \Gls{protocol} zugestimmt wurde und es deshalb implementiert werden muss.
 Fehlt die Implementierung der Funktion in der Referenz, handelt es sich dabei um einen Syntax-Fehler und das Programm kann nicht kompiliert werden.\pbreak%
 %
@@ -102,11 +102,11 @@ Bestimmte Aufgabenbereiche kann der Motor daher an die \texttt{Vehicle}-Klasse d
 Dabei muss der Motor gar nicht wissen, ob es sich dabei wirklich um die \texttt{Vehicle}-Klasse handelt oder eine andere beliebige Klasse.
 Es wird als Motor nur weitergegeben, dass soeben ein Liter Kraftstoff verbraucht wurde und der Delegierte soll mit dieser Information weiterarbeiten.
 Die einzige Bedingung, die von der Referenz erfüllt werden muss, ist das Implementieren des entsprechenden \Glspl{protocol}.
-Dabei ist es egal welche Klasse das \Gls{protocol} implementiert.
+Dabei ist es egal, welche Klasse das \Gls{protocol} implementiert.
 \codelisting{Implementierung der Engine-Klasse mit Delegation}{lst:engine-del}{engine-delegation.swift}{swift}
 
 In den Zeilen 1 bis 4 des Listings \ref{lst:engine-del} wird ein \Gls{protocol} erstellt.
-Die \texttt{Vehicle}-Klasse, welches diesem \Gls{protocol} in Zeile 6 zustimmt muss die dort definierten Funktionen implementieren.
+Die \texttt{Vehicle}-Klasse, welches diesem \Gls{protocol} in Zeile 6 zustimmt, muss die dort definierten Funktionen implementieren.
 In der Zeile 10 wird dem Motor nicht mehr die Referenz zum Fahrzeug selbst übergeben, sondern zu einer beliebigen Klasse, die das \texttt{EngineDelegate}-\Gls{protocol} implementiert.
 Der Motor kann absofort in den Zeilen 30 bis 35 die implementierten Funktionen aufrufen, da die Klasse sich sicher sein kann, dass die Referenz das \texttt{EngineDelegate}-\Gls{protocol} implementiert.
 Im iOS-Umfeld verteilen die Controller auf diese Weise Daten zwischen den verschiedenen Ansichten.
@@ -116,7 +116,7 @@ Für die Anzeige von Inhalten werden \textit{View Controller} verwendet.
 In einer \textit{Getting Started}-Anleitung beschreibt \textcite{APP2016} den Aufbau und die Funktionsweise eines solchen Controllers, welche an dieser Stelle wiedergegeben wird.
 Diese Controller bieten Grundfunktionalitäten, um Views auf dem Bildschirm anzuzeigen.
 Dabei werden im Hintergrund von dem System bestimmte Funktionen aufgerufen, die sich überschreiben lassen, sodass eigene Logik hinzugefügt werden kann.
-Welche Funktionen wann aufgerufen werden wird als der \textit{View Controller Lifecycle} bezeichnet.
+Welche Funktionen wann aufgerufen werden, wird als der \textit{View Controller Lifecycle} bezeichnet.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[scale=0.5]{images/view-controller-lifecycle}
@@ -142,7 +142,7 @@ Auch hier können vorbereitende Aufgaben durchgeführt werden, wie eine Animatio
 \item[\texttt{viewDidDisappear()}]
 Analog zu \texttt{viewDidAppear()} wird diese Methode jedesmal aufgerufen, wenn die Content View des View Controllers von der Ansicht entfernt wurde.
 \end{description}
-Bei Aufruf der Methoden \texttt{viewWillAppear()} und \texttt{viewDidDisappear()} ist die Content View im jeden Fall nicht sichtbar, sodass es sich an diesen Stellen eignet die Benutzeroberfläche zu aktualisieren.
+Bei Aufruf der Methoden \texttt{viewWillAppear()} und \texttt{viewDidDisappear()} ist die Content View im jeden Fall nicht sichtbar, sodass es sich an diesen Stellen eignet, die Benutzeroberfläche zu aktualisieren.
 Findet eine Aktualisierung der Benutzeroberfläche von zum Beispiel Texten oder Listenpunkten statt, während die Content View sichtbar ist, kann der Benutzer die abrupte Änderung sehen.\pbreak%
 %
 Alle vorgestellten Methoden haben eine Standardimplementierung und müssen nicht überschrieben werden.
@@ -194,7 +194,7 @@ Im Laufe der Anwendung müssten die entsprechenden Werte einzeln in Datentypen u
 Dieser manuelle Ansatz eignet sich gut, wenn es einem unbekannt ist, in welchem Format die Daten vorliegen.
 So kann man Schritt für Schritt die erhaltenen Daten analysieren und in den richtigen Datentyp konvertieren.
 Da es sich in dem Fall von Indoor Architect um eine vorgeschriebene Strukur der Daten handelt ist auch zu jeder Zeit bekannt, wie das \ac{json}-Konstrukt aussieht.
-Daher wurde sich dazu entschieden einen anderen Ansatz zu wählen.
+Daher wurde sich dazu entschieden, einen anderen Ansatz zu wählen.
 \subsubsection{Encoden und Decoden mittels \texttt{Codable}}
 Wenn die Struktur des \ac{json}-Objekts klar definiert ist und nicht davon abweicht, kann man mit dem \texttt{Codable}-\Gls{protocol} die Strukturen automatisch umwandeln lassen.
 \codelisting{\texttt{Codable}-Struktur und dazugehörige JSON-Strukur}{lst:swift-codable-struct}{swift-codable-struct.swift}{swift}

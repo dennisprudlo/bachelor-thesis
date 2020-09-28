@@ -21,7 +21,7 @@ Dabei muss beachtet werden, dass man die Syntax des Formats einhält.
 Die \ac{json} ist ein textbasiertes und sprachenunabhängiges Datenaustauschformat, welches Informationen strukturiert darstellen kann.
 Dabei ist ein großer Vorteil gegenüber anderen Datenaustauschformaten, dass \ac{json} für sowohl Mensch als auch Maschine einfach zu lesen ist und zudem die enthaltenen Informationen auf ein benötigtes Minimum reduziert.
 Gerade durch die für Maschinen einfach zu interpretierende Struktur lassen sich \ac{json}-Inhalte schneller parsen und verarbeiten \parencite{WYS2014}.
-Der Standard wird von der Internet Engineering Task Force\footnote{RFC 8259} und der European Computer Manufacturers Association (ECMA) spezifiziert\footnote{ECMA-404}.\pbreak%
+Der Standard wird von der Internet Engineering Task Force\footnote{RFC 8259 (\url{https://tools.ietf.org/html/rfc8259})} und der European Computer Manufacturers Association (ECMA) spezifiziert\footnote{ECMA-404 (\url{https://www.ecma-international.org/publications/standards/Ecma-404.htm})}.\pbreak%
 %
 Der Kern von \ac{json} besteht aus den sogenannten Objekten, die Key-Value-Paare enthalten.
 Dabei ist ein Key immer vom Typ \texttt{string} und ein Value vom Typ \texttt{object}, \texttt{array}, \texttt{string}, \texttt{number}, \texttt{boolean} oder \texttt{null}.
@@ -34,7 +34,7 @@ Das \texttt{parents}-Array kann wieder Objekte beinhalten, die eine Person besch
 \subsection{Das GeoJSON-Format}
 Bei der \ac{geojson} handelt es sich um ein Datenaustauschformat, welches auf \ac{json} basiert und sich an der Syntax von \ac{json} orientiert.
 Der Standard wurde Anfang 2007 begonnen und Mitte 2008 als \emph{GeoJSON Specification} veröffentlicht.
-In 2015 wurde eine neue \emph{GeoJSON Working Group} von der Internet Engineering Task Force gegründet, die den Standard nun spezifiziert\footnote{RFC 7948}.
+In 2015 wurde eine neue \emph{GeoJSON Working Group} von der Internet Engineering Task Force gegründet, die den Standard nun spezifiziert\footnote{RFC 7946 (\url{https://tools.ietf.org/html/rfc7946})}.
 Die veraltete GeoJSON Specification wurde daher für obsolet erklärt und wird nicht mehr verwendet \parencite{BUT2008}.\pbreak%
 %
 Für die Darstellung von Geometrien werden sogenannte \textit{Features} erstellt, die eine \textit{Geometry} und \textit{Properties} haben.
@@ -82,14 +82,14 @@ Unterschiedliche Webbrowser können auch unterschiedliche Funktionalitäten habe
 Das liegt daran, dass die Hersteller der Webbrowser die erarbeiteten Standards unterschiedlich interpretieren und implementieren \parencite{RED2016}.
 Kaum Unterschiede in der Anzeige der Inhalte gibt es bei den Webbrowsern \textit{Chrome} von Google und \textit{Safari} von Apple, da beide auf der HTML-Rendering-Engine \textit{WebKit} basieren \parencite{PIC2008}.
 Seit 2013 nutzt Google die HTML-Rendering-Engine \textit{Blink} - eine Abspaltung von WebKit – für ihren Browser und entwickelt diese weiter \parencite{BAR2013}.
-Erkennbar in der Abbildung \ref{fig:browser-market-share} erreichen die beiden größten Vertreter der mobilen Webbrowser zusammen \SI{84.1}{\prc} aller Nutzer \parencite{STA2020}.
+Erkennbar in der Abbildung \ref{fig:browser-market-share}, erreichen die beiden größten Vertreter der mobilen Webbrowser zusammen \SI{84.1}{\prc} aller Nutzer \parencite{STA2020}.
 Mit kleinen Anpassungen am Code oder der Einbindung von bestimmten \Glspl{library} kann man dafür sorgen, dass eine webbasierte Anwendung in allen Webbrowsern gleich funktioniert und noch mehr Nutzer erreichen.
 \begin{figure}[h!]
 	\includegraphics[scale=0.65]{images/browser-market-share}
 	\caption{Marktanteile mobiler Browser weltweit (Juni 2019 bis Juli 2020)}
 	\label{fig:browser-market-share}
 \end{figure}
-Der größte Nachteil gegenüber nativen Anwendung ist bis vor einiger Zeit noch die Offlinefähigkeit gewesen.
+Der größte Nachteil gegenüber nativen Anwendungen ist bis vor einiger Zeit noch die Offlinefähigkeit gewesen.
 Doch mit dem Ansatz der Progressive Web Apps lassen sich auch Offlinefunktionalitäten mit einbauen.
 Progressive Web Apps sind webbasierte Anwendungen, welche Offlinefunktionalität bieten und auf native Funktionen, wie Benachrichtigungen und Sensordaten des Gerätes zugreifen können.
 In sehr spezifischen Anwendungsfällen sind webbasierte Anwendungen nicht geeignet, da die Hersteller der Webbrowser sich nicht alle an die gleichen Standards halten und der Zugriff auf die Hardware über Progressive Web Apps noch eingeschränkt ist \parencite{TOR2020}.
@@ -105,4 +105,4 @@ Deshalb kann hybrider Code oft Ausnahmen enthalten, die je Betriebssystem unters
 Für eine Anwendung dieser Art ist es besonders wichtig, dass sie stabil und zuverlässig läuft.
 Es sollten keine Fehler beim Zeichnen auf den Kartendaten entstehen, da richtige Koordinaten für ein valides \acl{imdf} ausschlaggebend sind.
 Gerade im Hinblick auf das Herauslesen der Koordinaten anhand einer Karte wurde sich dafür entschieden, einen nativen Ansatz zu wählen.
-Da das \acl{imdf} ein von Apple spezifizierter Standard ist und das \Gls{sdk} für iOS Werkzeuge bereitstellt dieses Format zu interpretieren, wird die Anwendung für iOS-Geräte entwickelt.
+Da das \acl{imdf} ein von Apple spezifizierter Standard ist und das \Gls{sdk} für iOS Werkzeuge bereitstellt, um dieses Format zu interpretieren, wird die Anwendung für iOS-Geräte entwickelt.

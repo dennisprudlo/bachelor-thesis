@@ -15,13 +15,13 @@ Dabei wird genauer auf die Navigation durch die Anwendung eingegangen.
 Im Anschluss wird vor allem die Trennung des Kartenbereichs von dem Rest der Anwendung genauer erklärt und die gewählten Farben dargestellt.\pbreak%
 %
 Anders als bei den analysierten aktuellen Lösungen aus \autoref{ch:analysis} soll Indoor Architect so minimalistisch wie möglich werden.
-Trotzdem sollen alle wichtige Funktionen zur Erstellung von Indoor Maps enthalten bleiben.
+Trotzdem sollen alle wichtigen Funktionen zur Erstellung von Indoor Maps enthalten sein.
 Der Benutzer darf sich nicht in einem Projekt gefangen fühlen und sollte zu jeder Zeit ohne großen Aufwand zwischen verschiedenen Projekt wechseln können.
 
 \subsection{Navigation}
 Die Navigation durch die Anwendung wird mittels Push- und Pop-Navigation erreicht.
 Dabei gibt es eine Hauptansicht, von der man in verschiedene Unteransichten navigieren kann und ebenso wieder zurück navigieren kann.
-Der Vorteil gegenüber anderen Arten der Navigtion ist, dass es nur einen Pfad zu jeder Ansicht gibt und man daher besser im Blick behalten kann wo man sich befindet.
+Der Vorteil gegenüber anderen Arten der Navigtion ist, dass es nur einen Pfad zu jeder Ansicht gibt und man daher besser im Blick behalten kann, wo man sich befindet.
 %
 Um dem vorher beschreibenen Punkt gerecht zu werden, dass man schnell und einfach zwischen verschiedenen Projekten wechseln können sollte, wird eine Seitenleiste vorhanden sein.
 In dieser Seitenleiste werden die Projekte und gegebenenfalls weitere Punkte aufgelistet, über die man einen anderen Kontext öffnen kann.
@@ -79,9 +79,9 @@ Neben der automatischen Anpassung der dargestellten Schrift und Farben gibt es n
 Ein weiterer Schritt könnte das Vermeiden von Transparenzen und Animationen sein.
 In den \emph{Human Interface Guidelines} für iOS-Anwendungen, welche Empfehlungen und Ressourcen für das UI-Design auf Apple-Plattformen bereitstellen, weist Apple darauf hin, dass Transparenzen und Animationen für einige Personen ablenkend oder sogar unangenehm sein können \parencite{APP2020a}.
 Da keine starken Transparenzen in Indoor Architect eingebaut werden und die Animationen, die verwendet weden, bereits auf Barrierefreiheit achten, müssen dafür keine Schritte vorgenommen werden.
-Für Benutzer die an Blindheit leiden gibt es zudem noch die \emph{VoiceOver}-Funktion, welche berührten Fließtext sowie unter anderem den Titel von Buttons vorließt.
+Für Benutzer, die an Blindheit leiden, gibt es zudem noch die \emph{VoiceOver}-Funktion, welche berührten Fließtext sowie unter anderem den Titel von Buttons vorließt.
 Um die Aktion hinter dem Button auszuführen muss ein zweites mal auf den Button geklickt werden.
-Auch in diesem Fall kann diese Barrierefreiheitfunktion außer acht gelassen werden, da die Betroffenen nicht Zielgruppe der Anwendung sind.
+Auch in diesem Fall kann diese Barrierefreiheitfunktion außer Acht gelassen werden, da die Betroffenen nicht Zielgruppe der Anwendung sind.
 Selbst mit den entsprechenden Funktionen der Barrierefreiheit ist das Zeichnen auf den Kartendaten mit einer Blindheit in dieser Anwendung schwer zu verwirklichen.
 
 \section{Erstellen von Projekten}
@@ -104,7 +104,7 @@ Alle drei Felder können nach der Erstellung beliebig oft bearbeitet werden.
 	\label{fig:design-project-create}
 \end{figure}
 Neben dem geplanten Ablauf der Erstellung eines Projektes muss zusätzlich definiert werden, wie ein Projekt gespeichert wird.
-Um das weitergeben von Indoor Architect Projekten möglichst leicht zu halten ist ein Projekt lediglich ein Ordner, welcher eine bestimmte Struktur haben muss.
+Um das weitergeben von Indoor Architect Projekten möglichst leicht zu halten, ist ein Projekt lediglich ein Ordner, welcher eine bestimmte Struktur haben muss.
 Die Ordner müssen die Endung \texttt{imdfproj} haben, wie zum Beispiel \texttt{ein-projekt.imdfproj/}.
 Innerhalb dieses Ordners muss folgende Struktur eingehalten werden:
 \vspace{5pt}
@@ -129,17 +129,17 @@ Der Inhalt der \ac{geojson}-Dateien selbst muss nicht ein gültiges \ac{imdf}-Fo
 Das \texttt{overlays/}-Verzeichnis enthält alle verwendeten \emph{Overlays}, die über die Kartendaten gelegt werden können.
 Dabei handelt es sich um Grafiken, wie zum Beispiel Grundrisse der Gebäude, die man mit einer Transparenz über die Kartendaten legen kann, um die einzelnen Gebäude und Räume besser nachzeichnen zu können.
 Jedes Overlay ist dabei ein eigener Ordner, welcher die zu verwendende Grafik enthält, sowie eine \texttt{overlay.json}, welche die Positionsinformationen zu diesem Overlay speichert.
-Im Listing \ref{lst:overlay} wird eine Beispieldarstellung einer \texttt{overlay.json}-Datei gezeigt, in der zum Einen der Dateityp der Grafik hinterlegt wird und zum Anderen die Darstellungsoptionen.
+Im Listing \ref{lst:overlay} wird eine Beispieldarstellung einer \texttt{overlay.json}-Datei gezeigt, in der zum Einen der Dateityp der Grafik und zum Anderen die Darstellungsoptionen hinterlegt werden.
 Dabei handelt es sich um die Position, an der die Grafik angezeigt werden soll, sowie die Skalierung und die Rotation der Grafik auf den Kartendaten.
 \codelisting{Beispieldarstellung einer \texttt{overlay.json}}{lst:overlay}{json-overlay-example.json}{json}\\
 Zu guter Letzt bleibt die \texttt{manifest.json}-Datei, welche die grundlegenden Projektinformationen enthält.
-Im folgenden werden die einzelnen Felder des Listings \ref{lst:manifest} genauer erklärt.
+Im Folgenden werden die einzelnen Felder des Listings \ref{lst:manifest} genauer erklärt.
 \codelisting{Beispieldarstellung einer \texttt{manifest.json} eines Indoor Architect Projektes}{lst:manifest}{json-manifest-example.json}{json}\\
 Die \texttt{uuid} identifiziert das Projekt neben allen anderen existierenden Projekten innerhalb der Anwendung.
-Neben einfachen Zusatzinformationen, wie dem Titel des Projektes gibt es noch die \texttt{imdfprojVersion}, welche dazu dient die Version des Projektes zu identifizieren.
-Falls sich die Projektstruktur verändert kann man anhand dieser Versionsnummer erkennen welche Schritte zum migrieren auf die neue Version nötig sind und die Anwendung kann diese Migration dann selbst übernehmen.
+Neben einfachen Zusatzinformationen, wie dem Titel des Projektes gibt es noch die \texttt{imdfprojVersion}, welche dazu dient, die Version des Projektes zu identifizieren.
+Falls sich die Projektstruktur verändert, kann man anhand dieser Versionsnummer erkennen, welche Schritte zum migrieren auf die neue Version nötig sind und die Anwendung kann diese Migration dann selbst übernehmen.
 Die Felder \texttt{createdAt} und \texttt{updatedAt} bilden nur Zeitstempel der Erstellung und der letzten Bearbeitung des Projektes ab und die \texttt{session} speichert die Position des Anwenders in den Kartendaten, bevor das Projekt geschlossen wurde.
-Das Speichern der Session ermöglicht es der Anwendung beim Nächsten Öffnen des Bearbeitungsmodus der Kartendaten an die Stelle zu springen, an der der Anwender zuvor aufgehört hat.
+Das Speichern der Session ermöglicht es der Anwendung, beim Nächsten Öffnen des Bearbeitungsmodus der Kartendaten an die Stelle zu springen, an der der Anwender zuvor aufgehört hat.
 
 \section{Bearbeiten der Kartendaten}
 Die Bearbeitung der Kartendaten gehört zu den wichtigsten Aufgaben von Indoor Architect.
@@ -175,8 +175,8 @@ In der oberen Leiste werden weitere Informationen angezeigt, wie zum Beispiel di
 
 \section{Ausführen eines Audits}
 \label{sec:validation}
-Nach dem Erstellen der Kartendaten soll es möglich sein einen Audit durchzuführen, welcher Rückmeldung darüber gibt, ob die Kartendaten valide sind.
-Neben leicht zu identifizierenden Fehlern in der Formalität der gespeicherten Daten, wie ein Fehlender Projekttitel oder eine referenzierte UUID, welche nicht existiert gibt es auch viele semantische Fehler die auftreten können.
+Nach dem Erstellen der Kartendaten soll es möglich sein, einen Audit durchzuführen, welcher Rückmeldung darüber gibt, ob die Kartendaten valide sind.
+Neben leicht zu identifizierenden Fehlern in der Formalität der gespeicherten Daten, wie ein Fehlender Projekttitel oder eine referenzierte \ac{uuid}, welche nicht existiert,gibt es auch viele semantische Fehler die auftreten können.
 Das \acl{imdf} definiert eine große Menge an \emph{Validation Rules}\footnote{\url{https://register.apple.com/resources/imdf/Validations/}. Abruf: 22.08.2020}, welche erfolgreich sein müssen, damit es sich um ein valides \ac{imdf} handelt.
 Darunter fallen unter anderem Regeln wie \texttt{AddressMustHaveLocality}, mit welcher validiert wird, dass eine hinterlegte Adresse auch immer eine angegebene Stadt hat, oder auch \texttt{AnchorMustBeWithinReferencedUnit}, womit validiert wird, dass ein gesetzter Anchor mit einer Referenz zu einer bestimmten Unit auch immer innerhalb dieser Unit sein muss.
 \begin{figure}[h!]
@@ -191,7 +191,7 @@ Wenn Warnungen oder gar Fehler auftreten, sollten Lösungen vorgeschlagen werden
 
 \section{Exportieren der Projekte}
 Nach dem erfolgreichen Validieren der Kartendaten steht in der Regel der Export in ein \ac{imdf}-Archiv an.
-Da die Kartendaten in dem Indoor Architect Projekt selbst in der \ac{imdf}-Struktur hinterlegt sind besteht ein Export grundlegend nur aus dem archivieren der Daten und dem Speichern an einem gewählten Speicherort.
+Da die Kartendaten in dem Indoor Architect Projekt selbst in der \ac{imdf}-Struktur hinterlegt sind, besteht ein Export grundlegend nur aus dem Archivieren der Daten und dem Speichern an einem gewählten Speicherort.
 Das exportierte ZIP-Archiv kann im Anschluss für eine beliebige Verwendung weitergegeben werden.\pbreak%
 %
 Neben dem Export als \ac{imdf}-Archiv sollte auch ein Export als Indoor Architect Projekt möglich sein.
